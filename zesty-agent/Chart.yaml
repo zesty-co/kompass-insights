@@ -7,5 +7,5 @@ appVersion: "1.0"
 
 dependencies:
 - name: zesty-k8s-helm
-  version: 0.1.3
+  version: 0.1.4
   repository: https://zesty-co.github.io/zesty-k8s-helm
