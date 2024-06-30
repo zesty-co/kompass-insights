@@ -3,4 +3,4 @@ zesty-k8s-helm:
   encryptedCredentials: "gAAAAABmS2nMGZXVBfM5OWlkcBwXEUyjyh8mD43S_prGFrZpYE2bMlCvPvA3dQEyypFUjMCsua4GUJL0Cgozf9FMuAPLp20c3cKmPsW2R50q_5AUcXgl8qiqZompfeYILtFVeDbrCfnhSELjYzdF-pmGNZwWU59xUhhoXL1Qp2jkERuNQEKZMrLfvDJLo0MwUUtpDa24nm4yTq_czvi1j5LltYf3hL721w=="
   namespace: "zesty-k8s"
   image:
-    tag: "1af42b01"
+    tag: "711cf426"
