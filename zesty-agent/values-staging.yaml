@@ -2,7 +2,7 @@ zesty-k8s-helm:
   orgID: "1670724728655"
   namespace: "zesty-k8s"
   image:
-    tag: "f8b4111e"
+    tag: "9fc339dc"
 
 externalSecret:
   agentCreds:
