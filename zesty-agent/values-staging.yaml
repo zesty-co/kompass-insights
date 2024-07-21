@@ -1,6 +1,7 @@
 zesty-k8s-helm:
   orgID: "1670724728655"
   namespace: "zesty-k8s"
+  fullnameOverride: "zesty-k8s-helm"
   image:
     tag: "c21a8434"
 
