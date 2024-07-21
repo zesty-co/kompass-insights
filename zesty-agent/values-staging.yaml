@@ -1,4 +1,4 @@
-zestyK8sHelm:
+zestyk8s:
   orgID: "1670724728655"
   namespace: "zesty-k8s"
   fullnameOverride: "zesty-k8s-helm"
