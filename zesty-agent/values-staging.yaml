@@ -4,7 +4,8 @@ zestyk8s:
   fullnameOverride: "zesty-k8s-helm"
   image:
     tag: "c21a8434"
-
 externalSecret:
   agentCreds:
     key: "staging/zesty-k8s/encrypted-creds"
+image:
+  tag: 3a5dc9e0
