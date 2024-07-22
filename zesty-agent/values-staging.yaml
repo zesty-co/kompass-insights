@@ -7,5 +7,3 @@ zestyk8s:
 externalSecret:
   agentCreds:
     key: "staging/zesty-k8s/encrypted-creds"
-image:
-  tag: 3a5dc9e0
