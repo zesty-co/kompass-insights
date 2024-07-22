@@ -1,0 +1,2 @@
+serviceAccount:
+  awsRoleArn: "arn:aws:iam::672188301118:role/spots-validation"
