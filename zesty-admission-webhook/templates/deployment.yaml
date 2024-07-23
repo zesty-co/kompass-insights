@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: {{ include "zesty-admission-controller.fullname" . }}
+  namespace: {{ template "zesty-admission-controller.namespace" . }}
+  labels:
+    app: {{ include "zesty-admission-controller.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "zesty-admission-controller.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "zesty-admission-controller.fullname" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+          - name: http
+            containerPort: 443
+            protocol: TCP
+          volumeMounts:
+            - mountPath: "/etc/webhook/tls"
+              name: webhook-tls
+              readOnly: true
+      volumes:
+        - name: webhook-tls
+          secret:
+            secretName: {{ template "zesty-admission-controller.serviceName" . }}.{{ template "zesty-admission-controller.namespace" . }}.svc.zesty-admission-controller-tls-pair

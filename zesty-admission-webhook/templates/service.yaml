@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: {{ include "zesty-admission-controller.serviceName" . }}
+  namespace: {{ template "zesty-admission-controller.namespace" . }}
+spec:
+  ports:
+  - port: 443
+    targetPort: 443
+  selector:
+    app: {{ include "zesty-admission-controller.fullname" . }}
