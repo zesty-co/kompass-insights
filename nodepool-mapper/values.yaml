@@ -1,0 +1,13 @@
+nameOverride: ""
+fullnameOverride: ""
+namespaceOverride: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+service:
+  type: ClusterIP
+  port: 8080
