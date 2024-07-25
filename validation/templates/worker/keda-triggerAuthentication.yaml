@@ -1,8 +1,0 @@
-apiVersion: keda.sh/v1alpha1
-kind: TriggerAuthentication
-metadata:
-  name: "{{ .Values.name }}-worker-trigger-authentication"
-spec:
-  podIdentity:
-    provider: aws
-    identityOwner: workload

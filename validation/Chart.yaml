@@ -1,6 +1,0 @@
-apiVersion: v2
-name: validation
-description: This ms validates S3 URIs
-type: application
-version: 0.1.0
-appVersion: "0.1.0"
