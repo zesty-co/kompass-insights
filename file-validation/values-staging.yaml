@@ -1,0 +1,27 @@
+image:
+  repo: 473301030746.dkr.ecr.us-west-2.amazonaws.com/file-validation
+  tag: 1.19.14
+env:
+  - name: API_STAGE
+    value: "staging"
+  - name: AWS_DEFAULT_REGION
+    value: "us-west-2"
+worker:
+  awsRegion: "us-west-2"
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  logLevel: INFO
+  externalSecret:
+    appConfig:
+      audienceAuth0: "/staging/common/auth0-audience"
+      domainAuth0: "/staging/common/auth0-domain"
+      audienceSystemAuth0: "/staging/common/auth0-audience-system"
+      auth0Cred: "staging/common/auth0/cred"
+      sqsQueueURL: "/staging/zesty-k8s/file-validation/sqs"
+      dataStoreSNSArn: "/staging/zesty-k8s/data-store/sns"
+  restartPolicy: Never
+  backoffLimit: 3
