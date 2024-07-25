@@ -3,7 +3,7 @@ zestyk8s:
   namespace: "zesty-k8s"
   fullnameOverride: "zesty-k8s-helm"
   image:
-    tag: "1.1.0"
+    tag: "1.1.1"
 externalSecret:
   agentCreds:
     key: "staging/zesty-k8s/encrypted-creds"
