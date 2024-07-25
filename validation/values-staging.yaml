@@ -21,7 +21,7 @@ worker:
       domainAuth0: "/staging/common/auth0-domain"
       audienceSystemAuth0: "/staging/common/auth0-audience-system"
       auth0Cred: "staging/common/auth0/cred"
-      sqsQueueURL: "/staging/aws/spots-k8s-validation/sqs"
-      dataStoreSNSArn: "/staging/aws/spots-k8s-data-store/sns"
+      sqsQueueURL: "/staging/zesty-k8s/file-validation/sqs"
+      dataStoreSNSArn: "/staging/zesty-k8s/data-store/sns"
   restartPolicy: Never
   backoffLimit: 3

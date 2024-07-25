@@ -1,0 +1,76 @@
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  annotations:
+    "meta.upbound.io/{{ .Chart.Name }}": apigateway/v1beta1/restapi
+  labels:
+    "{{ .Values.api.apiGateway.stage }}.upbound.io/{{ .Chart.Name }}": restapi
+  name: "k8s-{{ .Chart.Name }}"
+spec:
+  forProvider:
+    name: "k8s-{{ .Chart.Name }}"
+    region: "{{ .Values.api.apiGateway.region }}"
+
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: Resource
+metadata:
+  annotations:
+    "meta.upbound.io/{{ .Chart.Name }}": apigateway/v1beta2/restapi
+  labels:
+    "{{ .Values.api.apiGateway.stage }}.upbound.io/{{ .Chart.Name }}": resource
+  name: "{{ .Chart.Name }}"
+spec:
+  forProvider:
+    parentIdSelector:
+      matchLabels:
+        "{{ .Values.api.apiGateway.stage }}.upbound.io/{{ .Chart.Name }}": restapi
+    pathPart: "/{proxy+}"
+    region: "{{ .Values.api.apiGateway.region }}"
+    restApiIdSelector:
+      matchLabels:
+        "{{ .Values.api.apiGateway.stage }}.upbound.io/{{ .Chart.Name }}": restapi
+
+# ---
+# apiVersion: apigateway.aws.upbound.io/v1beta1
+# kind: Integration
+# metadata:
+#   annotations:
+#     meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
+#     uptest.upbound.io/disable-import: "true"
+#   labels:
+#     testing.upbound.io/example-name: integration
+#   name: mydemointegration
+# spec:
+#   forProvider:
+#     httpMethodSelector:
+#       matchLabels:
+#         testing.upbound.io/example-name: integration
+#     region: us-west-1
+#     resourceIdSelector:
+#       matchLabels:
+#         testing.upbound.io/example-name: integration
+#     restApiIdSelector:
+#       matchLabels:
+#         testing.upbound.io/example-name: integration
+#     type: HTTP_PROXY
+
+# ---
+# apiVersion: apigateway.aws.upbound.io/v1beta1
+# kind: Stage
+# metadata:
+#   labels:
+#     "{{ .Values.api.apiGateway.stage }}.upbound.io/{{ .Chart.Name }}" : stage
+#   name: development
+# spec:
+#   forProvider:
+#     deploymentIdSelector:
+#       matchLabels:
+#         "{{ .Values.api.apiGateway.stage }}.upbound.io/{{ .Chart.Name }}": stage
+#     region: us-west-1
+#     restApiIdSelector:
+#       matchLabels:
+#         "{{ .Values.api.apiGateway.stage }}.upbound.io/{{ .Chart.Name }}": stage
+#     stageName: "{{ .Values.api.apiGateway.stage }}"
+
+

@@ -1,0 +1,2 @@
+serviceAccount:
+  awsRoleArn: "arn:aws:iam::473301030746:role/k8s-data-store"

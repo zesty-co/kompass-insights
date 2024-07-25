@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels: {{- include "labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels: {{- include "labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: 
+        service: {{ .Values.name }}
+      {{- include "labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: "{{ .Values.name }}"
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: {{.Chart.Name }}
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+      tolerations:
+        - effect: NoSchedule
+          key: team
+          operator: Equal
+          value: aws
+      nodeSelector:
+        team: "aws"
+      containers:
+        - name: "{{.Chart.Name }}-container"
+          image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+          command: ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "--log-level", "error", "src.app:app"]
+          imagePullPolicy: Always
+          env: {{ toYaml .Values.env | nindent 12 }}
+          volumeMounts:
+          - mountPath: /app/src/app-config.yaml
+            name: app-config
+            subPath: app-config.yaml
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              port: http
+              path: /health
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /health
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+      initContainers:
+        - name: "{{.Chart.Name }}-migration"
+          image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+          command: ['alembic','-c','src/postgres/alembic/alembic.ini','upgrade','head']
+          env: {{ toYaml .Values.env | nindent 12 }}
+          volumeMounts:
+          - mountPath: /app/src/app-config.yaml
+            name: app-config
+            subPath: app-config.yaml
+      volumes:
+      - name: app-config
+        secret:
+          secretName: "{{ .Values.name }}-app-config"

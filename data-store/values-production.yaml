@@ -1,0 +1,64 @@
+image:
+  repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/k8s/data-store
+  tag: 1.11.9
+ingress:
+  ClassName: internal
+  host: k8s-data-store.zesty.co
+resources:
+  limits:
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
+logLevel: INFO
+env:
+  - name: API_STAGE
+    value: "prod"
+  - name: AWS_DEFAULT_REGION
+    value: "eu-west-1"
+hpa:
+  min: 2
+  max: 10
+pdb:
+  maxUnavailable: 1
+api:
+  externalSecret:
+    appConfig:
+      audienceAuth0: "/prod/common/auth0-audience"
+      domainAuth0: "/prod/common/auth0-domain"
+      audienceSystemAuth0: "/prod/common/auth0-audience-system"
+      databaseCredentials: "production/zesty-k8s/data-store/cred"
+      databaseDetails: "production/zesty-k8s/data-store/database"
+      auth0Cred: "production/common/auth0/cred"
+      elasticDetails: "production/spots/elastic-credentials"
+cronjob:
+  externalSecret:
+    appConfig:
+      audienceAuth0: "/prod/common/auth0-audience"
+      domainAuth0: "/prod/common/auth0-domain"
+      audienceSystemAuth0: "/prod/common/auth0-audience-system"
+      databaseCredentials: "production/zesty-k8s/data-store/cred"
+      databaseDetails: "production/zesty-k8s/data-store/database"
+      auth0Cred: "production/common/auth0/cred"
+  schedule: "0 17 * * *"
+  successfulJobsHistoryLimit: 10
+  failedJobsHistoryLimit: 5
+worker:
+  awsRegion: "eu-west-1"
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  logLevel: INFO
+  externalSecret:
+    appConfig:
+      audienceAuth0: "/production/common/auth0-audience"
+      domainAuth0: "/production/common/auth0-domain"
+      audienceSystemAuth0: "/production/common/auth0-audience-system"
+      auth0Cred: "production/common/auth0/cred"
+      sqsQueueURL: "/production/zesty-k8s/data-store/sqs"
+      databaseCredentials: "production/zesty-k8s/data-store/cred"
+      databaseDetails: "production/zesty-k8s/data-store/database"
+      elasticDetails: "production/spots/elastic-credentials"

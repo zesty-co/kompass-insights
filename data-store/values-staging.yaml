@@ -1,0 +1,68 @@
+image:
+  repo: 473301030746.dkr.ecr.us-west-2.amazonaws.com/k8s/data-store
+  tag: 1.11.9
+ingress:
+  ClassName: internal
+  host: k8s-data-store.staging.zesty.co
+resources:
+  limits:
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
+logLevel: INFO
+env:
+  - name: API_STAGE
+    value: "staging"
+  - name: AWS_DEFAULT_REGION
+    value: "us-west-2"
+hpa:
+  min: 2
+  max: 4
+pdb:
+  maxUnavailable: 1
+api:
+  apiGateway:
+    stage: "staging"
+    region: "us-west-2"
+    path: ""
+  externalSecret:
+    appConfig:
+      audienceAuth0: "/staging/common/auth0-audience"
+      domainAuth0: "/staging/common/auth0-domain"
+      auth0Cred: "staging/common/auth0/cred"
+      audienceSystemAuth0: "/staging/common/auth0-audience-system"
+      databaseCredentials: "staging/zesty-k8s/data-store/cred"
+      databaseDetails: "staging/zesty-k8s/data-store/database"
+      elasticDetails: "staging/spots/elastic-credentials"
+cronjob:
+  externalSecret:
+    appConfig:
+      audienceAuth0: "/staging/common/auth0-audience"
+      domainAuth0: "/staging/common/auth0-domain"
+      audienceSystemAuth0: "/staging/common/auth0-audience-system"
+      auth0Cred: "staging/common/auth0/cred"
+      databaseCredentials: "staging/zesty-k8s/data-store/cred"
+      databaseDetails: "staging/zesty-k8s/data-store/database"
+  schedule: "0 17 * * *"
+  successfulJobsHistoryLimit: 10
+  failedJobsHistoryLimit: 5
+worker:
+  awsRegion: "us-west-2"
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  logLevel: INFO
+  externalSecret:
+    appConfig:
+      audienceAuth0: "/staging/common/auth0-audience"
+      domainAuth0: "/staging/common/auth0-domain"
+      audienceSystemAuth0: "/staging/common/auth0-audience-system"
+      auth0Cred: "staging/common/auth0/cred"
+      sqsQueueURL: "/staging/zesty-k8s/data-store/sqs"
+      databaseCredentials: "staging/zesty-k8s/data-store/cred"
+      databaseDetails: "staging/zesty-k8s/data-store/database"
+      elasticDetails: "staging/spots/elastic-credentials"
