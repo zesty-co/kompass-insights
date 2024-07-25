@@ -1,5 +1,5 @@
 image:
-  repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/spots/validation
+  repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/file-validation
   tag: 1.19.14
 env:
   - name: API_STAGE
@@ -21,7 +21,7 @@ worker:
       domainAuth0: "/prod/common/auth0-domain"
       audienceSystemAuth0: "/prod/common/auth0-audience-system"
       auth0Cred: "production/common/auth0/cred"
-      sqsQueueURL: "/production/zesty-k8s/file-validation/sqs"
-      dataStoreSNSArn: "/production/zesty-k8s/data-store/sns"
+      sqsQueueURL: "/prod/zesty-k8s/file-validation/sqs"
+      dataStoreSNSArn: "/prod/zesty-k8s/data-store/sns"
   restartPolicy: Never
   backoffLimit: 3
