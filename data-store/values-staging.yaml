@@ -62,7 +62,7 @@ worker:
       domainAuth0: "/staging/common/auth0-domain"
       audienceSystemAuth0: "/staging/common/auth0-audience-system"
       auth0Cred: "staging/common/auth0/cred"
-      sqsQueueURL: "/staging/aws/spots-k8s-validation/sqs"
+      sqsQueueURL: "/staging/zesty-k8s/data-store/sqs"
       databaseCredentials: "staging/zesty-k8s/data-store/cred"
       databaseDetails: "staging/zesty-k8s/data-store/database"
       elasticDetails: "staging/spots/elastic-credentials"
