@@ -1,5 +1,5 @@
 image:
-  repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/file-validation
+  repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/validator
   tag: 1.19.14
 env:
   - name: API_STAGE
