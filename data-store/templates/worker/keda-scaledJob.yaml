@@ -30,7 +30,7 @@ spec:
           team: "aws"
         containers:
         - image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
-          command: ["python", "/app/src/queue_handler.py"]
+          command: ["python", "/app/src/data_store_queue_handler_runner.py"]
           imagePullPolicy: Always
           name: {{ .Values.name }}-worker
           env:
