@@ -5,4 +5,4 @@ metadata:
 spec:
   podIdentity:
     provider: aws
-    identityOwner: workload
+    roleArn: "{{ .Values.serviceAccount.awsRoleArn }}"
