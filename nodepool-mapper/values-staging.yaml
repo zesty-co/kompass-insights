@@ -1,10 +1,8 @@
 replicaCount: 1
-
 image:
   repository: "473301030746.dkr.ecr.us-west-2.amazonaws.com/zesty-k8s/nodepool-mapper"
   pullPolicy: IfNotPresent
   tag: "latest"
-
 resources:
   limits:
     cpu: 100m
@@ -12,3 +10,6 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
+zestyk8s:
+  image:
+    tag: 1.0.0
