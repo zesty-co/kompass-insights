@@ -44,6 +44,7 @@ cronjob:
       auth0Cred: "staging/common/auth0/cred"
       databaseCredentials: "staging/zesty-k8s/data-store/cred"
       databaseDetails: "staging/zesty-k8s/data-store/database"
+      recommendationServiceSQS: "/staging/incubations/recommendations-resolver/sqs"
   schedule: "0 17 * * *"
   successfulJobsHistoryLimit: 10
   failedJobsHistoryLimit: 5
