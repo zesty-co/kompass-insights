@@ -4,6 +4,7 @@ zestyk8s:
   fullnameOverride: "zesty-k8s-helm"
   persistence:
     spec:
+      storageClassName: "ebs-sc-delete"
       accessModes:
         - ReadWriteMany
   image:
