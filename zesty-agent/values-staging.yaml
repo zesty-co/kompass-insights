@@ -1,6 +1,6 @@
-prometheus:
-  url: http://prometheus-stack-kube-prom-prometheus.monitoring:9090/
 zestyk8s:
+  prometheus:
+    url: http://prometheus-stack-kube-prom-prometheus.monitoring:9090/
   orgID: "1670724728655"
   namespace: "zesty-k8s"
   fullnameOverride: "zesty-k8s-helm"
