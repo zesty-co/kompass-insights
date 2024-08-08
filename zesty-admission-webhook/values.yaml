@@ -1,14 +1,3 @@
-# -- (int) Desired number of replicas
-replicaCount: 1
-
-image:
-  # -- (string) Image repository
-  repository: 473301030746.dkr.ecr.us-west-2.amazonaws.com/zesty-k8s/admission-webhook-poc
-  # -- (string) Image pull policy
-  pullPolicy: Always
-  # -- (string) Image tag
-  tag: latest
-
 # -- (string) Override the name of the chart
 nameOverride: ~
 
