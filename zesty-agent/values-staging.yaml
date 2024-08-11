@@ -1,6 +1,15 @@
 zestyk8s:
   prometheus:
     url: http://prometheus-stack-kube-prom-prometheus.monitoring:9090/
+  awsAthena:
+    enabled: true
+    athenaProjectID: "473301030746"
+    athenaBucketName: s3://zesty-staging-athena-results-us-west-2/opencost
+    athenaRegion: us-west-2
+    athenaDatabase: athenacurcfn_opencost_integration_cur
+    athenaTable: opencost_integration_cur
+    athenaWorkgroup: primary
+    athenaCatalog: AwsDataCatalog
   orgID: "1670724728655"
   namespace: "zesty-k8s"
   fullnameOverride: "zesty-k8s-helm"
