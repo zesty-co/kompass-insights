@@ -41,7 +41,7 @@ cronjob:
       databaseDetails: "production/zesty-k8s/data-store/database"
       auth0Cred: "production/common/auth0/cred"
       recommendationServiceSQS: "/production/incubations/recommendations-resolver/sqs"
-      clustersRefreshSQS: "/production/incubations/clusters-refresh/sqs"
+      clustersRefreshSQS: "/production/zesty-k8s/data-store/refresh_clusters_worker/sqs"
   schedule: "0 17 * * *"
   successfulJobsHistoryLimit: 10
   failedJobsHistoryLimit: 5
