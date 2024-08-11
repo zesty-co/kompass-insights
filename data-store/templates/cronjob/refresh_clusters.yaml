@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: "{{ .Values.name }}-refresh_clusters-cronjob"
+  labels: {{- include "labels" . | nindent 4 }}
+spec:
+  schedule: "{{ .Values.cronjob.schedule }}"
+  successfulJobsHistoryLimit: {{ .Values.cronjob.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.cronjob.failedJobsHistoryLimit }}
+  concurrencyPolicy: "Forbid"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: "{{ .Values.name }}-refresh_clusters-scheduler"
+          labels:
+            app: {{ .Values.name }}
+        spec:
+          serviceAccountName: {{ .Values.name }}
+          tolerations:
+            - effect: NoSchedule
+              key: team
+              operator: Equal
+              value: aws
+          nodeSelector:
+            team: "aws"
+          containers:
+          - name: "{{ .Values.name }}-refresh_clusters-scheduler"
+            image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+            imagePullPolicy: Always
+            env: {{ toYaml .Values.env | nindent 12 }}
+            volumeMounts:
+            - mountPath: /app/app-config.yaml
+              name: app-config
+              subPath: app-config.yaml
+            command: ["python3", "/app/src/cron_jobs/refresh_clusters.py"]
+            resources:
+            {{- toYaml .Values.resources | nindent 16 }}
+          volumes:
+          - name: app-config
+            secret:
+              secretName: "{{ .Values.name }}-cronjob-app-config"
+          restartPolicy: "Never"
+
