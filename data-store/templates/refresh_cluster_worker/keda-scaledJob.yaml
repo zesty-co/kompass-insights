@@ -1,0 +1,65 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledJob
+metadata:
+  name: "{{ .Values.name }}-worker"
+  labels:
+    service: "{{ .Values.name }}-worker"
+spec:
+  pollingInterval: 30
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 5
+  minReplicaCount: 0
+  maxReplicaCount: 20
+  jobTargetRef:
+    parallelism: 1
+    completions: 1
+    activeDeadlineSeconds: 5400
+    backoffLimit: 6
+    template:
+      metadata:
+        labels:
+          service: "{{ .Values.name }}-worker"
+      spec:
+        serviceAccountName: "{{ .Values.name }}"
+        tolerations:
+          - effect: NoSchedule
+            key: team
+            operator: Equal
+            value: aws
+        nodeSelector:
+          team: "aws"
+        containers:
+        - image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
+          command: ["python", "/app/src/data_store_queue_handler_runner.py"]
+          imagePullPolicy: Always
+          name: {{ .Values.name }}-worker
+          env:
+          - name: AWS_SQS_QUEUE_URL
+            valueFrom:
+              secretKeyRef:
+                name: "{{ .Values.name }}-worker-keda"
+                key: AWS_SQS_QUEUE_URL
+{{- with .Values.env }}
+{{ toYaml . | indent 10 }}
+{{- end }}
+          resources:
+          {{- toYaml .Values.worker.resources | nindent 12 }}
+          volumeMounts:
+          - mountPath: /app/src/app-config.yaml
+            name: app-config
+            subPath: app-config.yaml
+        restartPolicy: {{ .Values.worker.restartPolicy }}
+        volumes:
+        - name: app-config
+          secret:
+            secretName: "{{ .Values.name }}-worker-app-config"
+    backoffLimit: {{ .Values.worker.backoffLimit }}
+  triggers:
+  - type: aws-sqs-queue
+    authenticationRef:
+      name: "{{ .Values.name }}-worker-trigger-authentication"
+    metadata:
+      queueURLFromEnv: AWS_SQS_QUEUE_URL
+      queueLength: "5"
+      awsRegion: {{.Values.worker.awsRegion }}
+      identityOwner: pod
