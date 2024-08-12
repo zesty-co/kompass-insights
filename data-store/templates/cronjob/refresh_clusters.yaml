@@ -33,7 +33,7 @@ spec:
             - mountPath: /app/app-config.yaml
               name: app-config
               subPath: app-config.yaml
-            command: ["python3", "/app/src/cron_jobs/refresh_clusters.py"]
+            command: ["python3", "-m", "src.cron_jobs.refresh_clusters"]
             resources:
             {{- toYaml .Values.resources | nindent 16 }}
           volumes:
