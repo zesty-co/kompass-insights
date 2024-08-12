@@ -12,7 +12,7 @@ spec:
     spec:
       template:
         metadata:
-          name: "{{ .Values.name }}-refresh_clusters-scheduler"
+          name: "{{ .Values.name }}-refresh-clusters-scheduler"
           labels:
             app: {{ .Values.name }}
         spec:
