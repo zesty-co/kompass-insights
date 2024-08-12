@@ -21,6 +21,7 @@ hpa:
   max: 10
 pdb:
   maxUnavailable: 1
+
 clustersRefreshSQS: "/production/zesty-k8s/data-store/refresh_clusters_worker/sqs"
 
 api:
@@ -33,6 +34,7 @@ api:
       databaseDetails: "production/zesty-k8s/data-store/database"
       auth0Cred: "production/common/auth0/cred"
       elasticDetails: "production/spots/elastic-credentials"
+
 cronjob:
   externalSecret:
     appConfig:
@@ -46,6 +48,7 @@ cronjob:
   schedule: "0 17 * * *"
   successfulJobsHistoryLimit: 10
   failedJobsHistoryLimit: 5
+
 worker:
   awsRegion: "eu-west-1"
   resources:
@@ -65,3 +68,18 @@ worker:
       databaseCredentials: "production/zesty-k8s/data-store/cred"
       databaseDetails: "production/zesty-k8s/data-store/database"
       elasticDetails: "production/spots/elastic-credentials"
+
+refreshClustersWorker:
+  awsRegion: "eu-west-1"
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  logLevel: INFO
+  externalSecret:
+    appConfig:
+      databaseCredentials: "production/zesty-k8s/data-store/cred"
+      databaseDetails: "production/zesty-k8s/data-store/database"
+

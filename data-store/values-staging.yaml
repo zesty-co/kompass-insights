@@ -21,7 +21,9 @@ hpa:
   max: 4
 pdb:
   maxUnavailable: 1
+
 clustersRefreshSQS: "/staging/zesty-k8s/data-store/refresh_clusters_worker/sqs"
+
 api:
   apiGateway:
     stage: "staging"
@@ -36,6 +38,7 @@ api:
       databaseCredentials: "staging/zesty-k8s/data-store/cred"
       databaseDetails: "staging/zesty-k8s/data-store/database"
       elasticDetails: "staging/spots/elastic-credentials"
+      
 cronjob:
   externalSecret:
     appConfig:
@@ -49,6 +52,7 @@ cronjob:
   schedule: "0 17 * * *"
   successfulJobsHistoryLimit: 10
   failedJobsHistoryLimit: 5
+
 worker:
   awsRegion: "us-west-2"
   resources:
@@ -68,3 +72,18 @@ worker:
       databaseCredentials: "staging/zesty-k8s/data-store/cred"
       databaseDetails: "staging/zesty-k8s/data-store/database"
       elasticDetails: "staging/spots/elastic-credentials"
+
+refreshClustersWorker:
+  awsRegion: "us-west-2"
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  logLevel: INFO
+  externalSecret:
+    appConfig:
+      databaseCredentials: "staging/zesty-k8s/data-store/cred"
+      databaseDetails: "staging/zesty-k8s/data-store/database"
+
