@@ -37,7 +37,7 @@ spec:
           - name: AWS_SQS_QUEUE_URL
             valueFrom:
               secretKeyRef:
-                name: "{{ .Values.name }}-worker-keda"
+                name: "{{ .Values.name }}-refresh-clusters-worker-keda"
                 key: AWS_SQS_QUEUE_URL
 {{- with .Values.env }}
 {{ toYaml . | indent 10 }}
@@ -52,12 +52,12 @@ spec:
         volumes:
         - name: app-config
           secret:
-            secretName: "{{ .Values.name }}-worker-app-config"
+            secretName: "{{ .Values.name }}-refresh-clusters-worker-app-config"
     backoffLimit: {{ .Values.worker.backoffLimit }}
   triggers:
   - type: aws-sqs-queue
     authenticationRef:
-      name: "{{ .Values.name }}-worker-trigger-authentication"
+      name: "{{ .Values.name }}-refresh-clusters-worker-trigger-authentication"
     metadata:
       queueURLFromEnv: AWS_SQS_QUEUE_URL
       queueLength: "5"
