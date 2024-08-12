@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: "{{ .Values.name }}-refresh_clusters-cronjob"
+  name: "{{ .Values.name }}-refresh-clusters-cronjob"
   labels: {{- include "labels" . | nindent 4 }}
 spec:
   schedule: "{{ .Values.cronjob.schedule }}"

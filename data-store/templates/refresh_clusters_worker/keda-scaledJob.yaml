@@ -1,7 +1,7 @@
 apiVersion: keda.sh/v1alpha1
 kind: ScaledJob
 metadata:
-  name: "{{ .Values.name }}-worker"
+  name: "{{ .Values.name }}-refresh-clusters-worker"
   labels:
     service: "{{ .Values.name }}-worker"
 spec:
