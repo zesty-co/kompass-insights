@@ -26,7 +26,7 @@ spec:
           operator: Equal
           value: aws
       nodeSelector:
-        team: "zesty-k8s"
+        team: "aws"
       containers:
         - name: "{{.Chart.Name }}-container"
           image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
