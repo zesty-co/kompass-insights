@@ -23,7 +23,7 @@ pdb:
   maxUnavailable: 1
 
 clustersRefreshSQS: "/production/zesty-k8s/data-store/refresh_clusters_worker/sqs"
-
+slackBotToken: /prod/notifications/slack-bot-token
 api:
   externalSecret:
     appConfig:
