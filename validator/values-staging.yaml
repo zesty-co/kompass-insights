@@ -6,6 +6,7 @@ env:
     value: "staging"
   - name: AWS_DEFAULT_REGION
     value: "us-west-2"
+slackBotToken: "/staging/notifications/slack-bot-token"
 worker:
   awsRegion: "us-west-2"
   resources:

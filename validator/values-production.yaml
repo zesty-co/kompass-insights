@@ -6,6 +6,8 @@ env:
     value: "prod"
   - name: AWS_DEFAULT_REGION
     value: "eu-west-1"
+    
+slackBotToken: /prod/notifications/slack-bot-token
 worker:
   awsRegion: "eu-west-1"
   resources:
