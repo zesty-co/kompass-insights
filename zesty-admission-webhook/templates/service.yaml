@@ -6,6 +6,7 @@ metadata:
   name: {{ include "zesty-admission-controller.serviceName" . }}
   namespace: {{ template "zesty-admission-controller.namespace" . }}
 spec:
+  clusterIP: None
   ports:
   - port: 443
     targetPort: 443
