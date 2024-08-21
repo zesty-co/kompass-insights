@@ -21,9 +21,9 @@ spec:
             - effect: NoSchedule
               key: team
               operator: Equal
-              value: aws
+              value: zesty-k8s
           nodeSelector:
-            team: "aws"
+            team: "zesty-k8s"
           containers:
           - name: "{{ .Values.name }}-recommendation-scheduler"
             image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"

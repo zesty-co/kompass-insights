@@ -27,7 +27,7 @@ spec:
             operator: Equal
             value: aws
         nodeSelector:
-          team: "aws"
+          team: "zesty-k8s"
         containers:
         - image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
           command: ["python3", "-m", "src.refresh_clusters_queue_handler_runner"]
