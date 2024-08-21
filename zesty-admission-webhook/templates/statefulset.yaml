@@ -44,11 +44,11 @@ spec:
               if [ "$(hostname)" = "{{ include "zesty-admission-controller.fullname" . }}-0" ]; then
                 redis-server;
               else
-                redis-server --replicaof {{ include "zesty-admission-controller.fullname" . }} 6379;
+                redis-server --replicaof {{ include "zesty-admission-controller.serviceName" . }} 6379;
               fi
           envFrom:
             - configMapRef:
-                name: {{ include "zesty-admission-controller.fullname" . }}-config
+                name: {{ include "zesty-admission-controller.configMap" . }}
       volumes:
         - name: webhook-tls
           secret:

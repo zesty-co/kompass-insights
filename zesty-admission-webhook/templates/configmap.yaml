@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
-  name: {{ include "zesty-admission-controller.fullname" . }}-config
+  name: {{ include "zesty-admission-controller.configMap" . }}
 data:
   REDIS_SYNC_ENABLED: "true"

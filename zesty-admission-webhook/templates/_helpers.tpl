@@ -43,3 +43,10 @@ Create a service name for secrets.
 {{- define "zesty-admission-controller.serviceName" -}}
 {{- printf "%s-svc" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Create a config map name.
+*/}}
+{{- define "zesty-admission-controller.configMap" -}}
+{{- printf "%s-config" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
