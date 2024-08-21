@@ -25,7 +25,7 @@ spec:
           - effect: NoSchedule
             key: team
             operator: Equal
-            value: aws
+            value: zesty-k8s
         nodeSelector:
           team: "zesty-k8s"
         containers:
