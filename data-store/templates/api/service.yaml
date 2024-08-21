@@ -6,6 +6,7 @@ metadata:
 spec:
   selector: {{- include "labels" . | nindent 4 }}
   type: ClusterIP
+  clusterIP: None
   ports:
     - port: 80
       targetPort: 8000
