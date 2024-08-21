@@ -1,5 +1,5 @@
 # -- (int) Desired number of replicas
-replicaCount: 1
+replicaCount: 2
 image:
   # -- (string) Image repository
   repository: 473301030746.dkr.ecr.us-west-2.amazonaws.com/zesty-k8s/mutating-admission-webhook
