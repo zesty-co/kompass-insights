@@ -1,0 +1,14 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: {{ include "zesty-admission-controller.pdb" . }}
+  namespace: {{ template "zesty-admission-controller.namespace" . }}
+  labels:
+    app: {{ include "zesty-admission-controller.fullname" . }}
+spec:
+  maxUnavailable: {{ .Values.pdb.maxUnavailable }}
+  selector:
+    matchLabels:
+      app: {{ include "zesty-admission-controller.fullname" . }}
