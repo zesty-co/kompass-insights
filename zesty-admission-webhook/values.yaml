@@ -69,7 +69,7 @@ redis-ha:
   auth: false
   # -- Existing Secret to use for redis-ha authentication.
   # By default the redis-secret-init Job is generating this Secret.
-  existingSecret: zesty-admission-controller-redis
+  existingSecret: ~
 
   # -- Whether the Redis server pods should be forced to run on separate nodes.
   hardAntiAffinity: true
