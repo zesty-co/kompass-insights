@@ -6,6 +6,6 @@ image:
   # -- (string) Image pull policy
   pullPolicy: IfNotPresent
   # -- (string) Image tag
-  tag: 1.0.0
+  tag: 1.1.0
   # -- (string) Image for redis cache
   redis: redis:latest
