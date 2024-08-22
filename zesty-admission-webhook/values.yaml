@@ -66,7 +66,7 @@ redis-ha:
       argocd.argoproj.io/sync-wave: "-1"
 
   # -- Configures redis-ha with AUTH
-  auth: true
+  auth: false
   # -- Existing Secret to use for redis-ha authentication.
   # By default the redis-secret-init Job is generating this Secret.
   existingSecret: zesty-admission-controller-redis
