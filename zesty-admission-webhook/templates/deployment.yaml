@@ -8,7 +8,6 @@ metadata:
   labels:
     app: {{ include "zesty-admission-controller.fullname" . }}
 spec:
-  serviceName: {{ include "zesty-admission-controller.fullname" . }}
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
