@@ -29,6 +29,9 @@ spec:
             - mountPath: "/etc/webhook/tls"
               name: webhook-tls
               readOnly: true
+          envFrom:
+            - configMapRef:
+                name: {{ include "zesty-admission-controller.configMap" . }}
       volumes:
         - name: webhook-tls
           secret:
