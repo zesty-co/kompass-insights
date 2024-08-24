@@ -5,4 +5,4 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
   name: {{ include "zesty-admission-controller.configMap" . }}
 data:
-  REDIS_ADDR: {{ include "zesty-admission-controller.fullname" . }}-redis-ha-haproxy
+  REDIS_ADDR: {{ include "zesty-admission-controller.fullname" . }}-redis-ha-haproxy:{{ .Values.externalRedis.port }}
