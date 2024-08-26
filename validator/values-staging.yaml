@@ -7,6 +7,15 @@ env:
   - name: AWS_DEFAULT_REGION
     value: "us-west-2"
 slackBotToken: "/staging/notifications/slack-bot-token"
+slackChannelName: "k8s-notifications-staging"
+buckets:
+  agentPayload: "external-staging.zesty.co"
+  clusterState: "zesty-cluster-state-staging"
+dynamodb:
+  accounts: staging-accounts
+  organizations: staging-organizations
+  resellers: staging-resellers
+  users: staging-users
 worker:
   awsRegion: "us-west-2"
   resources:
@@ -24,5 +33,7 @@ worker:
       auth0Cred: "staging/common/auth0/cred"
       sqsQueueURL: "/staging/zesty-k8s/file-validation/sqs"
       dataStoreSNSArn: "/staging/zesty-k8s/data-store/sns"
+      publicRedis: "staging/data-engineering/serverless-backend/redis-public-cache"
+      privateRedis: "staging/data-engineering/serverless-backend/redis-cache"
   restartPolicy: Never
   backoffLimit: 3

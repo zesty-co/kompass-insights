@@ -23,6 +23,15 @@ pdb:
   maxUnavailable: 1
 clustersRefreshSQS: "/staging/zesty-k8s/data-store/refresh_clusters_worker/sqs"
 slackBotToken: "/staging/notifications/slack-bot-token"
+slackChannelName: "k8s-notifications-staging"
+buckets:
+  agentPayload: "external-staging.zesty.co"
+  clusterState: "zesty-cluster-state-staging"
+dynamodb:
+  accounts: staging-accounts
+  organizations: staging-organizations
+  resellers: staging-resellers
+  users: staging-users
 api:
   apiGateway:
     stage: "staging"
@@ -69,6 +78,8 @@ worker:
       databaseCredentials: "staging/zesty-k8s/data-store/cred"
       databaseDetails: "staging/zesty-k8s/data-store/database"
       elasticDetails: "staging/spots/elastic-credentials"
+      publicRedis: "staging/data-engineering/serverless-backend/redis-public-cache"
+      privateRedis: "staging/data-engineering/serverless-backend/redis-cache"
 refreshClustersWorker:
   awsRegion: "us-west-2"
   resources:

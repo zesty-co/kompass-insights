@@ -6,8 +6,16 @@ env:
     value: "prod"
   - name: AWS_DEFAULT_REGION
     value: "eu-west-1"
-    
 slackBotToken: /prod/notifications/slack-bot-token
+slackChannelName: "k8s-notifications-production"
+buckets:
+  agentPayload: "external.zesty.co"
+  clusterState: "zesty-cluster-state"
+dynamodb:
+  accounts: accounts
+  organizations: organizations
+  resellers: resellers
+  users: users
 worker:
   awsRegion: "eu-west-1"
   resources:
@@ -25,5 +33,7 @@ worker:
       auth0Cred: "production/common/auth0/cred"
       sqsQueueURL: "/prod/zesty-k8s/file-validation/sqs"
       dataStoreSNSArn: "/prod/zesty-k8s/data-store/sns"
+      publicRedis: "prod/data-engineering/serverless-backend/redis-public-cache"
+      privateRedis: "prod/data-engineering/serverless-backend/redis-cache"
   restartPolicy: Never
   backoffLimit: 3

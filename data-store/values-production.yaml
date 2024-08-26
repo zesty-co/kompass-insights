@@ -24,6 +24,15 @@ pdb:
 
 clustersRefreshSQS: "/production/zesty-k8s/data-store/refresh_clusters_worker/sqs"
 slackBotToken: /prod/notifications/slack-bot-token
+slackChannelName: "k8s-notifications-production"
+buckets:
+  agentPayload: "external.zesty.co"
+  clusterState: "zesty-cluster-state"
+dynamodb:
+  accounts: accounts
+  organizations: organizations
+  resellers: resellers
+  users: users
 api:
   externalSecret:
     appConfig:
@@ -68,6 +77,8 @@ worker:
       databaseCredentials: "production/zesty-k8s/data-store/cred"
       databaseDetails: "production/zesty-k8s/data-store/database"
       elasticDetails: "production/spots/elastic-credentials"
+      publicRedis: "prod/data-engineering/serverless-backend/redis-public-cache"
+      privateRedis: "prod/data-engineering/serverless-backend/redis-cache"
 
 refreshClustersWorker:
   awsRegion: "eu-west-1"
