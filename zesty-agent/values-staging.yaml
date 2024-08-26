@@ -19,7 +19,7 @@ zestyk8s:
       accessModes:
         - ReadWriteOnce
   image:
-    tag: "1.11.5"
+    tag: "1.11.6"
 externalSecret:
   agentCreds:
     key: "staging/zesty-k8s/encrypted-creds"
