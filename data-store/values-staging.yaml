@@ -57,7 +57,7 @@ cronjob:
       databaseDetails: "staging/zesty-k8s/data-store/database"
       recommendationServiceSQS: "/staging/incubations/recommendations-resolver/sqs"
   schedule: "0 17 * * *"
-  successfulJobsHistoryLimit: 10
+  successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
 worker:
   awsRegion: "us-west-2"
