@@ -9,7 +9,7 @@ spec:
   template:
     metadata:
       labels: 
-        service: {{ .Values.name }}}-api
+        service: {{ .Values.name }}-api
       {{- include "labels" . | nindent 8 }}
     spec:
       serviceAccountName: "{{ .Values.name }}"
