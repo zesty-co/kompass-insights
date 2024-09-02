@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}
+  name: "{{ .Values.name }}-api"
   labels: {{- include "labels" . | nindent 4 }}
 spec:
   selector:
@@ -9,7 +9,7 @@ spec:
   template:
     metadata:
       labels: 
-        service: {{ .Values.name }}
+        service: {{ .Values.name }}}-api
       {{- include "labels" . | nindent 8 }}
     spec:
       serviceAccountName: "{{ .Values.name }}"
