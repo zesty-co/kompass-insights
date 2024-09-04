@@ -7,10 +7,25 @@ metadata:
     app: {{ include "zesty-admission-controller.fullname" . }}
 rules:
   - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - daemonsets
+      - statefulsets
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+    verbs:
+      - get
+      - list
+  - apiGroups:
       - "karpenter.sh"
     resources:
       - nodepools
-      - nodeclaims
     verbs:
       - get
       - list
