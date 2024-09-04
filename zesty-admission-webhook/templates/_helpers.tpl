@@ -51,10 +51,30 @@ Create a config map name.
 {{- printf "%s-config" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-
 {{/*
 Create a pdb name.
 */}}
 {{- define "zesty-admission-controller.pdb" -}}
 {{- printf "%s-pdb" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a cr name.
+*/}}
+{{- define "zesty-admission-controller.cr" -}}
+{{- printf "%s-cr" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a sa name.
+*/}}
+{{- define "zesty-admission-controller.sa" -}}
+{{- printf "%s-sa" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a crb name.
+*/}}
+{{- define "zesty-admission-controller.crb" -}}
+{{- printf "%s-crb" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
 {{- end -}}

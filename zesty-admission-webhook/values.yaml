@@ -7,6 +7,10 @@ fullnameOverride: ~
 # -- (string) Override the namespace the chart deploys to
 namespaceOverride: ~
 
+# -- ServiceAccount annotations
+serviceAccount:
+  annotations:
+
 redis-ha:
   # -- Enables the Redis HA subchart and disables the custom Redis single node deployment
   enabled: true
