@@ -17,6 +17,7 @@ spec:
       labels:
         app: {{ include "zesty-admission-controller.fullname" . }}
     spec:
+      serviceAccountName: "{{ include "zesty-admission-controller.sa" . }}"
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
