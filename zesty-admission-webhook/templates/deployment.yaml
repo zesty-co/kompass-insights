@@ -26,6 +26,8 @@ spec:
           - name: http
             containerPort: 443
             protocol: TCP
+          - name: grpc
+            containerPort: 50051
           volumeMounts:
             - mountPath: "/etc/webhook/tls"
               name: webhook-tls

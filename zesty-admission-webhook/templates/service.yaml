@@ -9,5 +9,7 @@ spec:
   ports:
   - port: 443
     targetPort: 443
+  - port: 50051
+    targetPort: 50051
   selector:
     app: {{ include "zesty-admission-controller.fullname" . }}

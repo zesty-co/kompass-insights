@@ -12,6 +12,10 @@ zestyk8s:
     athenaCatalog: AwsDataCatalog
   orgID: "1670724728655"
   namespace: "zesty-k8s"
+  grpc:
+    enabled: true
+    server:
+      endpoint: zesty-admission-webhook-zesty-admission-controller-svc
   fullnameOverride: "zesty-k8s-helm"
   persistence:
     spec:
