@@ -6,10 +6,13 @@ metadata:
   name: {{ include "zesty-admission-controller.serviceName" . }}
   namespace: {{ template "zesty-admission-controller.namespace" . }}
 spec:
-  ports:
-  - port: 443
-    targetPort: 443
-  - port: 50051
-    targetPort: 50051
   selector:
     app: {{ include "zesty-admission-controller.fullname" . }}
+  ports:
+  - name: https
+    port: 443
+    targetPort: 443
+  - name: grpc
+    port: 50051
+    targetPort: 50051
+  type: ClusterIP
