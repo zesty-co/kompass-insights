@@ -22,6 +22,10 @@ zestyk8s:
       storageClassName: "ebs-sc-delete"
       accessModes:
         - ReadWriteOnce
+  grpc:
+    enabled: true
+    server:
+      endpoint: zesty-admission-webhook-zesty-admission-controller-svc
   image:
     tag: "1.18.2"
 externalSecret:
