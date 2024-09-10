@@ -26,6 +26,9 @@ zestyk8s:
     enabled: true
     server:
       endpoint: zesty-admission-webhook-zesty-admission-controller-svc
+  config:
+    manager:
+      enable: true
   image:
     tag: "1.19.6"
 externalSecret:
