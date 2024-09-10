@@ -27,7 +27,7 @@ zestyk8s:
     server:
       endpoint: zesty-admission-webhook-zesty-admission-controller-svc
   image:
-    tag: "1.19.3"
+    tag: "1.19.4"
 externalSecret:
   agentCreds:
     key: "staging/zesty-k8s/encrypted-creds"
