@@ -11,6 +11,18 @@ namespaceOverride: ~
 serviceAccount:
   annotations:
 
+# -- Deployment Node Selector
+nodeSelector:
+  team: "zesty-k8s"
+
+
+# -- Deployment Tolerations
+tolerations:
+  - effect: NoSchedule
+    key: team
+    operator: Equal
+    value: zesty-k8s
+
 redis-ha:
   # -- Enables the Redis HA subchart and disables the custom Redis single node deployment
   enabled: true
