@@ -30,7 +30,7 @@ zestyk8s:
     manager:
       enable: true
   image:
-    tag: "1.20.3"
+    tag: "1.20.4"
 externalSecret:
   agentCreds:
     key: "staging/zesty-k8s/encrypted-creds"
