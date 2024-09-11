@@ -1,1 +1,5 @@
 namespace: "zesty-k8s"
+
+zestyk8s:
+  nodeSelector:
+    team: "zesty-k8s"
