@@ -3,3 +3,8 @@ namespace: "zesty-k8s"
 zestyk8s:
   nodeSelector:
     team: "zesty-k8s"
+  tolerations:
+    - effect: NoSchedule
+      key: team
+      operator: Equal
+      value: zesty-k8s
