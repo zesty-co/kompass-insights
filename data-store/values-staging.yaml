@@ -16,6 +16,9 @@ env:
     value: "staging"
   - name: AWS_DEFAULT_REGION
     value: "us-west-2"
+environment:
+  apiStage: "staging"
+  region: "us-west-2"
 hpa:
   min: 2
   max: 4

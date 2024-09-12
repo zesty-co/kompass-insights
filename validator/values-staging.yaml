@@ -6,6 +6,9 @@ env:
     value: "staging"
   - name: AWS_DEFAULT_REGION
     value: "us-west-2"
+environment:
+  apiStage: "staging"
+  region: "us-west-2"
 slackBotToken: "/staging/notifications/slack-bot-token"
 slackChannelName: "k8s-notifications-staging"
 buckets:

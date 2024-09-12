@@ -16,6 +16,9 @@ env:
     value: "prod"
   - name: AWS_DEFAULT_REGION
     value: "eu-west-1"
+environment:
+  apiStage: "prod"
+  region: "eu-west-1"
 hpa:
   min: 2
   max: 10
