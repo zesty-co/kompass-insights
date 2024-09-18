@@ -23,6 +23,13 @@ rules:
       - get
       - list
   - apiGroups:
+      - "keda.sh"
+    resources:
+      - scaledjobs
+    verbs:
+      - get
+      - list
+  - apiGroups:
       - "karpenter.sh"
     resources:
       - nodepools
