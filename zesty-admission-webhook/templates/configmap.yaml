@@ -8,3 +8,4 @@ data:
   REDIS_ADDR: "{{ .Release.Name }}-redis-ha-haproxy:{{ .Values.externalRedis.port }}"
   AGENT_HOST: "zesty-k8s-helm-svc"
   AGENT_PORT: "50051"
+  GRPC: "{{ .Values.grpc.port }}"
