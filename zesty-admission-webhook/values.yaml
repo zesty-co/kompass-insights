@@ -9,7 +9,7 @@ namespaceOverride: ~
 
 # -- (int) Set grpc port
 grpc:
-  port: 50052
+  port: 50051
 
 # -- ServiceAccount annotations
 serviceAccount:

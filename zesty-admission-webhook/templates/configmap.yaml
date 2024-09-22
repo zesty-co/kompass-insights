@@ -7,5 +7,5 @@ metadata:
 data:
   REDIS_ADDR: "{{ .Release.Name }}-redis-ha-haproxy:{{ .Values.externalRedis.port }}"
   AGENT_HOST: "zesty-k8s-helm-svc"
-  AGENT_PORT: "50051"
+  AGENT_PORT: "50052"
   GRPC: "{{ .Values.grpc.port }}"
