@@ -6,6 +6,6 @@ metadata:
   name: {{ include "zesty-admission-controller.configMap" . }}
 data:
   REDIS_ADDR: "{{ .Release.Name }}-redis-ha-haproxy:{{ .Values.externalRedis.port }}"
-  AGENT_HOST: "http://zesty-k8s-helm-svc"
+  AGENT_HOST: "zesty-k8s-helm-svc"
   AGENT_PORT: "50052"
   GRPC: "{{ .Values.grpc.port }}"
