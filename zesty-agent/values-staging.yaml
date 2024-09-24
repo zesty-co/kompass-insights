@@ -14,7 +14,7 @@ zestyk8s:
   namespace: "zesty-k8s"
   grpc:
     enabled: true
-    server:
+    client:
       endpoint: zesty-admission-webhook-zesty-admission-controller-svc
   fullnameOverride: "zesty-k8s-helm"
   persistence:
