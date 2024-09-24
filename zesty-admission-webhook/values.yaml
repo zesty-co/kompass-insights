@@ -56,6 +56,8 @@ redis-ha:
       # -- Will save the DB if both the given number of seconds and the given number of write operations against the DB occurred. `""`  is disabled
       # @default -- `'""'`
       save: '""'
+    # Enable FLUSHDB and FLUSHALL
+    disableCommands: []
   ## Enables a HA Proxy for better LoadBalancing / Sentinel Master support. Automatically proxies to Redis master.
   haproxy:
     # -- Enabled HAProxy LoadBalancing/Proxy
