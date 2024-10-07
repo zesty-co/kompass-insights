@@ -58,6 +58,9 @@ redis-ha:
       save: '""'
     # Enable FLUSHDB and FLUSHALL
     disableCommands: []
+    ## annotations for the redis statefulset
+    annotations:
+      argocd.argoproj.io/sync-wave: "-1"
   ## Enables a HA Proxy for better LoadBalancing / Sentinel Master support. Automatically proxies to Redis master.
   haproxy:
     # -- Enabled HAProxy LoadBalancing/Proxy
