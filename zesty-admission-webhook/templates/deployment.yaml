@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "3"
   name: {{ include "zesty-admission-controller.fullname" . }}
   namespace: {{ template "zesty-admission-controller.namespace" . }}
   labels:
