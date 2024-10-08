@@ -5,7 +5,7 @@ zestyk8s:
     enabled: true
     athenaProjectID: ~
     athenaBucketName: ~
-    athenaRegion: eu-east-1
+    athenaRegion: eu-west-1
     athenaDatabase: ~
     athenaTable: ~
     athenaWorkgroup: ~
@@ -13,7 +13,7 @@ zestyk8s:
   s3override:
     enabled: true
     bucket: "external.zesty.co"
-    region: "eu-east-1"
+    region: "eu-west-1"
   orgID: "3863721556980"
   namespace: "zesty-k8s"
   grpc:

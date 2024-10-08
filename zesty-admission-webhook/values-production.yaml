@@ -2,7 +2,7 @@
 replicaCount: 2
 image:
   # -- (string) Image repository
-  repository: ~
+  repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/mutating-admission-webhook"
   # -- (string) Image pull policy
   pullPolicy: IfNotPresent
   # -- (string) Image tag
