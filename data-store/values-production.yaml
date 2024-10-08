@@ -1,6 +1,6 @@
 image:
   repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/data-store
-  tag: 1.19.1
+  tag: 1.19.2
 ingress:
   ClassName: internal
   host: k8s-data-store.zesty.co
@@ -24,22 +24,18 @@ hpa:
   max: 10
 pdb:
   maxUnavailable: 1
-
 clustersRefreshSQS: "/production/zesty-k8s/data-store/refresh_clusters_worker/sqs"
 slackBotToken: "/prod/notifications/slack-bot-token"
 slackChannelName: "k8s-notifications-production"
-
 buckets:
   agentPayload: "external.zesty.co"
   clusterState: "zesty-cluster-state"
   pricing: "zesty-pricing-bronze"
-
 dynamodb:
   accounts: accounts
   organizations: organizations
   resellers: resellers
   users: users
-
 api:
   apiGateway:
     stage: prod
@@ -54,7 +50,6 @@ api:
       databaseCredentials: "prod/zesty-k8s/data-store/cred"
       databaseDetails: "prod/zesty-k8s/data-store/database"
       elasticDetails: "production/zesty-k8s/elastic-credentials"
-
 cronjob:
   externalSecret:
     appConfig:
@@ -68,7 +63,6 @@ cronjob:
   schedule: "0 17 * * *"
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
-
 worker:
   awsRegion: "eu-west-1"
   resources:
@@ -90,7 +84,6 @@ worker:
       elasticDetails: "production/zesty-k8s/elastic-credentials"
       publicRedis: "prod/data-engineering/serverless-backend/redis-public-cache"
       privateRedis: "prod/data-engineering/serverless-backend/redis-cache"
-
 refreshClustersWorker:
   awsRegion: "eu-west-1"
   resources:
@@ -104,4 +97,3 @@ refreshClustersWorker:
     appConfig:
       databaseCredentials: "prod/zesty-k8s/data-store/cred"
       databaseDetails: "prod/zesty-k8s/data-store/database"
-
