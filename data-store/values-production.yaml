@@ -1,6 +1,6 @@
 image:
   repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/k8s/data-store
-  tag: 1.11.9
+  tag: 1.19.1
 ingress:
   ClassName: internal
   host: k8s-data-store.zesty.co
@@ -28,23 +28,31 @@ pdb:
 clustersRefreshSQS: "/production/zesty-k8s/data-store/refresh_clusters_worker/sqs"
 slackBotToken: /prod/notifications/slack-bot-token
 slackChannelName: "k8s-notifications-production"
+
 buckets:
   agentPayload: "external.zesty.co"
   clusterState: "zesty-cluster-state"
+  pricing: "zesty-pricing-bronze"
+
 dynamodb:
   accounts: accounts
   organizations: organizations
   resellers: resellers
   users: users
+
 api:
+  apiGateway:
+    stage: prod
+    region: eu-east-1
+    path: ""
   externalSecret:
     appConfig:
       audienceAuth0: "/prod/common/auth0-audience"
       domainAuth0: "/prod/common/auth0-domain"
+      auth0Cred: "production/common/auth0/cred"
       audienceSystemAuth0: "/prod/common/auth0-audience-system"
       databaseCredentials: "production/zesty-k8s/data-store/cred"
       databaseDetails: "production/zesty-k8s/data-store/database"
-      auth0Cred: "production/common/auth0/cred"
       elasticDetails: "production/spots/elastic-credentials"
 
 cronjob:
@@ -53,12 +61,12 @@ cronjob:
       audienceAuth0: "/prod/common/auth0-audience"
       domainAuth0: "/prod/common/auth0-domain"
       audienceSystemAuth0: "/prod/common/auth0-audience-system"
+      auth0Cred: "production/common/auth0/cred"
       databaseCredentials: "production/zesty-k8s/data-store/cred"
       databaseDetails: "production/zesty-k8s/data-store/database"
-      auth0Cred: "production/common/auth0/cred"
       recommendationServiceSQS: "/production/incubations/recommendations-resolver/sqs"
   schedule: "0 17 * * *"
-  successfulJobsHistoryLimit: 10
+  successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
 
 worker:
