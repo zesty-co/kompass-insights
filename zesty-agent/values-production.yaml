@@ -14,7 +14,7 @@ zestyk8s:
     enabled: true
     bucket: "external.zesty.co"
     region: "eu-east-1"
-  orgID: "1670724728655"
+  orgID: "2867149138211"
   namespace: "zesty-k8s"
   grpc:
     enabled: true
