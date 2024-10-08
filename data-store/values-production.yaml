@@ -26,7 +26,7 @@ pdb:
   maxUnavailable: 1
 
 clustersRefreshSQS: "/production/zesty-k8s/data-store/refresh_clusters_worker/sqs"
-slackBotToken: /prod/notifications/slack-bot-token
+slackBotToken: "/prod/notifications/slack-bot-token"
 slackChannelName: "k8s-notifications-production"
 
 buckets:
@@ -51,9 +51,9 @@ api:
       domainAuth0: "/prod/common/auth0-domain"
       auth0Cred: "production/common/auth0/cred"
       audienceSystemAuth0: "/prod/common/auth0-audience-system"
-      databaseCredentials: "production/zesty-k8s/data-store/cred"
-      databaseDetails: "production/zesty-k8s/data-store/database"
-      elasticDetails: "production/spots/elastic-credentials"
+      databaseCredentials: prod/zesty-k8s/data-store/cred"
+      databaseDetails: prod/zesty-k8s/data-store/database"
+      elasticDetails: prod/spots/elastic-credentials"
 
 cronjob:
   externalSecret:
@@ -62,8 +62,8 @@ cronjob:
       domainAuth0: "/prod/common/auth0-domain"
       audienceSystemAuth0: "/prod/common/auth0-audience-system"
       auth0Cred: "production/common/auth0/cred"
-      databaseCredentials: "production/zesty-k8s/data-store/cred"
-      databaseDetails: "production/zesty-k8s/data-store/database"
+      databaseCredentials: prod/zesty-k8s/data-store/cred"
+      databaseDetails: prod/zesty-k8s/data-store/database"
       recommendationServiceSQS: "/production/incubations/recommendations-resolver/sqs"
   schedule: "0 17 * * *"
   successfulJobsHistoryLimit: 5
@@ -80,14 +80,14 @@ worker:
   logLevel: INFO
   externalSecret:
     appConfig:
-      audienceAuth0: "/production/common/auth0-audience"
-      domainAuth0: "/production/common/auth0-domain"
-      audienceSystemAuth0: "/production/common/auth0-audience-system"
+      audienceAuth0: "/prod/common/auth0-audience"
+      domainAuth0: "/prod/common/auth0-domain"
+      audienceSystemAuth0: "/prod/common/auth0-audience-system"
       auth0Cred: "production/common/auth0/cred"
       sqsQueueURL: "/production/zesty-k8s/data-store/sqs"
-      databaseCredentials: "production/zesty-k8s/data-store/cred"
-      databaseDetails: "production/zesty-k8s/data-store/database"
-      elasticDetails: "production/spots/elastic-credentials"
+      databaseCredentials: prod/zesty-k8s/data-store/cred"
+      databaseDetails: prod/zesty-k8s/data-store/database"
+      elasticDetails: prod/spots/elastic-credentials"
       publicRedis: "prod/data-engineering/serverless-backend/redis-public-cache"
       privateRedis: "prod/data-engineering/serverless-backend/redis-cache"
 
@@ -102,6 +102,6 @@ refreshClustersWorker:
   logLevel: INFO
   externalSecret:
     appConfig:
-      databaseCredentials: "production/zesty-k8s/data-store/cred"
-      databaseDetails: "production/zesty-k8s/data-store/database"
+      databaseCredentials: prod/zesty-k8s/data-store/cred"
+      databaseDetails: prod/zesty-k8s/data-store/database"
 
