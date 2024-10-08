@@ -51,9 +51,9 @@ api:
       domainAuth0: "/prod/common/auth0-domain"
       auth0Cred: "production/common/auth0/cred"
       audienceSystemAuth0: "/prod/common/auth0-audience-system"
-      databaseCredentials: prod/zesty-k8s/data-store/cred"
-      databaseDetails: prod/zesty-k8s/data-store/database"
-      elasticDetails: prod/spots/elastic-credentials"
+      databaseCredentials: "prod/zesty-k8s/data-store/cred"
+      databaseDetails: "prod/zesty-k8s/data-store/database"
+      elasticDetails: "production/zesty-k8s/elastic-credentials"
 
 cronjob:
   externalSecret:
@@ -62,8 +62,8 @@ cronjob:
       domainAuth0: "/prod/common/auth0-domain"
       audienceSystemAuth0: "/prod/common/auth0-audience-system"
       auth0Cred: "production/common/auth0/cred"
-      databaseCredentials: prod/zesty-k8s/data-store/cred"
-      databaseDetails: prod/zesty-k8s/data-store/database"
+      databaseCredentials: "prod/zesty-k8s/data-store/cred"
+      databaseDetails: "prod/zesty-k8s/data-store/database"
       recommendationServiceSQS: "/production/incubations/recommendations-resolver/sqs"
   schedule: "0 17 * * *"
   successfulJobsHistoryLimit: 5
@@ -85,9 +85,9 @@ worker:
       audienceSystemAuth0: "/prod/common/auth0-audience-system"
       auth0Cred: "production/common/auth0/cred"
       sqsQueueURL: "/production/zesty-k8s/data-store/sqs"
-      databaseCredentials: prod/zesty-k8s/data-store/cred"
-      databaseDetails: prod/zesty-k8s/data-store/database"
-      elasticDetails: prod/spots/elastic-credentials"
+      databaseCredentials: "prod/zesty-k8s/data-store/cred"
+      databaseDetails: "prod/zesty-k8s/data-store/database"
+      elasticDetails: "production/zesty-k8s/elastic-credentials"
       publicRedis: "prod/data-engineering/serverless-backend/redis-public-cache"
       privateRedis: "prod/data-engineering/serverless-backend/redis-cache"
 
@@ -102,6 +102,6 @@ refreshClustersWorker:
   logLevel: INFO
   externalSecret:
     appConfig:
-      databaseCredentials: prod/zesty-k8s/data-store/cred"
-      databaseDetails: prod/zesty-k8s/data-store/database"
+      databaseCredentials: "prod/zesty-k8s/data-store/cred"
+      databaseDetails: "prod/zesty-k8s/data-store/database"
 
