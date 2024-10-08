@@ -34,8 +34,8 @@ worker:
       domainAuth0: "/prod/common/auth0-domain"
       audienceSystemAuth0: "/prod/common/auth0-audience-system"
       auth0Cred: "production/common/auth0/cred"
-      sqsQueueURL: "/prod/zesty-k8s/file-validation/sqs"
-      dataStoreSNSArn: "/prod/zesty-k8s/data-store/sns"
+      sqsQueueURL: "/production/zesty-k8s/file-validation/sqs"
+      dataStoreSNSArn: "/production/zesty-k8s/data-store/sns"
       publicRedis: "prod/data-engineering/serverless-backend/redis-public-cache"
       privateRedis: "prod/data-engineering/serverless-backend/redis-cache"
   restartPolicy: Never
