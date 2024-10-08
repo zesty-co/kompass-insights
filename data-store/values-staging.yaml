@@ -1,6 +1,6 @@
 image:
   repo: 473301030746.dkr.ecr.us-west-2.amazonaws.com/zesty-k8s/data-store
-  tag: 1.19.1
+  tag: 1.19.2
 ingress:
   ClassName: internal
   host: k8s-data-store.staging.zesty.co
@@ -24,22 +24,18 @@ hpa:
   max: 4
 pdb:
   maxUnavailable: 1
-
 clustersRefreshSQS: /staging/zesty-k8s/data-store/refresh_clusters_worker/sqs
 slackBotToken: /staging/notifications/slack-bot-token
 slackChannelName: k8s-notifications-staging
-
 buckets:
   agentPayload: external-staging.zesty.co
   clusterState: zesty-cluster-state-staging
   pricing: zesty-pricing-bronze-staging
-
 dynamodb:
   accounts: staging-accounts
   organizations: staging-organizations
   resellers: staging-resellers
   users: staging-users
-
 api:
   apiGateway:
     stage: staging
@@ -54,7 +50,6 @@ api:
       databaseCredentials: staging/zesty-k8s/data-store/cred
       databaseDetails: staging/zesty-k8s/data-store/database
       elasticDetails: staging/spots/elastic-credentials
-
 cronjob:
   externalSecret:
     appConfig:
@@ -68,7 +63,6 @@ cronjob:
   schedule: 0 17 * * *
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
-
 worker:
   awsRegion: us-west-2
   resources:
@@ -90,7 +84,6 @@ worker:
       elasticDetails: staging/spots/elastic-credentials
       publicRedis: staging/data-engineering/serverless-backend/redis-public-cache
       privateRedis: staging/data-engineering/serverless-backend/redis-cache
-
 refreshClustersWorker:
   awsRegion: us-west-2
   resources:
@@ -104,4 +97,3 @@ refreshClustersWorker:
     appConfig:
       databaseCredentials: staging/zesty-k8s/data-store/cred
       databaseDetails: staging/zesty-k8s/data-store/database
-
