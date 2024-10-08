@@ -1,0 +1,12 @@
+# -- (int) Desired number of replicas
+replicaCount: 2
+image:
+  # -- (string) Image repository
+  repository: ~
+  # -- (string) Image pull policy
+  pullPolicy: IfNotPresent
+  # -- (string) Image tag
+  tag: 1.13.0
+pdb:
+  # -- (int) Min amount of running pods
+  maxUnavailable: 1

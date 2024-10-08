@@ -3,17 +3,17 @@ zestyk8s:
     url: http://prometheus-stack-kube-prom-prometheus.monitoring:9090/
   awsAthena:
     enabled: true
-    athenaProjectID: "473301030746"
-    athenaBucketName: s3://zesty-staging-athena-results-us-west-2/opencost
-    athenaRegion: us-west-2
-    athenaDatabase: athenacurcfn_opencost_integration_cur
-    athenaTable: opencost_integration_cur
-    athenaWorkgroup: primary
-    athenaCatalog: AwsDataCatalog
+    athenaProjectID: ~
+    athenaBucketName: ~
+    athenaRegion: eu-east-1
+    athenaDatabase: ~
+    athenaTable: ~
+    athenaWorkgroup: ~
+    athenaCatalog: ~
   s3override:
     enabled: true
-    bucket: "external-staging.zesty.co"
-    region: "us-west-2"
+    bucket: "external.zesty.co"
+    region: "eu-east-1"
   orgID: "1670724728655"
   namespace: "zesty-k8s"
   grpc:
@@ -33,4 +33,4 @@ zestyk8s:
     tag: "1.31.4"
 externalSecret:
   agentCreds:
-    key: "staging/zesty-k8s/encrypted-creds"
+    key: "prod/zesty-k8s/encrypted-creds"
