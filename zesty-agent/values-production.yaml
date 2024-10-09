@@ -1,6 +1,6 @@
 zestyk8s:
   prometheus:
-    url: http://prometheus-stack-kube-prom-prometheus.monitoring:9090/
+    url: http://prometheus-stack-prometheus.monitoring:9090/
   awsAthena:
     enabled: true
     athenaProjectID: "672188301118"
