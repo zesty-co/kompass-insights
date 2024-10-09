@@ -3,13 +3,13 @@ zestyk8s:
     url: http://prometheus-stack-kube-prom-prometheus.monitoring:9090/
   awsAthena:
     enabled: true
-    athenaProjectID: ~
-    athenaBucketName: ~
+    athenaProjectID: "672188301118"
+    athenaBucketName: s3://zesty-k8s-athena-result/zesty
     athenaRegion: eu-west-1
-    athenaDatabase: ~
-    athenaTable: ~
-    athenaWorkgroup: ~
-    athenaCatalog: ~
+    athenaDatabase: athenacurcfn_zesty_k8s_export
+    athenaTable: zesty_k8s_export
+    athenaWorkgroup: primary
+    athenaCatalog: AwsDataCatalog
   s3override:
     enabled: true
     bucket: "external.zesty.co"
@@ -20,7 +20,7 @@ zestyk8s:
     enabled: true
     client:
       endpoint: zesty-admission-webhook-zesty-admission-controller-svc
-  fullnameOverride: "zesty-k8s-helm"
+  fullnameOverride: "prod-zesty-k8s"
   persistence:
     spec:
       storageClassName: "ebs-sc-delete"
@@ -31,7 +31,7 @@ zestyk8s:
       enable: true
   image:
     repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent"
-    tag: "1.31.4"
+    tag: "1.32.0"
 externalSecret:
   agentCreds:
     key: "prod/zesty-k8s/encrypted-creds"
