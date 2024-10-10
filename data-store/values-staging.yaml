@@ -10,7 +10,7 @@ resources:
   requests:
     cpu: 50m
     memory: 128Mi
-logLevel: DEBUG
+logLevel: INFO
 env:
   - name: API_STAGE
     value: staging
