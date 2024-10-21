@@ -1,6 +1,8 @@
 zestyk8s:
   prometheus:
     url: http://prometheus-stack-prometheus.monitoring:9090/
+  secret:
+    key: "prod/zesty-k8s/encrypted-creds"
   awsAthena:
     enabled: true
     athenaProjectID: "672188301118"
@@ -34,4 +36,3 @@ zestyk8s:
     tag: "1.32.2"
 externalSecret:
   agentCreds:
-    key: "prod/zesty-k8s/encrypted-creds"
