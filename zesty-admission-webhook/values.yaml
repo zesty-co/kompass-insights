@@ -18,6 +18,8 @@ serviceAccount:
 # -- Deployment Node Selector
 nodeSelector:
   team: "zesty-k8s"
+  karpenter.sh/capacity-type:
+    - on-demand
 
 # -- Deployment Tolerations
 tolerations:
@@ -35,6 +37,10 @@ redis-ha:
     repository: public.ecr.aws/docker/library/redis
     # -- Redis tag
     tag: 7.2.4-alpine
+  sentinel:
+    nodeSelector:
+      karpenter.sh/capacity-type:
+        - on-demand
   ## Prometheus redis-exporter sidecar
   exporter:
     # -- Enable Prometheus redis-exporter sidecar
