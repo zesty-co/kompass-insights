@@ -27,8 +27,7 @@ spec:
           value: zesty-k8s
       nodeSelector:
         team: "zesty-k8s"
-        karpenter.sh/capacity-type:
-          - on-demand
+        karpenter.sh/capacity-type: on-demand
       containers:
         - name: "{{.Chart.Name }}-container"
           image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
