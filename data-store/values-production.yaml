@@ -13,24 +13,27 @@ resources:
 logLevel: INFO
 env:
   - name: API_STAGE
-    value: "prod"
+    value: prod
   - name: AWS_DEFAULT_REGION
-    value: "eu-west-1"
+    value: eu-west-1
 environment:
-  apiStage: "prod"
-  region: "eu-west-1"
+  apiStage: prod
+  region: eu-west-1
 hpa:
   min: 2
   max: 10
 pdb:
   maxUnavailable: 1
-clustersRefreshSQS: "/production/zesty-k8s/data-store/refresh_clusters_worker/sqs"
-slackBotToken: "/prod/notifications/slack-bot-token"
-slackChannelName: "k8s-notifications-production"
+clustersRefreshSQS: /production/zesty-k8s/data-store/refresh_clusters_worker/sqs
+slackBotToken: /prod/notifications/slack-bot-token
+slackChannelName: k8s-notifications-production
 buckets:
-  agentPayload: "external.zesty.co"
-  clusterState: "zesty-cluster-state"
-  pricing: "zesty-pricing-bronze"
+  agentPayload: external.zesty.co
+  clusterState: zesty-cluster-state
+  pricing: zesty-pricing-bronze
+pricing_files:
+  spot_file_key: aws_spot_data/LATEST/aws_spot_data.parquet
+  od_file_key: ec2_od_filtered/LATEST/amazonec2_ec2_on_demand_filtered.parquet
 dynamodb:
   accounts: accounts
   organizations: organizations
@@ -43,28 +46,28 @@ api:
     path: ""
   externalSecret:
     appConfig:
-      audienceAuth0: "/prod/common/auth0-audience"
-      domainAuth0: "/prod/common/auth0-domain"
-      auth0Cred: "production/common/auth0/cred"
-      audienceSystemAuth0: "/prod/common/auth0-audience-system"
-      databaseCredentials: "prod/zesty-k8s/data-store/cred"
-      databaseDetails: "prod/zesty-k8s/data-store/database"
-      elasticDetails: "production/zesty-k8s/elastic-credentials"
+      audienceAuth0: /prod/common/auth0-audience
+      domainAuth0: /prod/common/auth0-domain
+      auth0Cred: production/common/auth0/cred
+      audienceSystemAuth0: /prod/common/auth0-audience-system
+      databaseCredentials: prod/zesty-k8s/data-store/cred
+      databaseDetails: prod/zesty-k8s/data-store/database
+      elasticDetails: production/zesty-k8s/elastic-credentials
 cronjob:
   externalSecret:
     appConfig:
-      audienceAuth0: "/prod/common/auth0-audience"
-      domainAuth0: "/prod/common/auth0-domain"
-      audienceSystemAuth0: "/prod/common/auth0-audience-system"
-      auth0Cred: "production/common/auth0/cred"
-      databaseCredentials: "prod/zesty-k8s/data-store/cred"
-      databaseDetails: "prod/zesty-k8s/data-store/database"
-      recommendationServiceSQS: "/production/incubations/recommendations-resolver/sqs"
-  schedule: "0 17 * * *"
+      audienceAuth0: /prod/common/auth0-audience
+      domainAuth0: /prod/common/auth0-domain
+      audienceSystemAuth0: /prod/common/auth0-audience-system
+      auth0Cred: production/common/auth0/cred
+      databaseCredentials: prod/zesty-k8s/data-store/cred
+      databaseDetails: prod/zesty-k8s/data-store/database
+      recommendationServiceSQS: /production/incubations/recommendations-resolver/sqs
+  schedule: 0 17 * * *
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
 worker:
-  awsRegion: "eu-west-1"
+  awsRegion: eu-west-1
   resources:
     limits:
       memory: 1Gi
@@ -74,18 +77,18 @@ worker:
   logLevel: INFO
   externalSecret:
     appConfig:
-      audienceAuth0: "/prod/common/auth0-audience"
-      domainAuth0: "/prod/common/auth0-domain"
-      audienceSystemAuth0: "/prod/common/auth0-audience-system"
-      auth0Cred: "production/common/auth0/cred"
-      sqsQueueURL: "/production/zesty-k8s/data-store/sqs"
-      databaseCredentials: "prod/zesty-k8s/data-store/cred"
-      databaseDetails: "prod/zesty-k8s/data-store/database"
-      elasticDetails: "production/zesty-k8s/elastic-credentials"
-      publicRedis: "prod/data-engineering/serverless-backend/redis-public-cache"
-      privateRedis: "prod/data-engineering/serverless-backend/redis-cache"
+      audienceAuth0: /prod/common/auth0-audience
+      domainAuth0: /prod/common/auth0-domain
+      audienceSystemAuth0: /prod/common/auth0-audience-system
+      auth0Cred: production/common/auth0/cred
+      sqsQueueURL: /production/zesty-k8s/data-store/sqs
+      databaseCredentials: prod/zesty-k8s/data-store/cred
+      databaseDetails: prod/zesty-k8s/data-store/database
+      elasticDetails: production/zesty-k8s/elastic-credentials
+      publicRedis: prod/data-engineering/serverless-backend/redis-public-cache
+      privateRedis: prod/data-engineering/serverless-backend/redis-cache
 refreshClustersWorker:
-  awsRegion: "eu-west-1"
+  awsRegion: eu-west-1
   resources:
     limits:
       memory: 1Gi
@@ -95,5 +98,5 @@ refreshClustersWorker:
   logLevel: INFO
   externalSecret:
     appConfig:
-      databaseCredentials: "prod/zesty-k8s/data-store/cred"
-      databaseDetails: "prod/zesty-k8s/data-store/database"
+      databaseCredentials: prod/zesty-k8s/data-store/cred
+      databaseDetails: prod/zesty-k8s/data-store/database
