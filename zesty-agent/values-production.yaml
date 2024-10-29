@@ -33,9 +33,7 @@ zestyk8s:
       enable: true
   image:
     repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent"
-    tag: "1.32.2"
-  migrationImage:
-    repository: "672188301118.dkr.ecr.us-west-2.amazonaws.com/zesty-k8s/agent/migration"
+    migrationRepository: "672188301118.dkr.ecr.us-west-2.amazonaws.com/zesty-k8s/agent/migration"
     tag: "1.32.2"
 externalSecret:
   agentCreds:
