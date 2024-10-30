@@ -1,6 +1,6 @@
 zestyk8s:
-  prometheus:
-    url: http://prometheus-stack-kube-prom-prometheus.monitoring:9090/
+  # prometheus: NOTE: currently disabled
+  #   url: http://prometheus-stack-kube-prom-prometheus.monitoring:9090/
   secret:
     key: "staging/zesty-k8s/encrypted-creds"
   awsAthena:
