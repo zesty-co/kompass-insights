@@ -32,6 +32,4 @@ zestyk8s:
     manager:
       enable: true
   image:
-    repository: "473301030746.dkr.ecr.us-west-2.amazonaws.com/zesty-k8s/agent"
-    migrationRepository: "473301030746.dkr.ecr.us-west-2.amazonaws.com/zesty-k8s/agent/migration"
     tag: "1.39.2"
