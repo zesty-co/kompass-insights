@@ -9,7 +9,7 @@ spec:
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
   minReplicaCount: 0
-  maxReplicaCount: 100
+  maxReplicaCount: 30
   jobTargetRef:
     parallelism: 1
     completions: 1
