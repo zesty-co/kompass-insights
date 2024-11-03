@@ -12,6 +12,10 @@ zestyk8s:
     athenaTable: zesty_k8s_export
     athenaWorkgroup: primary
     athenaCatalog: AwsDataCatalog
+  s3override:
+    enabled: true
+    bucket: "external.zesty.co"
+    region: "eu-west-1"
   orgID: "3863721556980"
   namespace: "zesty-k8s"
   grpc:
