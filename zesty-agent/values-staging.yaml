@@ -32,4 +32,4 @@ zestyk8s:
     manager:
       enable: true
   image:
-    tag: "1.40.9"
+    tag: "1.40.10"
