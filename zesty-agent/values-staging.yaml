@@ -24,6 +24,7 @@ zestyk8s:
       endpoint: zesty-admission-webhook-zesty-admission-controller-svc
   fullnameOverride: "zesty-k8s-helm"
   persistence:
+    mountPath: /data/db
     spec:
       storageClassName: "ebs-sc-delete"
       accessModes:

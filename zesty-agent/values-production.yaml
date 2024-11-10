@@ -25,6 +25,7 @@ zestyk8s:
     requests:
       memory: 2Gi
   persistence:
+    mountPath: /data/db
     spec:
       storageClassName: "ebs-sc-delete"
       accessModes:
