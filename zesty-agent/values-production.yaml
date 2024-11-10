@@ -19,6 +19,11 @@ zestyk8s:
     client:
       endpoint: zesty-admission-webhook-zesty-admission-controller-svc
   fullnameOverride: "prod-zesty-k8s"
+  resources:
+    limits:
+      memory: 8Gi
+    requests:
+      memory: 2Gi
   persistence:
     spec:
       storageClassName: "ebs-sc-delete"
