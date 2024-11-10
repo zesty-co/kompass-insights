@@ -36,6 +36,6 @@ zestyk8s:
     manager:
       enable: true
   image:
-    tag: "1.46.0"
+    tag: "1.46.1"
 externalSecret:
   agentCreds:
