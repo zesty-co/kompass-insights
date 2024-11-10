@@ -30,10 +30,11 @@ slackChannelName: k8s-notifications-staging
 buckets:
   agentPayload: external-staging.zesty.co
   clusterState: zesty-cluster-state-staging
-  pricing: zesty-pricing-bronze-staging
+  bronze_pricing: zesty-pricing-bronze-staging
+  silver_pricing: zesty-pricing-silver-staging
 pricing_files:
   spot_file_key: aws_spot_data/LATEST/aws_spot_data.parquet
-  od_file_key: tests/silver/aws_pricing_od_silver.parquet
+  od_file_key: ec2_ondemand/aws_pricing_od_silver.parquet
 dynamodb:
   accounts: staging-accounts
   organizations: staging-organizations

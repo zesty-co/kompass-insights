@@ -30,10 +30,11 @@ slackChannelName: k8s-notifications-production
 buckets:
   agentPayload: external.zesty.co
   clusterState: zesty-cluster-state
-  pricing: zesty-pricing-bronze
+  bronze_pricing: zesty-pricing-bronze
+  silver_pricing: zesty-pricing-silver
 pricing_files:
   spot_file_key: aws_spot_data/LATEST/aws_spot_data.parquet
-  od_file_key: ec2_od_filtered/LATEST/amazonec2_ec2_on_demand_filtered.parquet
+  od_file_key: ec2_ondemand/aws_pricing_od_silver.parquet
 dynamodb:
   accounts: accounts
   organizations: organizations
