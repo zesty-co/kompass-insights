@@ -24,6 +24,9 @@ zestyk8s:
       storageClassName: "ebs-sc-delete"
       accessModes:
         - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
   config:
     manager:
       enable: true
