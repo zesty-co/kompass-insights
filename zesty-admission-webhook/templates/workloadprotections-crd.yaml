@@ -48,21 +48,29 @@ spec:
             type: object
           spec:
             properties:
-              protection:
-                description: Protection
+              spike:
+                description: Spike protection configuration
                 properties:
-                  spike:
+                  active:
                     default: false
                     type: boolean
-                  spot:
+                  threshold:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    x-kubernetes-int-or-string: true
+                required:
+                - active
+                type: object
+              spot:
+                description: Spot protection configuration
+                properties:
+                  active:
                     default: false
                     type: boolean
                 required:
-                - spike
-                - spot
+                - active
                 type: object
-            required:
-            - protection
             type: object
           status:
             properties:
@@ -85,6 +93,30 @@ spec:
                 - Pending
                 - Failed
                 type: string
+              workloadReference:
+                description: |-
+                  WorkloadReference
+                  It is used as a safeguard in case a WorkloadProtection object has multiple owners.
+                  Field will point to the workload that is being protected by this WorkloadProtection object.
+                properties:
+                  apiVersion:
+                    description: APIVersion
+                    type: string
+                  kind:
+                    description: Kind
+                    type: string
+                  name:
+                    description: Name
+                    type: string
+                  uid:
+                    description: UID
+                    type: string
+                required:
+                - apiVersion
+                - kind
+                - name
+                - uid
+                type: object
             type: object
         type: object
     served: true
