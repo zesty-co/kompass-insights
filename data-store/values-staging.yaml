@@ -23,10 +23,6 @@ env:
 environment:
   apiStage: staging
   region: us-west-2
-  HOST_IP:
-    valueFrom:
-      fieldRef:
-        fieldPath: status.hostIP
 hpa:
   min: 2
   max: 4
