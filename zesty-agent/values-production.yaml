@@ -38,5 +38,6 @@ zestyk8s:
       enable: true
   image:
     tag: "1.46.17"
+    pullPolicy: Always
 externalSecret:
   agentCreds:
