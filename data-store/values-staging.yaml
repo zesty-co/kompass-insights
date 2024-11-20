@@ -16,6 +16,10 @@ env:
     value: staging
   - name: AWS_DEFAULT_REGION
     value: us-west-2
+  - name: HOST_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
 environment:
   apiStage: staging
   region: us-west-2
