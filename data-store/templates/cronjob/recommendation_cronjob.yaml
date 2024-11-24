@@ -33,7 +33,7 @@ spec:
             - mountPath: /app/app-config.yaml
               name: app-config
               subPath: app-config.yaml
-            command: ["python3", "/app/src/cron_jobs/recommendation.py"]
+            command: ["python3", "/app/src/cron_jobs/generate_recommendations.py"]
             resources:
             {{- toYaml .Values.resources | nindent 16 }}
           volumes:

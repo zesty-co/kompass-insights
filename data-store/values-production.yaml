@@ -29,6 +29,7 @@ hpa:
 pdb:
   maxUnavailable: 1
 clustersRefreshSQS: /production/zesty-k8s/data-store/refresh_clusters_worker/sqs
+generateRecommendationsSQS: /production/zesty-k8s/data-store/k8s_recommendations/sqs
 slackBotToken: /prod/notifications/slack-bot-token
 slackChannelName: k8s-notifications-production
 buckets:
