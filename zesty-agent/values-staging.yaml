@@ -25,6 +25,7 @@ zestyk8s:
   fullnameOverride: "zesty-k8s-helm"
   persistence:
     mountPath: /data/db
+    volumeName: "zesty-pv-storage"
     spec:
       storageClassName: "ebs-sc-delete"
       accessModes:

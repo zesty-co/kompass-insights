@@ -26,6 +26,7 @@ zestyk8s:
       memory: 2Gi
   persistence:
     mountPath: /data/db
+    volumeName: "zesty-pv-storage"
     spec:
       storageClassName: "ebs-sc-delete"
       accessModes:
