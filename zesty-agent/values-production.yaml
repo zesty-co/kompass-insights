@@ -38,6 +38,7 @@ zestyk8s:
     manager:
       enable: true
   image:
+    tag: "1.47.6"
     pullPolicy: Always
 externalSecret:
   agentCreds:
