@@ -16,6 +16,10 @@ env:
     value: prod
   - name: AWS_DEFAULT_REGION
     value: eu-west-1
+  - name: HOST_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
 environment:
   apiStage: prod
   region: eu-west-1
