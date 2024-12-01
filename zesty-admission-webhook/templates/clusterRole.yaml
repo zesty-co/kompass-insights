@@ -23,16 +23,28 @@ rules:
       - get
       - list
   - apiGroups:
-      - "keda.sh"
+      - keda.sh
     resources:
       - scaledjobs
     verbs:
       - get
       - list
   - apiGroups:
-      - "karpenter.sh"
+      - karpenter.sh
     resources:
       - nodepools
     verbs:
       - get
       - list
+  - apiGroups:
+      - zesty.co
+    resources:
+      - managedworkloads
+      - managednodepools
+    verbs:
+      - get
+      - list
+      - create
+      - update
+      - patch
+      - delete
