@@ -1,139 +1,22 @@
 # -- (string) Override the name of the chart
 nameOverride: ~
-
 # -- (string) Override the expanded name of the chart
 fullnameOverride: ~
-
 # -- (string) Override the namespace the chart deploys to
 namespaceOverride: ~
-
 # -- (int) Set grpc port
 grpc:
   port: 50051
-
 # -- ServiceAccount annotations
 serviceAccount:
   annotations:
-
 # -- Deployment Node Selector
 nodeSelector:
-  team: "zesty-k8s"
+  team: zesty-k8s
   karpenter.sh/capacity-type: on-demand
-
 # -- Deployment Tolerations
 tolerations:
   - effect: NoSchedule
     key: team
     operator: Equal
     value: zesty-k8s
-
-redis-ha:
-  # -- Enables the Redis HA subchart and disables the custom Redis single node deployment
-  enabled: true
-  ## Redis image
-  image:
-    # -- Redis repository
-    repository: public.ecr.aws/docker/library/redis
-    # -- Redis tag
-    tag: 7.2.4-alpine
-  sentinel:
-    nodeSelector:
-      karpenter.sh/capacity-type: on-demand
-  ## Prometheus redis-exporter sidecar
-  exporter:
-    # -- Enable Prometheus redis-exporter sidecar
-    enabled: false
-    # -- Repository to use for the redis-exporter
-    image: public.ecr.aws/bitnami/redis-exporter
-    # -- Tag to use for the redis-exporter
-    tag: 1.58.0
-  persistentVolume:
-    # -- Configures persistence on Redis nodes
-    enabled: false
-  ## Redis specific configuration options
-  redis:
-    # -- Redis convention for naming the cluster group: must match `^[\\w-\\.]+$` and can be templated
-    masterGroupName: zesty-admission-controller
-    # -- Any valid redis config options in this section will be applied to each server (see `redis-ha` chart)
-    # @default -- See [values.yaml]
-    config:
-      # -- Will save the DB if both the given number of seconds and the given number of write operations against the DB occurred. `""`  is disabled
-      # @default -- `'""'`
-      save: '""'
-    # Enable FLUSHDB and FLUSHALL
-    disableCommands: []
-  haproxy:
-    # -- Enabled HAProxy LoadBalancing/Proxy
-    enabled: true
-    # --  Custom labels for the haproxy pod. This is relevant for Argo CD CLI.
-    labels:
-      app.kubernetes.io/name: zesty-admission-controller-redis-ha-haproxy
-    metrics:
-      # -- HAProxy enable prometheus metric scraping
-      enabled: true
-    # -- Whether the haproxy pods should be forced to run on separate nodes.
-    hardAntiAffinity: true
-    # -- Additional affinities to add to the haproxy pods.
-    additionalAffinities: {}
-    # -- Assign custom [affinity] rules to the haproxy pods.
-    affinity: |
-
-    # -- [Tolerations] for use with node taints for haproxy pods.
-    tolerations: []
-    # -- HAProxy container-level security context
-    # @default -- See [values.yaml]
-    containerSecurityContext:
-      readOnlyRootFilesystem: true
-
-  # -- Configures redis-ha with AUTH
-  auth: false
-  # -- Existing Secret to use for redis-ha authentication.
-  # By default the redis-secret-init Job is generating this Secret.
-  existingSecret: ~
-
-  # -- Whether the Redis server pods should be forced to run on separate nodes.
-  hardAntiAffinity: true
-
-  # -- Additional affinities to add to the Redis server pods.
-  additionalAffinities: {}
-
-  # -- Assign custom [affinity] rules to the Redis pods.
-  affinity: |
-
-  # -- [Tolerations] for use with node taints for Redis pods.
-  tolerations: []
-
-  # -- Assign custom [TopologySpreadConstraints] rules to the Redis pods.
-  ## https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
-  topologySpreadConstraints:
-    # -- Enable Redis HA topology spread constraints
-    enabled: false
-    # -- Max skew of pods tolerated
-    # @default -- `""` (defaults to `1`)
-    maxSkew: ""
-    # -- Topology key for spread
-    # @default -- `""` (defaults to `topology.kubernetes.io/zone`)
-    topologyKey: ""
-    # -- Enforcement policy, hard or soft
-    # @default -- `""` (defaults to `ScheduleAnyway`)
-    whenUnsatisfiable: ""
-  # -- Redis HA statefulset container-level security context
-  # @default -- See [values.yaml]
-  containerSecurityContext:
-    readOnlyRootFilesystem: true
-
-# External Redis parameters
-externalRedis:
-  # -- External Redis server host
-  host: ""
-  # -- External Redis username
-  username: ""
-  # -- External Redis password
-  password: ""
-  # -- External Redis server port
-  port: 6379
-  # -- The name of an existing secret with Redis (must contain key `redis-password`) and Sentinel credentials.
-  # When it's set, the `externalRedis.password` parameter is ignored
-  existingSecret: ""
-  # -- External Redis Secret annotations
-  secretAnnotations: {}
