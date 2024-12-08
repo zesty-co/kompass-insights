@@ -31,7 +31,7 @@ spec:
       containers:
         - name: "{{.Chart.Name }}-container"
           image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
-          command: ["opentelemetry-instrument", "--traces_exporter","otlp","--metrics_exporter","none","--service_name","k8s-data-store-api", "uvicorn", "--host", "0.0.0.0", "--port", "8000", "--log-level", "error", "src.app:app"]
+          command: ["opentelemetry-instrument", "--traces_exporter","console,otlp","--metrics_exporter","none","--service_name","k8s-data-store-api", "uvicorn", "--host", "0.0.0.0", "--port", "8000", "--log-level", "error", "src.app:app"]
           imagePullPolicy: Always
           env: {{ toYaml .Values.env | nindent 12 }}
           volumeMounts:
