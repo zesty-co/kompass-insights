@@ -2,11 +2,11 @@ apiVersion: v2
 name: zesty-k8s
 description: A Helm chart for Kubernetes
 type: application
-version: 1.0.21
+version: 1.0.22
 appVersion: "1.0"
 
 dependencies:
 - name: zesty-k8s-helm
   alias: zestyk8s
-  version: 1.0.21
+  version: 1.0.22
   repository: https://zesty-co.github.io/zesty-k8s-helm
