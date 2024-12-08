@@ -25,7 +25,7 @@ env:
   - name: OTEL_EXPORTER_OTLP_ENDPOINT
     value: "http://$(HOST_IP):4317"
   - name: OTEL_PYTHON_FASTAPI_EXCLUDED_URLS
-    value: "/health,/metrics"
+    value: "health,metrics"
 environment:
   apiStage: staging
   region: us-west-2
