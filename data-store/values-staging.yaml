@@ -25,7 +25,7 @@ environment:
   region: us-west-2
 hpa:
   min: 2
-  max: 3
+  max: 4
 pdb:
   maxUnavailable: 1
 clustersRefreshSQS: /staging/zesty-k8s/data-store/refresh_clusters_worker/sqs
