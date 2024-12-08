@@ -20,6 +20,10 @@ env:
     valueFrom:
       fieldRef:
         fieldPath: status.hostIP
+  - name: OTEL_TRACES_EXPORTER
+    value: otlp_proto_grpc
+  - name: OTEL_EXPORTER_OTLP_ENDPOINT
+    value: "$(HOST_IP):4317"
 environment:
   apiStage: staging
   region: us-west-2
