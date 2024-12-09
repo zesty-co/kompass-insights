@@ -33,7 +33,7 @@ spec:
             - mountPath: /app/app-config.yaml
               name: app-config
               subPath: app-config.yaml
-            command: ["python3", "/app/src/cron_jobs/healthcheck.py"]
+            command: ["opentelemetry-instrument", "--traces_exporter","otlp","--metrics_exporter","none","--service_name", "k8s-data-store-healthcheck-scheduler", "python3", "/app/src/cron_jobs/healthcheck.py"]
             resources:
             {{- toYaml .Values.resources | nindent 16 }}
           volumes:

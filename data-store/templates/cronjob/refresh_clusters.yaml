@@ -33,7 +33,7 @@ spec:
             - mountPath: /app/app-config.yaml
               name: app-config
               subPath: app-config.yaml
-            command: ["python3", "-m", "src.cron_jobs.refresh_clusters"]
+            command: ["opentelemetry-instrument", "--traces_exporter","otlp","--metrics_exporter","none","--service_name", "k8s-data-store-refresh-clusters-scheduler","python3", "-m", "src.cron_jobs.refresh_clusters"]
             resources:
             {{- toYaml .Values.resources | nindent 16 }}
           volumes:
