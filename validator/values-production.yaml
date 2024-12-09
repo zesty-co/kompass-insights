@@ -6,6 +6,14 @@ env:
     value: "prod"
   - name: AWS_DEFAULT_REGION
     value: "eu-west-1"
+  - name: HOST_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
+  - name: OTEL_TRACES_EXPORTER
+    value: otlp_proto_grpc
+  - name: OTEL_EXPORTER_OTLP_ENDPOINT
+    value: "http://$(HOST_IP):4317"
 environment:
   apiStage: "prod"
   region: "eu-west-1"
