@@ -26,6 +26,8 @@ env:
     value: "http://$(HOST_IP):4317"
   - name: OTEL_PYTHON_FASTAPI_EXCLUDED_URLS
     value: "health,metrics"
+  - name: OTEL_PYTHON_LOG_CORRELATION
+    value: "true"
 environment:
   apiStage: prod
   region: eu-west-1
