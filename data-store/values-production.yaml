@@ -82,7 +82,7 @@ worker:
   awsRegion: eu-west-1
   resources:
     limits:
-      memory: 1Gi
+      memory: 2Gi
     requests:
       cpu: 200m
       memory: 512Mi
