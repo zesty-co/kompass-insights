@@ -39,6 +39,8 @@ spec:
               secretKeyRef:
                 name: "{{ .Values.name }}-worker-keda"
                 key: AWS_SQS_QUEUE_URL
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: "cx.application.name=k8s-data-store-worker,cx.subsystem.name=k8s-data-store-worker"
 {{- with .Values.env }}
 {{ toYaml . | indent 10 }}
 {{- end }}
