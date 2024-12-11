@@ -85,7 +85,7 @@ worker:
       memory: 2Gi
     requests:
       cpu: 200m
-      memory: 512Mi
+      memory: 1Gi
   logLevel: INFO
   externalSecret:
     appConfig:
