@@ -30,7 +30,7 @@ spec:
           team: "zesty-k8s"
         containers:
         - image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
-          command: ["opentelemetry-instrument", "--traces_exporter","otlp","--metrics_exporter","none","--service_name", "k8s-data-store-worker", "python", "/app/src/data_store_queue_handler_runner.py"]
+          command: ["opentelemetry-instrument", "--traces_exporter","otlp,console","--metrics_exporter","none","--service_name", "k8s-data-store-worker", "python", "/app/src/data_store_queue_handler_runner.py"]
           imagePullPolicy: Always
           name: {{ .Values.name }}-worker
           env:
