@@ -6,4 +6,4 @@ spec:
   maxUnavailable: {{ .Values.pdb.maxUnavailable }}
   selector:
     matchLabels:
-      app: {{ .Values.name }}
+      service: {{ .Values.name }}-api
