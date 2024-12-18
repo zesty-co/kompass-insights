@@ -36,7 +36,5 @@ zestyk8s:
     pullPolicy: Always
   podMinuteMetrics:
     enabled: false
-  image:
-    tag: "1.58.2"
 externalSecret:
   agentCreds:
