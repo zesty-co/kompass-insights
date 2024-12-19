@@ -6,10 +6,10 @@ ingress:
   host: k8s-data-store.staging.zesty.co
 resources:
   limits:
-    memory: 256Mi
+    memory: 512Mi
   requests:
     cpu: 50m
-    memory: 128Mi
+    memory: 256Mi
 logLevel: INFO
 env:
   - name: API_STAGE
