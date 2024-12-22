@@ -16,7 +16,7 @@ spec:
       topologySpreadConstraints:
         - labelSelector:
             matchLabels:
-              app: {{.Chart.Name }}
+              app: {{ .Values.name }}-api
           maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
           whenUnsatisfiable: DoNotSchedule
