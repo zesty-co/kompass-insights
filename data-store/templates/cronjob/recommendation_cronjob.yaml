@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Values.name }}-recommendation-cronjob"
   labels: {{- include "labels" . | nindent 4 }}
 spec:
-  schedule: "{{ .Values.cronjob.schedule }}"
+  schedule: "{{ .Values.recommendationsCronJob.schedule }}"
   successfulJobsHistoryLimit: {{ .Values.cronjob.successfulJobsHistoryLimit }}
   failedJobsHistoryLimit: {{ .Values.cronjob.failedJobsHistoryLimit }}
   concurrencyPolicy: "Forbid"

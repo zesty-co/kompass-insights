@@ -99,6 +99,8 @@ worker:
       elasticDetails: staging/spots/elastic-credentials
       publicRedis: staging/data-engineering/serverless-backend/redis-public-cache
       privateRedis: staging/data-engineering/serverless-backend/redis-cache
+recommendationsCronJob:
+  schedule: 0 * * * *
 refreshClustersWorker:
   awsRegion: us-west-2
   resources:
