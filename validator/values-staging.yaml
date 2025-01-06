@@ -1,6 +1,6 @@
 image:
   repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/validator
-  tag: 1.4.11
+  tag: 1.4.12
 env:
   - name: API_STAGE
     value: "staging"
