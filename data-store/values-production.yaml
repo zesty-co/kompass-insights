@@ -100,6 +100,7 @@ worker:
       elasticDetails: production/zesty-k8s/elastic-credentials
       publicRedis: prod/data-engineering/serverless-backend/redis-public-cache
       privateRedis: prod/data-engineering/serverless-backend/redis-cache
+      auditLogSQS: /production/audit-log/sqs
 recommendationsCronJob:
   schedule: 0 * * * *
 refreshClustersWorker:

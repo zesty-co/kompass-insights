@@ -99,6 +99,7 @@ worker:
       elasticDetails: staging/spots/elastic-credentials
       publicRedis: staging/data-engineering/serverless-backend/redis-public-cache
       privateRedis: staging/data-engineering/serverless-backend/redis-cache
+      auditLogSQS: /staging/audit-log/sqs
 recommendationsCronJob:
   schedule: 0 * * * *
 refreshClustersWorker:
