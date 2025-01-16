@@ -1,6 +1,6 @@
 image:
   repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/data-store
-  tag: 1.55.0
+  tag: 1.55.1
 ingress:
   ClassName: internal
   host: k8s-data-store.staging.zesty.co
