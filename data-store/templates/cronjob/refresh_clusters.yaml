@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Values.name }}-refresh-clusters-cronjob"
   labels: {{- include "labels" . | nindent 4 }}
 spec:
-  schedule: "{{ .Values.cronjob.schedule }}"
+  schedule: "{{ .Values.cronjob.schedule.refreshClusters }}"
   successfulJobsHistoryLimit: {{ .Values.cronjob.successfulJobsHistoryLimit }}
   failedJobsHistoryLimit: {{ .Values.cronjob.failedJobsHistoryLimit }}
   concurrencyPolicy: "Forbid"

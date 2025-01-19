@@ -75,7 +75,9 @@ cronjob:
       databaseCredentials: staging/zesty-k8s/data-store/cred
       databaseDetails: staging/zesty-k8s/data-store/database
       recommendationServiceSQS: /staging/incubations/recommendations-resolver/sqs
-  schedule: 0 17 * * *
+  schedule:
+    healthcheck: 0 * * * *
+    refreshClusters: 0 17 * * *
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
 worker:

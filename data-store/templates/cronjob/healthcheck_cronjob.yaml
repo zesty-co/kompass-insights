@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Values.name }}-healthcheck-cronjob"
   labels: {{- include "labels" . | nindent 4 }}
 spec:
-  schedule: "{{ .Values.cronjob.schedule }}"
+  schedule: "{{ .Values.cronjob.schedule.healthcheck }}"
   successfulJobsHistoryLimit: {{ .Values.cronjob.successfulJobsHistoryLimit }}
   failedJobsHistoryLimit: {{ .Values.cronjob.failedJobsHistoryLimit }}
   concurrencyPolicy: "Forbid"
