@@ -12,6 +12,10 @@ zestyk8s:
     athenaTable: opencost_integration_cur
     athenaWorkgroup: primary
     athenaCatalog: AwsDataCatalog
+  assumeRole:
+    enabled: false
+    masterRoleArn: arn:aws:iam::672188301118:role/CrossAccountAthenaAccessRole
+    externalID: "3000051831"
   s3override:
     enabled: true
     bucket: "external-staging.zesty.co"
@@ -34,5 +38,5 @@ zestyk8s:
     manager:
       enable: true
   image:
-    tag: "1.62.2"
+    tag: "1.65.2"
     pullPolicy: Always

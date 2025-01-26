@@ -1,6 +1,6 @@
 image:
   repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/data-store
-  tag: 1.50.0
+  tag: 1.55.11
 ingress:
   ClassName: internal
   host: k8s-data-store.staging.zesty.co
@@ -75,7 +75,9 @@ cronjob:
       databaseCredentials: staging/zesty-k8s/data-store/cred
       databaseDetails: staging/zesty-k8s/data-store/database
       recommendationServiceSQS: /staging/incubations/recommendations-resolver/sqs
-  schedule: 0 17 * * *
+  schedule:
+    healthcheck: 0 * * * *
+    refreshClusters: 0 17 * * *
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
 worker:

@@ -1,6 +1,6 @@
 image:
   repo: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/data-store
-  tag: 1.49.70
+  tag: 1.55.3
 ingress:
   ClassName: external
   host: k8s-data-store.zesty.co
@@ -76,7 +76,9 @@ cronjob:
       databaseCredentials: prod/zesty-k8s/data-store/cred
       databaseDetails: prod/zesty-k8s/data-store/database
       recommendationServiceSQS: /production/incubations/recommendations-resolver/sqs
-  schedule: 0 17 * * *
+  schedule:
+    healthcheck: 0 * * * *
+    refreshClusters: 0 17 * * *
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
 worker:
