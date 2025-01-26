@@ -6,7 +6,7 @@ image:
   # -- (string) Image pull policy
   pullPolicy: IfNotPresent
   # -- (string) Image tag
-  tag: 1.17.1
+  tag: 1.17.2
 pdb:
   # -- (int) Min amount of running pods
   maxUnavailable: 1
