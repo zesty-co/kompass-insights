@@ -6,7 +6,7 @@ version: 1.0.41
 appVersion: "1.0"
 
 dependencies:
-- name: zesty-k8s-helm
+- name: kompass-insights
   alias: zestyk8s
   version: 1.0.41
-  repository: https://zesty-co.github.io/zesty-k8s-helm
+  repository: https://zesty-co.github.io/kompass-insights

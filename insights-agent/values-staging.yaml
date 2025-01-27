@@ -26,7 +26,7 @@ zestyk8s:
     enabled: true
     client:
       endpoint: zesty-admission-webhook-zesty-admission-controller-svc
-  fullnameOverride: "zesty-k8s-helm"
+  fullnameOverride: "kompass-insights"
   persistence:
     mountPath: /data/db
     volumeName: "zesty-pv-storage"
