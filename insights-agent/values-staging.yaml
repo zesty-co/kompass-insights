@@ -38,5 +38,5 @@ zestyk8s:
     manager:
       enable: true
   image:
-    tag: "1.68.2"
+    tag: "1.69.0"
     pullPolicy: Always
