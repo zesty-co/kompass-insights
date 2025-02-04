@@ -126,6 +126,9 @@ autoUpdate:
 
 admissionController:
   enabled: false
+  nameOverride: ~
+  fullnameOverride: ~
+  namespaceOverride: ~
   resources:
     limits:
       memory: 2Gi
