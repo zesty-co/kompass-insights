@@ -10,7 +10,7 @@ Helper Templates for zesty-admission-controller and zesty-k8s
 Expand the name of the chart.
 */}}
 {{- define "zesty-admission-controller.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- default .Chart.Name .Values.admissionController.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
@@ -42,7 +42,7 @@ Create chart name and version as used by the chart label.
 Create a namespace name used by the chart.
 */}}
 {{- define "zesty-admission-controller.namespace" -}}
-  {{ default .Release.Namespace .Values.namespaceOverride }}
+  {{ default .Release.Namespace .Values.admissionController.namespaceOverride }}
 {{- end -}}
 
 {{/*
