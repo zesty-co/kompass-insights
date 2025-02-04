@@ -3,6 +3,21 @@ entries:
   kompass-insights:
   - apiVersion: v2
     appVersion: 1.68.2
+    created: "2025-02-04T19:36:36.371743653Z"
+    dependencies:
+    - condition: metricsServer.enabled
+      name: metrics-server
+      repository: https://kubernetes-sigs.github.io/metrics-server/
+      version: 3.12.1
+    description: A Helm chart for Kubernetes
+    digest: b70096744af42abcfbe6ef3b19c553fece00fa15e673379a5ebee8588bac1827
+    name: kompass-insights
+    type: application
+    urls:
+    - https://github.com/zesty-co/kompass-insights/releases/download/kompass-insights-1.1.5/kompass-insights-1.1.5.tgz
+    version: 1.1.5
+  - apiVersion: v2
+    appVersion: 1.68.2
     created: "2025-02-04T19:30:01.246806011Z"
     dependencies:
     - condition: metricsServer.enabled
@@ -76,4 +91,4 @@ entries:
     urls:
     - https://github.com/zesty-co/kompass-insights/releases/download/kompass-insights-1.1.0/kompass-insights-1.1.0.tgz
     version: 1.1.0
-generated: "2025-02-04T19:30:01.246830638Z"
+generated: "2025-02-04T19:36:36.37176355Z"
