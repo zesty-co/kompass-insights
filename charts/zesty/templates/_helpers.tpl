@@ -249,7 +249,7 @@ All of the relevant verbs.
 verbs:
   - get
   - list
-  {{- if .Values.config.manager.enable }}
+  {{- if .Values.admissionController.enabled }}
   - patch
   {{- end }}
   - watch

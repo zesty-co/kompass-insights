@@ -16,6 +16,7 @@ rules:
     verbs:
       - get
       - list
+      - patch
   - apiGroups:
       - batch
     resources:
@@ -38,6 +39,7 @@ rules:
     verbs:
       - get
       - list
+      - patch
   - apiGroups:
       - zesty.co
     resources:
