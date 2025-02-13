@@ -75,6 +75,7 @@ prometheus:
 
 awsAthena:
   enabled: false
+  curV2: false
   athenaProjectID: ~
   athenaBucketName: ~
   athenaRegion: ~

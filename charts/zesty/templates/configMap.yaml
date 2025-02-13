@@ -24,6 +24,7 @@ data:
   {{- end }}
   {{- if .Values.awsAthena.enabled }}
   ATHENA_ENABLED: "{{ .Values.awsAthena.enabled }}"
+  ATHENA_CUR_V2: "{{ .Values.awsAthena.curV2 }}"
   ATHENA_PROJECT_ID: "{{ .Values.awsAthena.athenaProjectID }}"
   ATHENA_BUCKET_NAME: "{{ .Values.awsAthena.athenaBucketName }}"
   ATHENA_REGION: "{{ .Values.awsAthena.athenaRegion }}"
