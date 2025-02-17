@@ -48,6 +48,11 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ include "zesty-admission-controller.configMap" . }}
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
       volumes:
         - name: webhook-tls
           secret:
