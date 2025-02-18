@@ -10,4 +10,5 @@ data:
   AGENT_PORT: "50052"
   GRPC: "{{ .Values.grpc.client.port }}"
   SECRET: {{ include "zesty-k8s.secret" . }}
+  LOG_REMOTE: "{{ .Values.log.remote }}"
 {{- end }}
