@@ -60,6 +60,13 @@ Create a config map name.
 {{- end -}}
 
 {{/*
+Create a role name.
+*/}}
+{{- define "zesty-admission-controller.role" -}}
+  {{- printf "%s-role" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
 Create a pdb name.
 */}}
 {{- define "zesty-admission-controller.pdb" -}}

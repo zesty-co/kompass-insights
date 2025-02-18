@@ -9,4 +9,5 @@ data:
   AGENT_HOST: "kompass-insights-svc"
   AGENT_PORT: "50052"
   GRPC: "{{ .Values.grpc.client.port }}"
+  SECRET: {{ include "zesty-k8s.secret" . }}
 {{- end }}
