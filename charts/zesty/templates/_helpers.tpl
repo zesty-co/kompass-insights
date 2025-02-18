@@ -94,6 +94,13 @@ Create a crb name.
   {{- printf "%s-crb" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{/*
+Create a rb name.
+*/}}
+{{- define "zesty-admission-controller.rb" -}}
+  {{- printf "%s-rb" (include "zesty-admission-controller.fullname" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 {{/* ========================
    zesty-k8s Helpers
    ======================== */}}
