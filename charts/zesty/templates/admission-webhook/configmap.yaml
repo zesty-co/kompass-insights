@@ -6,8 +6,8 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"
   name: {{ include "zesty-admission-controller.configMap" . }}
 data:
-  AGENT_HOST: "kompass-insights-svc"
-  AGENT_PORT: "50052"
+  AGENT_HOST:  "{{ include "zesty-k8s.svc" . }}"
+  AGENT_PORT: "{{ .Values.grpc.server.port }}"
   GRPC: "{{ .Values.grpc.client.port }}"
   SECRET: {{ include "zesty-k8s.secret" . }}
   LOG_LEVEL: "{{ .Values.log.level }}"
