@@ -43,7 +43,8 @@ persistence:
 
 serviceAccount:
   annotations:
-  externalID: ~
+
+externalID: ~
 
 container:
   securityContext:

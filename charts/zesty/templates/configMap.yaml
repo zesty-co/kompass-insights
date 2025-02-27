@@ -10,7 +10,7 @@ data:
   PODMINUTEMETRICS_ENABLED: "{{ .Values.podMinuteMetrics.enabled }}"
   PATHS_MOUNTPATH: "{{ .Values.persistence.mountPath }}"
   STORAGE_SIZE: "{{ .Values.persistence.spec.resources.requests.storage }}"
-  LINKED_ACCOUNT_EXTERNAL_ID: "{{ .Values.serviceAccount.externalID }}"
+  EXTERNAL_ID: "{{ .Values.externalID }}"
   {{- if .Values.prometheus.url }}
   PROMETHEUS_SERVER_ENDPOINT: "{{ .Values.prometheus.url }}"
   {{- end }}
