@@ -36,7 +36,8 @@ data:
   {{- end }}
   {{- if .Values.assumeRole.enabled }}
   MASTER_PAYER_ARN: "{{ .Values.assumeRole.masterRoleArn }}"
-  EXTERNAL_ID: "{{ .Values.assumeRole.externalID }}"
+  MASTER_ROLE_EXTERNALID: "{{ .Values.assumeRole.masterExternalID }}"
+  ZESTY_ROLE_EXTERNALID: "{{ .Values.assumeRole.zestyExternalID }}"
   ZESTY_ROLE_ARN: "{{ .Values.assumeRole.roleArn }}"
   {{- end }}
   {{- if .Values.s3override.enabled }}
