@@ -89,7 +89,8 @@ awsAthena:
 assumeRole:
   enabled: false
   masterRoleArn: ~
-  externalID: ~
+  masterExternalID: ~
+  zestyExternalID: ~
   roleArn: ~
 
 s3override:
