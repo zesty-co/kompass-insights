@@ -90,6 +90,7 @@ assumeRole:
   enabled: false
   masterRoleArn: ~
   externalID: ~
+  roleArn: ~
 
 s3override:
   enabled: false
