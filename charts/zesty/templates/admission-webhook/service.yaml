@@ -5,7 +5,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
   name: {{ include "zesty-admission-controller.serviceName" . }}
-  namespace: {{ template "zesty-admission-controller.namespace" . }}
 spec:
   selector:
     app: {{ include "zesty-admission-controller.fullname" . }}

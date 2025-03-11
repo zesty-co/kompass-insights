@@ -38,12 +38,7 @@ Create chart name and version as used by the chart label.
   {{- printf "%s-%s" "zesty-admission-controller" .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{/*
-Create a namespace name used by the chart.
-*/}}
-{{- define "zesty-admission-controller.namespace" -}}
-  {{ default .Release.Namespace .Values.admissionController.namespaceOverride }}
-{{- end -}}
+
 
 {{/*
 Create a service name for secrets.
@@ -144,12 +139,6 @@ Create a version as used by the chart and image tag.
   {{ default .Chart.AppVersion .Values.image.tag  }}
 {{- end }}
 
-{{/*
-Create a namespace name used by the chart.
-*/}}
-{{- define "zesty-k8s.namespace" -}}
-  {{ default .Release.Namespace .Values.namespaceOverride }}
-{{- end -}}
 
 {{/*
 Create a name for the SA.

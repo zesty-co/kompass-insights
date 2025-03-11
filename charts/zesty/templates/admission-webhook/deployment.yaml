@@ -5,7 +5,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
   name: {{ include "zesty-admission-controller.fullname" . }}
-  namespace: {{ template "zesty-admission-controller.namespace" . }}
   labels:
     app: {{ include "zesty-admission-controller.fullname" . }}
 spec:
@@ -56,5 +55,5 @@ spec:
       volumes:
         - name: webhook-tls
           secret:
-            secretName: {{ template "zesty-admission-controller.serviceName" . }}.{{ template "zesty-admission-controller.namespace" . }}.svc.zesty-admission-controller-tls-pair
+            secretName: {{ template "zesty-admission-controller.serviceName" . }}.{{ .Release.Namespace }}.svc.zesty-admission-controller-tls-pair
 {{- end }}
