@@ -13,4 +13,6 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: "{{ include "zesty-admission-controller.sa" . }}"
+    namespace: "{{ .Release.Namespace }}"
+
 {{- end }}

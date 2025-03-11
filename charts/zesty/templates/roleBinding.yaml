@@ -12,3 +12,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: "{{ include "zesty-k8s.saname" . }}"
+    namespace: "{{ .Release.Namespace }}"
