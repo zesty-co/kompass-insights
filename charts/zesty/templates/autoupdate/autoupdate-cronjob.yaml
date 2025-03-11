@@ -36,7 +36,9 @@ spec:
               - name: RELEASE_NAME
                 value: "{{ .Release.Name }}"
               - name: NAMESPACE
-                value: "{{ include "zesty-k8s.namespace" . }}"
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.namespace
           restartPolicy: Never
       backoffLimit: 4
 {{- end }}

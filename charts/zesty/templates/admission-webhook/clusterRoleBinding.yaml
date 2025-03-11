@@ -3,7 +3,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ include "zesty-admission-controller.crb" . }}
-  namespace: {{ template "zesty-admission-controller.namespace" . }}
   labels:
     app: {{ include "zesty-admission-controller.fullname" . }}
 roleRef:
@@ -13,5 +12,5 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ include "zesty-admission-controller.sa" . }}
-    namespace: {{ template "zesty-admission-controller.namespace" . }}
+    namespace: "{{ .Release.Namespace }}"
 {{- end }}

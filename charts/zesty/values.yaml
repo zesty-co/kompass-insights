@@ -29,7 +29,6 @@ tolerations: []
 
 nameOverride: ~
 fullnameOverride: ~
-namespaceOverride: ~
 
 persistence:
   volumeName: "zesty-pv-storage"
@@ -133,7 +132,6 @@ admissionController:
   enabled: false
   nameOverride: ~
   fullnameOverride: ~
-  namespaceOverride: ~
   resources:
     limits:
       memory: 2Gi
