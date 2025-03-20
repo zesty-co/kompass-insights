@@ -1,4 +1,4 @@
-{{- if .Values.grpc.enabled }}
+{{- if .Values.admissionController.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -10,12 +10,10 @@ spec:
   selector:
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
   ports:
-    {{- if .Values.grpc.enabled }}
     - name: grpc
-      port: {{ .Values.grpc.server.port }}
+      port: {{ .Values.admissionController.grpc.server.port }}
       targetPort: grpc
       protocol: TCP
-    {{- end }}
     - name: healthz
       port: {{ .Values.health.port }}
       targetPort: healthz

@@ -7,8 +7,8 @@ metadata:
   name: {{ include "zesty-admission-controller.configMap" . }}
 data:
   AGENT_HOST:  "{{ include "zesty-k8s.svc" . }}"
-  AGENT_PORT: "{{ .Values.grpc.server.port }}"
-  GRPC: "{{ .Values.grpc.client.port }}"
+  AGENT_PORT: "{{ .Values.admissionController.grpc.server.port }}"
+  GRPC: "{{ .Values.admissionController.grpc.port }}"
   SECRET: {{ include "zesty-k8s.secret" . }}
   LOG_LEVEL: "{{ .Values.log.level }}"
   LOG_REMOTE: "{{ .Values.log.remote }}"
