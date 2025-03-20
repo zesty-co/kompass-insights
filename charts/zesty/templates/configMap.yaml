@@ -51,10 +51,10 @@ data:
   METADATA_REGION: "{{ .Values.metadata.region }}"
   METADATA_CLUSTERNAME: "{{ .Values.metadata.clusterName }}"
   {{- end }}
-  {{- if .Values.grpc.enabled }}
-  GRPC_PORT: "{{ .Values.grpc.server.port }}"
-  MANAGER_HOST: "{{ .Values.grpc.client.endpoint }}"
-  MANAGER_PORT: "{{ .Values.grpc.client.port }}"
+  {{- if .Values.admissionController.enabled }}
+  GRPC_PORT: "{{ .Values.admissionController.grpc.server.port }}"
+  MANAGER_HOST: "{{ .Values.admissionController.grpc.endpoint }}"
+  MANAGER_PORT: "{{ .Values.admissionController.grpc.port }}"
   {{- end -}}
   {{- if .Values.awsCluster.enabled }}
   {{- if ne .Values.awsCluster.accessKeyID "" }}

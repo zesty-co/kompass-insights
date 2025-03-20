@@ -35,7 +35,7 @@ spec:
             containerPort: 443
             protocol: TCP
           - name: grpc
-            containerPort: {{ .Values.grpc.client.port }}
+            containerPort: {{ .Values.admissionController.grpc.port }}
           volumeMounts:
             - mountPath: "/etc/webhook/tls"
               name: webhook-tls

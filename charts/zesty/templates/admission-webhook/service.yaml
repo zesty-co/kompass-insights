@@ -13,7 +13,7 @@ spec:
     port: 443
     targetPort: 443
   - name: grpc
-    port: {{ .Values.grpc.client.port }}
-    targetPort: {{ .Values.grpc.client.port }}
+    port: {{ .Values.admissionController.grpc.port }}
+    targetPort: {{ .Values.admissionController.grpc.port }}
   type: ClusterIP
 {{- end }}

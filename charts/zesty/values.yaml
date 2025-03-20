@@ -103,14 +103,6 @@ metadata:
   region: ~
   clusterName: ~
 
-grpc:
-  enabled: false
-  client:
-    endpoint: ~
-    port: 50051
-  server:
-    port: 50052
-
 health:
   port: 9000
 
@@ -130,6 +122,11 @@ autoUpdate:
 
 admissionController:
   enabled: false
+  grpc:
+    server:
+      port: 50052
+    endpoint: ~
+    port: 50051
   nameOverride: ~
   fullnameOverride: ~
   resources:
