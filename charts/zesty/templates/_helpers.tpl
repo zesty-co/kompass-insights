@@ -43,7 +43,7 @@ Generate the GRPC endpoint name for the admission controller service.
 Format: <fullname>-<namespace>-svc
 */}}
 {{- define "zesty-admission-controller.grpcEndpoint" -}}
-{{ printf "%s-%s-svc" (include "zesty-admission-controller.fullname" .) .Release.Namespace }}
+{{ printf "%s-svc" (include "zesty-admission-controller.fullname" .) }}
 {{- end }}
 
 {{/*
