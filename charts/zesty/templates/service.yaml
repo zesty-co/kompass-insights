@@ -1,4 +1,4 @@
-{{- if .Values.admissionController.enabled }}
+{{- if or (and (hasKey .Values "grpc") (eq .Values.grpc.enabled true)) (.Values.admissionController.enabled) }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -11,7 +11,11 @@ spec:
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
   ports:
     - name: grpc
+      {{- if and (hasKey .Values "grpc") (eq .Values.grpc.enabled true) }}
+      port: {{ .Values.grpc.server.port }}
+      {{- else if and (.Values.admissionController.enabled) (hasKey .Values.admissionController "grpc") }}
       port: {{ .Values.admissionController.grpc.server.port }}
+      {{- end }}
       targetPort: grpc
       protocol: TCP
     - name: healthz
