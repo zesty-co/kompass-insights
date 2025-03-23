@@ -53,7 +53,7 @@ data:
   {{- end }}
   {{- if .Values.admissionController.enabled }}
   GRPC_PORT: "{{ .Values.admissionController.grpc.server.port }}"
-  MANAGER_HOST: "{{ .Values.admissionController.grpc.endpoint }}"
+  MANAGER_HOST: {{ default (include "zesty-admission-controller.grpcEndpoint" .) .Values.admissionController.grpc.endpoint | quote }}
   MANAGER_PORT: "{{ .Values.admissionController.grpc.port }}"
   {{- end -}}
   {{- if .Values.awsCluster.enabled }}
