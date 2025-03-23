@@ -38,7 +38,13 @@ Create chart name and version as used by the chart label.
   {{- printf "%s-%s" "zesty-admission-controller" .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-
+{{/*
+Generate the GRPC endpoint name for the admission controller service.
+Format: <fullname>-<namespace>-svc
+*/}}
+{{- define "zesty-admission-controller.grpcEndpoint" -}}
+{{ printf "%s-%s-svc" (include "zesty-admission-controller.fullname" .) .Release.Namespace }}
+{{- end }}
 
 {{/*
 Create a service name for secrets.

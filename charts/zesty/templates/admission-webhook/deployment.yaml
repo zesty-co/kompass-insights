@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
-  name: {{ include "zesty-admission-controller.fullname" . }}
+  name: {{ include "zesty-admission-controller.grpcEndpoint" . }}
   labels:
     app: {{ include "zesty-admission-controller.fullname" . }}
 spec:
@@ -53,7 +53,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: MANAGER_HOST
-              value: {{ printf "%s-%s-admission-controller-svc" (include "zesty-admission-controller.fullname" .) .Release.Namespace | quote }}
+              value: {{ include "zesty-admission-controller.grpcEndpoint" . | quote }}
       volumes:
         - name: webhook-tls
           secret:
