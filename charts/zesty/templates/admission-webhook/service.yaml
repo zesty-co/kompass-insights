@@ -13,12 +13,12 @@ spec:
     port: 443
     targetPort: 443
   - name: grpc
-    {{- if and (hasKey .Values "grpc") (eq .Values.grpc.enabled true) }}
-    port: {{ .Values.grpc.client.port }}
-    targetPort: {{ .Values.grpc.client.port }}
-    {{- else if hasKey .Values.admissionController "grpc" }}
+    {{- if hasKey .Values.admissionController "grpc" }}
     port: {{ .Values.admissionController.grpc.port }}
     targetPort: {{ .Values.admissionController.grpc.port }}
+    {{- else if and (hasKey .Values "grpc") (eq .Values.grpc.enabled true) }}
+    port: {{ .Values.grpc.client.port }}
+    targetPort: {{ .Values.grpc.client.port }}
     {{- end }}
   type: ClusterIP
 {{- end }}
