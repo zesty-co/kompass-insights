@@ -4,7 +4,11 @@ kind: Deployment
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
+  {{- if hasKey .Values "grpc" }}
+  name: {{ include "zesty-admission-controller.fullname" . }}
+  {{- else if hasKey .Values.admissionController "grpc" }}
   name: {{ include "zesty-admission-controller.grpcEndpoint" . }}
+  {{- end }}
   labels:
     app: {{ include "zesty-admission-controller.fullname" . }}
 spec:
@@ -34,8 +38,14 @@ spec:
           - name: https
             containerPort: 443
             protocol: TCP
+          {{- if or (and (hasKey .Values "grpc") (eq .Values.grpc.enabled true)) (.Values.admissionController.enabled) }}
           - name: grpc
+            {{- if and (hasKey .Values "grpc") (eq .Values.grpc.enabled true) }}
+            containerPort: {{ .Values.grpc.client.port }}
+            {{- else if hasKey .Values.admissionController "grpc" }}
             containerPort: {{ .Values.admissionController.grpc.port }}
+            {{- end }}
+          {{- end }}
           volumeMounts:
             - mountPath: "/etc/webhook/tls"
               name: webhook-tls
@@ -52,8 +62,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            {{- if hasKey .Values.admissionController "grpc" }}
             - name: MANAGER_HOST
               value: {{ include "zesty-admission-controller.grpcEndpoint" . | quote }}
+            {{- end }}
       volumes:
         - name: webhook-tls
           secret:

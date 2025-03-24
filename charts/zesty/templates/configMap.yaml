@@ -51,11 +51,15 @@ data:
   METADATA_REGION: "{{ .Values.metadata.region }}"
   METADATA_CLUSTERNAME: "{{ .Values.metadata.clusterName }}"
   {{- end }}
-  {{- if .Values.admissionController.enabled }}
+  {{- if and (hasKey .Values "grpc") (eq .Values.grpc.enabled true) }}
+  GRPC_PORT: "{{ .Values.grpc.server.port }}"
+  MANAGER_HOST: "{{ .Values.grpc.client.endpoint }}"
+  MANAGER_PORT: "{{ .Values.grpc.client.port }}"
+  {{- else if and (.Values.admissionController.enabled) (hasKey .Values.admissionController "grpc") }}
   GRPC_PORT: "{{ .Values.admissionController.grpc.server.port }}"
   MANAGER_HOST: {{ default (include "zesty-admission-controller.grpcEndpoint" .) .Values.admissionController.grpc.endpoint | quote }}
   MANAGER_PORT: "{{ .Values.admissionController.grpc.port }}"
-  {{- end -}}
+  {{- end}}
   {{- if .Values.awsCluster.enabled }}
   {{- if ne .Values.awsCluster.accessKeyID "" }}
   AWS_ACCESS_KEY_ID: "{{ .Values.awsCluster.accessKeyID }}"
