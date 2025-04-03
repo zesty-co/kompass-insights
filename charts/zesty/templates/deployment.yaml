@@ -46,13 +46,9 @@ spec:
             - containerPort: {{ .Values.health.port }}
               name: healthz
               protocol: TCP
-            {{- if and (.Values.admissionController.enabled) (hasKey .Values.admissionController "grpc") }}
+            {{- if .Values.admission.enabled }}
             - name: grpc
-              containerPort: {{ .Values.admissionController.grpc.server.port }}
-              protocol: TCP
-            {{- else if and (hasKey .Values "grpc") (eq .Values.grpc.enabled true) }}
-            - name: grpc
-              containerPort: {{ .Values.grpc.server.port }}
+              containerPort: {{ .Values.admission.grpc.server.port }}
               protocol: TCP
             {{- end }}
           readinessProbe:
