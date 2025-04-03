@@ -120,29 +120,13 @@ autoUpdate:
   enabled: true # enable it to allow auto update for the agent
   schedule: "0 0 * * 2,4" # At 00:00 on Tuesday and Thursday
 
-admissionController:
+admission:
   enabled: false
+  insights:
+    secret: "kompass-insights-secret"
+    service: "kompass-insights-svc"
   grpc:
     server:
       port: 50052
-    endpoint: ~
+    endpoint: "kompass-insights-svc"
     port: 50051
-  nameOverride: ~
-  fullnameOverride: ~
-  resources:
-    limits:
-      memory: 2Gi
-    requests:
-      cpu: 250m
-      memory: 2Gi
-  replicaCount: 2
-  image:
-    # -- (string) Image repository
-    repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/mutating-admission-webhook"
-    # -- (string) Image pull policy
-    pullPolicy: Always
-    # -- (string) Image tag
-    tag: stable
-  pdb:
-    # -- (int) Min amount of running pods
-    maxUnavailable: 1

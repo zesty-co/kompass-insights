@@ -1,8 +1,7 @@
-{{- if or (and (hasKey .Values "grpc") (eq .Values.grpc.enabled true)) (.Values.admissionController.enabled) }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: "{{ include "zesty-k8s.svc" . }}"
+  name: "{{ .Values.admission.insights.service }}"
   labels:
     app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
@@ -11,10 +10,8 @@ spec:
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
   ports:
     - name: grpc
-      {{- if and (.Values.admissionController.enabled) (hasKey .Values.admissionController "grpc") }}
-      port: {{ .Values.admissionController.grpc.server.port }}
-      {{- else if and (hasKey .Values "grpc") (eq .Values.grpc.enabled true) }}
-      port: {{ .Values.grpc.server.port }}
+      {{- if .Values.admission.enabled }}
+      port: {{ .Values.admission.grpc.server.port }}
       {{- end }}
       targetPort: grpc
       protocol: TCP
@@ -23,4 +20,3 @@ spec:
       targetPort: healthz
       protocol: TCP
   type: ClusterIP
-{{- end }}
