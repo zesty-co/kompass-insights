@@ -11,7 +11,7 @@ rules:
     resources:
       - secrets
     resourceNames:
-      - "{{ include "zesty-k8s.secret" . }}"
+      - "{{ .Values.admission.insights.secret }}"
     verbs:
       - get
       - patch

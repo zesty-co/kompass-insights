@@ -62,4 +62,4 @@ data:
   AWS_SECRET_ACCESS_KEY: "{{ .Values.awsCluster.secretAccessKey }}"
   {{- end }}
   {{- end }}
-  SECRET_NAME: "{{ include "zesty-k8s.secret" . }}"
+  SECRET_NAME: "{{ .Values.admission.insights.secret }}"

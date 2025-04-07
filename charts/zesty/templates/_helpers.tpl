@@ -71,13 +71,6 @@ Create a name for the ConfigMap.
 {{- end -}}
 
 {{/*
-Create a name for the Secret.
-*/}}
-{{- define "zesty-k8s.secret" -}}
-  {{ printf "%s-secret" (include "zesty-k8s.fullname" .) }}
-{{- end -}}
-
-{{/*
 Create a name for the ClusterRole.
 */}}
 {{- define "zesty-k8s.clusterrole" -}}
