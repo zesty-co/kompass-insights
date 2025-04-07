@@ -122,6 +122,8 @@ autoUpdate:
 
 admission:
   enabled: false
+  service:
+    name: "kompass-admission-controller-svc"
   insights:
     secret: "kompass-insights-secret"
     service: "kompass-insights-svc"

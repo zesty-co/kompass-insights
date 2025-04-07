@@ -53,7 +53,7 @@ data:
   {{- end }}
   {{- if .Values.admission.enabled }}
   GRPC_PORT: "{{ .Values.admission.grpc.server.port }}"
-  MANAGER_HOST: "{{ .Values.admission.grpc.endpoint }}"
+  MANAGER_HOST: "{{ .Values.admission.service.name }}"
   MANAGER_PORT: "{{ .Values.admission.grpc.port }}"
   {{- end }}
   {{- if .Values.awsCluster.enabled }}
