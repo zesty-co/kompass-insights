@@ -76,6 +76,11 @@ rules:
       - qnodes
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
   - apiGroups:
+      - "kompass.zesty.co"
+    resources:
+      - workloaddescriptors
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups:
       - "apiextensions.k8s.io"
     resources:
       - customresourcedefinitions
