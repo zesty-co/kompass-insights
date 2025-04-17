@@ -3,6 +3,31 @@ entries:
   kompass-insights:
   - apiVersion: v2
     appVersion: stable
+    created: "2025-04-17T10:16:06.728510487Z"
+    dependencies:
+    - condition: metricsServer.enabled
+      name: metrics-server
+      repository: https://kubernetes-sigs.github.io/metrics-server/
+      version: 3.12.1
+    - alias: admission
+      condition: admission.enabled
+      name: kompass-admission-controller
+      repository: https://zesty-co.github.io/kompass-admission-controller
+      version: 0.1.4
+    - alias: victoriaMetrics
+      condition: victoriaMetrics.enabled
+      name: victoria-metrics-single
+      repository: https://victoriametrics.github.io/helm-charts
+      version: 0.14.3
+    description: A Helm chart for Kubernetes
+    digest: 6534c8d8cf8d96bf1876fb7fe361106e135dff2c1c7d135dc1def9302c4cae40
+    name: kompass-insights
+    type: application
+    urls:
+    - https://github.com/zesty-co/kompass-insights/releases/download/kompass-insights-2.0.5/kompass-insights-2.0.5.tgz
+    version: 2.0.5
+  - apiVersion: v2
+    appVersion: stable
     created: "2025-04-16T07:42:36.614843295Z"
     dependencies:
     - condition: metricsServer.enabled
@@ -627,4 +652,4 @@ entries:
     urls:
     - https://github.com/zesty-co/kompass-insights/releases/download/zesty-k8s-helm-1.1.13/zesty-k8s-helm-1.1.13.tgz
     version: 1.1.13
-generated: "2025-04-16T07:42:36.615428464Z"
+generated: "2025-04-17T10:16:06.728983972Z"
