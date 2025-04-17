@@ -132,3 +132,28 @@ admission:
       port: 50052
     endpoint: "kompass-insights-svc"
     port: 50051
+
+
+victoriaMetrics:
+  enabled: false
+  serviceAccount:
+    name: zesty-kompass-victoria-metrics
+  server:
+    fullnameOverride: zesty-kompass-victoria-metrics
+    persistentVolume:
+      mountPath: /victoria-metrics-data
+      size: "30Gi"
+      storageClassName: "ebs-sc"
+    resources:
+      requests:
+        memory: "3Gi"
+        cpu: "0.5"
+    extraArgs:
+      retentionPeriod: 1w
+      storageDataPath: /victoria-metrics-data
+      search.maxStalenessInterval: 5m
+      search.minStalenessInterval: 30s
+      search.maxQueryDuration: 2m
+      search.disableCache: true
+      memory.allowedPercent: 60
+      dedup.minScrapeInterval: 30s

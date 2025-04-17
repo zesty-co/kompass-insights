@@ -35,3 +35,8 @@ dependencies:
   version: 0.1.4
   repository: https://zesty-co.github.io/kompass-admission-controller
   condition: admission.enabled
+- alias: victoriaMetrics
+  condition: victoriaMetrics.enabled
+  name: victoria-metrics-single
+  repository: https://victoriametrics.github.io/helm-charts
+  version: 0.14.3
