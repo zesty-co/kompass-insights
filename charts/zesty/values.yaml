@@ -158,6 +158,9 @@ victoriaMetrics:
       dedup.minScrapeInterval: 30s
 
 victoriaMetricsAgent:
+  fullnameOverride: zesty-kompass-victoria-metrics-agent
+  serviceAccount:
+    name: zesty-kompass-victoria-metrics-agent
   extraArgs:
     promscrape.config: /etc/vmagent-config/vmagent-config.yaml
   remoteWrite:
