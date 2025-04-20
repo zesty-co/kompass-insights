@@ -133,7 +133,6 @@ admission:
     endpoint: "kompass-insights-svc"
     port: 50051
 
-
 victoriaMetrics:
   enabled: false
   serviceAccount:
@@ -157,3 +156,10 @@ victoriaMetrics:
       search.disableCache: true
       memory.allowedPercent: 60
       dedup.minScrapeInterval: 30s
+
+victoriaMetricsAgent:
+  extraArgs:
+    promscrape.config: /etc/vmagent-config/vmagent-config.yaml
+  remoteWrite:
+    - url: http://victoriametrics.{{ .Release.Namespace }}:8428/api/v1/write
+    
