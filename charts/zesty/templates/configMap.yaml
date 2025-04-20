@@ -97,17 +97,11 @@ data:
             regex: '.*'
             action: keep
 
-      # for collecting Pilot metrics
-      - job_name: 'pilot'
-        scrape_interval: 30s
-        static_configs:
-          - targets: ['http://{{ include "recommendations-maker.name" . }}.{{ .Release.Namespace }}:{{ .Values.recommendationsMaker.port }}']
-
       # for collecting VM metrics
       - job_name: 'vmetrics'
         scrape_interval: 30s
         static_configs:
-          - targets: ['http://victoriametrics.{{ .Release.Namespace }}:8428']
+          - targets: ['http://zesty-kompass-victoria-metrics:8428']
 
       # For pod and node metrics
       - job_name: 'kube-state-metrics'

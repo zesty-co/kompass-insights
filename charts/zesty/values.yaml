@@ -164,5 +164,5 @@ victoriaMetricsAgent:
   extraArgs:
     promscrape.config: /etc/vmagent-config/vmagent-config.yaml
   remoteWrite:
-    - url: http://victoriametrics.{{ .Release.Namespace }}:8428/api/v1/write
+    - url: http://zesty-kompass-victoria-metrics:8428/api/v1/write
     
