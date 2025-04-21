@@ -134,7 +134,7 @@ admission:
     port: 50051
 
 victoriaMetrics:
-  enabled: true
+  enabled: false
   serviceAccount:
     name: zesty-kompass-victoria-metrics
   server:
