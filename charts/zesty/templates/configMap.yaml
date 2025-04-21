@@ -63,4 +63,3 @@ data:
   {{- end }}
   {{- end }}
   SECRET_NAME: "{{ .Values.admission.insights.secret }}"
-  
