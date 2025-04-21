@@ -164,5 +164,11 @@ victoriaMetricsAgent:
   extraArgs:
     promscrape.config: /etc/vmagent-config/vmagent-config.yaml
   remoteWrite:
-    - url: http://zesty-kompass-victoria-metrics:8428/api/v1/write
-    
+    - url: http://zesty-kompass-victoria-metrics.zesty-system:8428/api/v1/write
+  extraVolumes:
+    - name: config
+      configMap:
+        name: vmagent-config
+  extraVolumeMounts:
+    - name: config
+      mountPath: /etc/vmagent-config

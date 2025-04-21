@@ -69,7 +69,7 @@ data:
       - job_name: 'vmetrics'
         scrape_interval: 30s
         static_configs:
-          - targets: ['http://victoriametrics.{{ .Release.Namespace }}:8428']
+          - targets: ['http://zesty-kompass-victoria-metrics.{{ .Release.Namespace }}:8428']
 
       # For pod and node metrics
       - job_name: 'kube-state-metrics'
