@@ -133,7 +133,6 @@ admission:
     endpoint: "kompass-insights-svc"
     port: 50051
 
-
 victoriaMetrics:
   enabled: false
   serviceAccount:
@@ -157,3 +156,24 @@ victoriaMetrics:
       search.disableCache: true
       memory.allowedPercent: 60
       dedup.minScrapeInterval: 30s
+  service:
+    enabled: true
+    type: ClusterIP
+
+victoriaMetricsAgent:
+  fullnameOverride: zesty-kompass-victoria-metrics-agent
+  serviceAccount:
+    name: zesty-kompass-victoria-metrics-agent
+  service:
+    type: ClusterIP
+  extraArgs:
+    promscrape.config: /etc/vmagent-config/vmagent-config.yaml
+  remoteWrite:
+    - url: http://zesty-kompass-victoria-metrics.zesty-system:8428/api/v1/write
+  extraVolumes:
+    - name: config
+      configMap:
+        name: vmagent-config
+  extraVolumeMounts:
+    - name: config
+      mountPath: /etc/vmagent-config
