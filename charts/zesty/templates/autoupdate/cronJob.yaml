@@ -25,20 +25,23 @@ spec:
           {{- end }}
           serviceAccountName: "{{ include "zesty-k8s.autoupdate-saname" . }}"
           containers:
-            - name: zesty-k8s-updater
-              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}" 
-              command: ["./update"]
-              imagePullPolicy: {{ .Values.image.pullPolicy }}
-              envFrom:
-                - configMapRef:
-                    name: "{{ include "zesty-k8s.configmap" . }}"
+            - name: kompass-updater
+              image: "{{ .Values.autoUpdate.image.repository }}:{{ .Values.autoUpdate.image.tag }}"
+              command: ["./main"]
+              imagePullPolicy: {{ .Values.autoUpdate.image.pullPolicy }}
+              volumeMounts:
+              - mountPath: /bin/app-config.yaml
+                name: app-config
+                subPath: app-config.yaml
               env:
-              - name: RELEASE_NAME
-                value: "{{ .Release.Name }}"
               - name: NAMESPACE
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.namespace
+          volumes:
+            - name: app-config
+              configMap:
+                name: "{{ include "zesty-k8s.fullname" . }}-updater-app-config"
           restartPolicy: Never
       backoffLimit: 4
 {{- end }}
