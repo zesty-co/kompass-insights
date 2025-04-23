@@ -23,5 +23,9 @@ dependencies:
 - alias: victoriaMetricsAgent
   condition: victoriaMetrics.enabled
   name: victoria-metrics-agent
-  repository: https://victoriametrics.github.io/helm-charts
   version: 0.16.2
+  repository: https://victoriametrics.github.io/helm-charts
+- condition: kube-state-metrics.enabled
+  name: kube-state-metrics
+  version: ">=5.28.0"
+  repository: https://prometheus-community.github.io/helm-charts

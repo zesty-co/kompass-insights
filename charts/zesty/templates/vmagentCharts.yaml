@@ -78,7 +78,7 @@ data:
           - role: service
         relabel_configs:
           - source_labels: [__meta_kubernetes_service_name]
-            regex: zesty-kompass-pod-rightsizing-kube-state-metrics
+            regex: zesty-kompass-kube-state-metrics
             action: keep
         metric_relabel_configs:
           - source_labels: [__name__]

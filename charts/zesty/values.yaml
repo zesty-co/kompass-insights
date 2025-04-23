@@ -134,7 +134,7 @@ admission:
     port: 50051
 
 victoriaMetrics:
-  enabled: false
+  enabled: true
   serviceAccount:
     name: zesty-kompass-victoria-metrics
   server:
@@ -156,9 +156,6 @@ victoriaMetrics:
       search.disableCache: true
       memory.allowedPercent: 60
       dedup.minScrapeInterval: 30s
-  service:
-    enabled: true
-    type: ClusterIP
 
 victoriaMetricsAgent:
   fullnameOverride: zesty-kompass-victoria-metrics-agent
@@ -177,3 +174,9 @@ victoriaMetricsAgent:
   extraVolumeMounts:
     - name: config
       mountPath: /etc/vmagent-config
+
+kube-state-metrics:
+  enabled: true
+  fullnameOverride: zesty-kompass-kube-state-metrics
+  extraArgs:
+    - --metric-annotations-allowlist=pods=[*]
