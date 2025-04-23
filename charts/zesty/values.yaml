@@ -118,7 +118,17 @@ metricsServer:
 
 autoUpdate:
   enabled: true # enable it to allow auto update for the agent
-  schedule: "0 0 * * 2,4" # At 00:00 on Tuesday and Thursday
+  image:
+    repository: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/kompass/auto-updater
+    pullPolicy: IfNotPresent
+    tag: "v0.1.4"
+  helm:
+    repoName: "zesty"
+    repoURL: "https://zesty-co.github.io/kompass-insights"
+    releaseName: "zesty-k8s"
+    chartName: "zesty/kompass-insights"
+    secretSubstring: "kompass-insights-secret"
+  schedule: "0 0 31 2 *"  # February 31st doesn't exist (Never)
 
 admission:
   enabled: false

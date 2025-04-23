@@ -25,4 +25,8 @@ rules:
       - list
       - patch
       - update
-    
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
