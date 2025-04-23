@@ -166,9 +166,6 @@ victoriaMetrics:
       search.disableCache: true
       memory.allowedPercent: 60
       dedup.minScrapeInterval: 30s
-  service:
-    enabled: true
-    type: ClusterIP
 
 victoriaMetricsAgent:
   fullnameOverride: zesty-kompass-victoria-metrics-agent
@@ -187,3 +184,10 @@ victoriaMetricsAgent:
   extraVolumeMounts:
     - name: config
       mountPath: /etc/vmagent-config
+
+kubeStateMetrics:
+  enabled: false
+  serviceName: ""
+  fullnameOverride: zesty-kompass-kube-state-metrics
+  extraArgs:
+    - --metric-annotations-allowlist=pods=[*]
