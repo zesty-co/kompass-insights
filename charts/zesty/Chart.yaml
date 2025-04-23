@@ -7,17 +7,17 @@ appVersion: "stable"
 
 dependencies:
 - name: metrics-server
-  version: 3.12.1
-  repository: https://kubernetes-sigs.github.io/metrics-server/
   condition: metricsServer.enabled
+  repository: https://kubernetes-sigs.github.io/metrics-server/
+  version: 3.12.1
 - name: kompass-admission-controller
   alias: admission
   version: 0.1.4
   repository: https://zesty-co.github.io/kompass-admission-controller
   condition: admission.enabled
-- alias: victoriaMetrics
+- name: victoria-metrics-single
+  alias: victoriaMetrics
   condition: victoriaMetrics.enabled
-  name: victoria-metrics-single
   repository: https://victoriametrics.github.io/helm-charts
   version: 0.14.3
 - alias: victoriaMetricsAgent
@@ -25,7 +25,7 @@ dependencies:
   name: victoria-metrics-agent
   version: 0.16.2
   repository: https://victoriametrics.github.io/helm-charts
-- condition: kube-state-metrics.enabled
+- condition: kubeStateMetrics.enabled
   name: kube-state-metrics
   version: ">=5.28.0"
   repository: https://prometheus-community.github.io/helm-charts

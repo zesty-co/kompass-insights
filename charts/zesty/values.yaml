@@ -175,8 +175,9 @@ victoriaMetricsAgent:
     - name: config
       mountPath: /etc/vmagent-config
 
-kube-state-metrics:
+kubeStateMetrics:
   enabled: true
+  serviceName: ""
   fullnameOverride: zesty-kompass-kube-state-metrics
   extraArgs:
     - --metric-annotations-allowlist=pods=[*]

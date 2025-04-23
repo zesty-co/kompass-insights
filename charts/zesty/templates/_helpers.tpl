@@ -152,3 +152,11 @@ verbs:
   {{- end }}
   - watch
 {{- end -}}
+
+{{- define "kube-state-metrics.serviceName" -}}
+  {{- if .Values.kubeStateMetrics.enabled }}
+    {{- .Values.kubeStateMetrics.fullnameOverride | trunc 63 | trimSuffix "-" }}
+  {{- else }}
+    {{- .Values.kubeStateMetrics.serviceName | trunc 63 | trimSuffix "-" }}
+  {{- end }}
+{{- end }}
