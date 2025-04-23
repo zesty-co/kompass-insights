@@ -134,7 +134,7 @@ admission:
     port: 50051
 
 victoriaMetrics:
-  enabled: true
+  enabled: false
   serviceAccount:
     name: zesty-kompass-victoria-metrics
   server:
@@ -176,7 +176,7 @@ victoriaMetricsAgent:
       mountPath: /etc/vmagent-config
 
 kubeStateMetrics:
-  enabled: true
+  enabled: false
   serviceName: ""
   fullnameOverride: zesty-kompass-kube-state-metrics
   extraArgs:
