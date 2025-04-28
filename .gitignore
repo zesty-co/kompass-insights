@@ -4,3 +4,6 @@
 # Helm generated files
 charts/zesty/charts/
 charts/zesty/Chart.lock
+
+# Other
+.DS_Store
