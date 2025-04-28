@@ -188,6 +188,7 @@ victoriaMetricsAgent:
 kubeStateMetrics:
   enabled: false
   serviceName: ""
+  nameOverride: kube-state-metrics
   fullnameOverride: zesty-kompass-kube-state-metrics
   extraArgs:
     - --metric-annotations-allowlist=pods=[*]
