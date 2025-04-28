@@ -20,12 +20,16 @@ dependencies:
   condition: victoriaMetrics.enabled
   repository: https://victoriametrics.github.io/helm-charts
   version: 0.14.3
-- alias: victoriaMetricsAgent
+- name: victoria-metrics-agent
+  alias: victoriaMetricsAgent
   condition: victoriaMetrics.enabled
-  name: victoria-metrics-agent
-  version: 0.16.2
   repository: https://victoriametrics.github.io/helm-charts
+  version: 0.16.2
 - condition: kubeStateMetrics.enabled
   name: kube-state-metrics
-  version: ">=5.28.0"
   repository: https://prometheus-community.github.io/helm-charts
+  version: ">=5.28.0"
+- name: grafana
+  condition: grafana.enabled
+  repository: https://grafana.github.io/helm-charts
+  version: 8.10.4
