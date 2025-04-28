@@ -191,3 +191,24 @@ kubeStateMetrics:
   fullnameOverride: zesty-kompass-kube-state-metrics
   extraArgs:
     - --metric-annotations-allowlist=pods=[*]
+
+grafana:
+  enabled: false
+  fullnameOverride: "zesty-kompass-grafana"
+  deployDataSource: true
+  deployDashboard: true
+  persistence:
+    enabled: true
+    type: "statefulset"
+    size: 1Gi
+    storageClassName: "ebs-sc"
+  # Use ConfigMaps for datasources and dashboards
+  sidecar:
+    datasources:
+      enabled: true
+      label: grafana_datasource
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+  adminUser: admin
+  adminPassword: password
