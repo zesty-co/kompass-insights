@@ -21,6 +21,12 @@ rules:
       - nodes/proxy
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
+      - ""
+    resources:
+      - pods/log
+    verbs:
+      - get
+  - apiGroups:
       - "metrics.k8s.io"
     resources:
       - pods
