@@ -7,6 +7,11 @@ metadata:
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
 rules:
   - apiGroups:
+      - "argoproj.io"
+    resources:
+      - workflows
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
       - ""
     resources:
       - configmaps
