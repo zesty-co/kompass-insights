@@ -25,7 +25,7 @@ rules:
       - alertmanagers
       - podmonitors
       - probes
-      - prometheuses
+      - prometheuss
       - prometheusrules
       - servicemonitors
       - thanosrulers
