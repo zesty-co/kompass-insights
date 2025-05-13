@@ -64,3 +64,4 @@ data:
   {{- end }}
   SECRET_NAME: "{{ .Values.admission.insights.secret }}"
   UPDATER: "{{ include "zesty-k8s.fullname" . }}-updater"
+  VICTORIA_METRICS_URL: "http://{{ .Values.victoriaMetrics.server.fullnameOverride }}.{{ .Release.Namespace }}:8428"
