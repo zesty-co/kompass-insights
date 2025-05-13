@@ -19,6 +19,31 @@ rules:
       - analysisruns
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
+      - "monitoring.coreos.com"
+    resources:
+      - alertmanagers
+      - podmonitors
+      - probes
+      - prometheuses
+      - prometheusrules
+      - servicemonitors
+      - thanosrulers
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
+      - "actions.github.com"
+    resources:
+      - autoscalinglisteners
+      - workflowruns
+      - runnerdeployments
+      - runners
+      - workflows
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
+      - "qscaler.qubex.ai"
+    resources:
+      - qcacherevisioncreations
+    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
       - ""
     resources:
       - configmaps
