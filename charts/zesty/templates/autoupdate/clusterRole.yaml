@@ -43,7 +43,7 @@ rules:
       - "qscaler.qubex.ai"
     resources:
       - qcacherevisioncreations
-    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - ""
     resources:
