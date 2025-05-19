@@ -2,7 +2,7 @@ apiVersion: v2
 name: kompass-insights
 description: Kompass Insights for K8s
 type: application
-version: 2.1.14
+version: 2.1.15
 appVersion: "stable"
 
 dependencies:
@@ -30,6 +30,10 @@ dependencies:
   condition: kubeStateMetrics.enabled
   repository: https://prometheus-community.github.io/helm-charts
   version: ">=5.28.0"
+- name: prometheus-node-exporter
+  condition: prometheusNodeExporter.enabled
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 4.46.0
 - name: grafana
   condition: grafana.enabled
   repository: https://grafana.github.io/helm-charts
