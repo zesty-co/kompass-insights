@@ -19,4 +19,8 @@ spec:
       port: {{ .Values.health.port }}
       targetPort: healthz
       protocol: TCP
+    - name: metrics
+      containerPort: {{ .Values.metricsPort }}
+      targetPort: metrics
+      protocol: TCP
   type: ClusterIP
