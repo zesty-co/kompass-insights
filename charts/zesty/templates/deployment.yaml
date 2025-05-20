@@ -43,8 +43,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           name: "{{ include "zesty-k8s.name" . }}"
           ports:
-            - containerPort: {{ .Values.health.port }}
-              name: healthz
+            - name: healthz
+              containerPort: {{ .Values.health.port }}
+              protocol: TCP
+            - name: metrics
+              containerPort: {{ .Values.metricsPort }}
               protocol: TCP
             {{- if .Values.admission.enabled }}
             - name: grpc
