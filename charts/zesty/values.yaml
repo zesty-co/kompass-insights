@@ -148,3 +148,5 @@ metricsPort: 9003
 victoriaMetrics:
   server:
     fullnameOverride: zesty-kompass-victoria-metrics
+  extraArgs:
+    - "-search.cacheTimestampOffset=7d"
