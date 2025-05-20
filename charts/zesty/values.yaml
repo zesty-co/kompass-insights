@@ -21,6 +21,7 @@ log:
 image:
   repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent"
   migrationRepository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent/migration"
+  recommendationsRepository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/recommendation-maker"
   pullPolicy: Always
   tag: stable
 nodeSelector: {}
@@ -112,6 +113,31 @@ config:
 
 podMinuteMetrics:
   enabled: true
+
+recommendations:
+  enabled: false
+  container:
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+  securityContext:
+    fsGroup: 65532
+    runAsGroup: 65532
+    runAsNonRoot: true
+    runAsUser: 65532
+    seccompProfile:
+      type: RuntimeDefault
+  http:
+    port: 8000
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 250m
+      memory: 512Mi
 
 metricsServer:
   enabled: false # enable it to install metrics-server
