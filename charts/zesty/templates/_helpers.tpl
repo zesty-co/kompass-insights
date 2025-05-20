@@ -185,3 +185,11 @@ Selector labels
 app.kubernetes.io/name: {{ include "zesty-k8s.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{- define "zesty-k8s.victoriaMetrics.endpoint" -}}
+http://{{ .Values.victoriaMetrics.server.fullnameOverride }}.{{ .Release.Namespace }}:8428
+{{- end }}
+
+{{- define "zesty-k8s.recommendations.fullname" -}}
+ {{ printf "%s-recommendations" (include "zesty-k8s.fullname" .) | trunc 63 | trimSuffix "-" }}
+{{- end }}

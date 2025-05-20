@@ -1,0 +1,65 @@
+{{- if .Values.recommendations.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
+  labels:
+    app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
+    app.kubernetes.io/name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
+      app.kubernetes.io/name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "{{ .Values.recommendations.http.port }}"
+      labels:
+        app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
+        app.kubernetes.io/name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
+    spec:
+      automountServiceAccountToken: true
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+      {{- toYaml .Values.nodeSelector | nindent 10 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations:
+      {{- toYaml .Values.tolerations | nindent 10 }}
+      {{- end }}
+      containers:
+        - image: "{{ .Values.image.recommendationsRepository }}:{{ include "zesty-k8s.version" . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          name: "recommendations"
+          ports:
+            - containerPort: {{ .Values.recommendations.http.port }}
+              name: http
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: {{ .Values.recommendations.http.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.recommendations.http.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          {{- with .Values.recommendations.resources }}
+          resources:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          securityContext:
+          {{- toYaml .Values.recommendations.container.securityContext | nindent 12 }}
+          env:
+            - name: PROMETHEUS_ENDPOINT
+              value: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
+      securityContext:
+      {{- toYaml .Values.recommendations.securityContext | nindent 8 }}
+{{- end }}
