@@ -4,7 +4,7 @@ metadata:
   name: "{{ include "zesty-k8s.fullname" . }}-updater-app-config"
 data:
   app-config.yaml: |
-    release_name: {{ .Release.Name }}
+    release_name: "{{ include "zesty-k8s.fullname" . }}"
     helm:
       repo_name: {{ .Values.autoUpdate.helm.repoName }}
       repo_url: {{ .Values.autoUpdate.helm.repoURL }}
