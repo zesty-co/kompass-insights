@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
+  namespace: "{{ .Release.Namespace }}"
   labels:
     app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
     app.kubernetes.io/name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
