@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
+  namespace: "{{ .Release.Namespace }}"
   labels:
     app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
     app.kubernetes.io/name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
