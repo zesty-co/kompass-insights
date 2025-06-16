@@ -170,7 +170,3 @@ admission:
     port: 50051
 
 metricsPort: 9003
-
-victoriaMetrics:
-  server:
-    fullnameOverride: zesty-kompass-victoria-metrics
