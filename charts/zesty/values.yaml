@@ -171,10 +171,6 @@ admission:
 
 metricsPort: 9003
 
-victoriaMetrics:
-  server:
-    fullnameOverride: zesty-kompass-victoria-metrics
-
 cxLogging:
   enabled: false
   clusterName: ""
