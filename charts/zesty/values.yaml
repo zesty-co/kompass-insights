@@ -143,7 +143,7 @@ metricsServer:
   enabled: false # enable it to install metrics-server
 
 autoUpdate:
-  enabled: true # enable it to allow auto update for the agent
+  enabled: false # disable by default - enable to allow auto update mechanism
   image:
     repository: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/kompass/auto-updater
     pullPolicy: IfNotPresent
@@ -170,3 +170,10 @@ admission:
     port: 50051
 
 metricsPort: 9003
+
+cxLogging:
+  enabled: false
+  clusterName: ""
+  apiKey: ""
+  logUrl: "https://ingress.eu2.coralogix.com:443/api/v1/logs"
+  timeDeltaUrl: "https://ingress.eu2.coralogix.com:443/sdk/v1/time"
