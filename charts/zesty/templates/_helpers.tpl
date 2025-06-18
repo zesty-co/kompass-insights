@@ -187,7 +187,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{- define "zesty-k8s.victoriaMetrics.endpoint" -}}
-    {{- if .Values.global.victoriaMetricsRemoteUrl }}
+    {{- if and .Values.global .Values.global.victoriaMetricsRemoteUrl }}
         {{- .Values.global.victoriaMetricsRemoteUrl -}}
     {{- else -}}
         http://kompass-victoria-metrics:8428
