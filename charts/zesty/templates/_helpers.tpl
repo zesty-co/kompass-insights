@@ -187,7 +187,15 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{- define "zesty-k8s.victoriaMetrics.endpoint" -}}
-{{- default "http://kompass-victoria-metrics:8428" .Values.global.victoriaMetricsRemoteUrl }}
+    {{- if and .Values.global .Values.global.victoriaMetricsRemoteUrl }}
+        {{- .Values.global.victoriaMetricsRemoteUrl -}}
+    {{- else -}}
+        http://kompass-victoria-metrics:8428
+    {{- end }}
+{{- end }}
+
+{{- define "zesty-k8s.exposedMetrics.port" -}}
+{{- default "9003" .Values.metricsPort }}
 {{- end }}
 
 {{- define "zesty-k8s.recommendations.fullname" -}}
