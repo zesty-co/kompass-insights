@@ -65,7 +65,5 @@ data:
   {{- end }}
   SECRET_NAME: "{{ .Values.admission.insights.secret }}"
   UPDATER: "{{ include "zesty-k8s.fullname" . }}-updater"
-  {{- if .Values.victoriaMetrics }}
   VICTORIAMETRICS_URL: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
-  {{- end }}
-  METRICSPORT: "{{ .Values.metricsPort }}"
+  METRICSPORT: {{ include "zesty-k8s.exposedMetrics.port" . | quote }}

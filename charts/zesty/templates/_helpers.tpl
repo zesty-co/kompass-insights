@@ -190,6 +190,10 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- default "http://kompass-victoria-metrics:8428" .Values.global.victoriaMetricsRemoteUrl }}
 {{- end }}
 
+{{- define "zesty-k8s.exposedMetrics.port" -}}
+{{- default "9013" .Values.metricsPort }}
+{{- end }}
+
 {{- define "zesty-k8s.recommendations.fullname" -}}
  {{ printf "%s-recommendations" (include "zesty-k8s.fullname" .) | trunc 63 | trimSuffix "-" }}
 {{- end }}
