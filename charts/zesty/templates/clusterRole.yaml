@@ -135,3 +135,8 @@ rules:
       - clusterroles
       - clusterrolebindings
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - mutatingwebhookconfigurations
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
