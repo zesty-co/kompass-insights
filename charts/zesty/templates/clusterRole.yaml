@@ -122,6 +122,7 @@ rules:
       - "kompass.zesty.co"
     resources:
       - workloaddescriptors
+      - autopilotconfigs
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
   - apiGroups:
       - "apiextensions.k8s.io"
