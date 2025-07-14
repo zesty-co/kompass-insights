@@ -122,6 +122,7 @@ rules:
       - "kompass.zesty.co"
     resources:
       - workloaddescriptors
+      - autopilotconfigs
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
   - apiGroups:
       - "apiextensions.k8s.io"
@@ -134,3 +135,7 @@ rules:
       - clusterroles
       - clusterrolebindings
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
+
+
+#     "Unhandled Error","logger":"UnhandledError","err":"pkg/mod/k8s.io/client-go@v0.32.3/tools/cache/reflector.go:251: Failed to watch kompass.zesty.co/v1, Resource=autopilotconfigs: failed to list kompass.zesty.co/v1, Resource=autopilotconfigs: autopilotconfigs.kompass.zesty.co is fo │
+# │ rbidden: User \"system:serviceaccount:zesty-system:kompass-insights-sa\" cannot list resource \"autopilotconfigs\" in API group \"kompass.zesty.co\" at the cluster scope"}
