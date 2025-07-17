@@ -61,6 +61,8 @@ spec:
           env:
             - name: PROMETHEUS_ENDPOINT
               value: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
+            - name: AGENT_HOST
+              value: {{ .Values.admission.insights.service | quote }}
       securityContext:
       {{- toYaml .Values.recommendations.securityContext | nindent 8 }}
 {{- end }}
