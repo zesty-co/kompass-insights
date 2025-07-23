@@ -21,7 +21,6 @@ log:
 image:
   repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent"
   migrationRepository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent/migration"
-  recommendationsRepository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/recommendation-maker"
   pullPolicy: Always
   tag: stable
 nodeSelector: {}
@@ -116,6 +115,10 @@ podMinuteMetrics:
 
 recommendations:
   enabled: false
+  image: 
+    repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/recommendation-maker"
+    pullPolicy: always
+    tag: stable
   container:
     securityContext:
       allowPrivilegeEscalation: false
