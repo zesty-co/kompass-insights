@@ -103,6 +103,12 @@ spec:
               value: {{ .Values.cxLogging.apiKey }}
             - name: CX_CLUSTER_NAME
               value: {{ .Values.cxLogging.clusterName }}
+            - name: CORALOGIX_DOMAIN
+              value: {{ .Values.cxLogging.domain }}
+            - name: CORALOGIX_INGRESS_LOGS_URL
+              value: {{ .Values.cxLogging.ingressLogsUrl }}
+            - name: CORALOGIX_INGRESS_URL
+              value: {{ .Values.cxLogging.ingressUrl }}
             - name: CORALOGIX_LOG_URL
               value: {{ .Values.cxLogging.logUrl }}
             - name: CORALOGIX_TIME_DELTA_URL
