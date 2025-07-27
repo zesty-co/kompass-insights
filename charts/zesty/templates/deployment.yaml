@@ -106,13 +106,13 @@ spec:
             - name: CORALOGIX_DOMAIN
               value: {{ .Values.cxLogging.domain }}
             - name: CORALOGIX_INGRESS_LOGS_URL
-              value: {{ .Values.cxLogging.baseUrl }}.{{ .Values.cxLogging.domain }}{{ .Values.cxLogging.endpoints.singles }}
+              value: {{ .Values.cxLogging.ingressLogsUrl }}
             - name: CORALOGIX_INGRESS_URL
-              value: {{ .Values.cxLogging.baseUrl }}.{{ .Values.cxLogging.domain }}/
+              value: {{ .Values.cxLogging.ingressUrl }}
             - name: CORALOGIX_LOG_URL
-              value: {{ .Values.cxLogging.baseUrl }}.{{ .Values.cxLogging.domain }}:443{{ .Values.cxLogging.endpoints.logs }}
+              value: {{ .Values.cxLogging.logUrl }}
             - name: CORALOGIX_TIME_DELTA_URL
-              value: {{ .Values.cxLogging.baseUrl }}.{{ .Values.cxLogging.domain }}:443{{ .Values.cxLogging.endpoints.timeDelta }}
+              value: {{ .Values.cxLogging.timeDeltaUrl }}
             {{- end }}
           {{- if ne .Values.encryptedCredentials ""}}
             - name: ENCRYPTED_CREDENTIALS
