@@ -114,7 +114,7 @@ podMinuteMetrics:
   enabled: true
 
 recommendations:
-  enabled: false
+  enabled: true
   image: 
     repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/recommendation-maker"
     pullPolicy: Always
