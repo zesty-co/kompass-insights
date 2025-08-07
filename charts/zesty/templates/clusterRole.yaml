@@ -19,6 +19,18 @@ rules:
       - analysisruns
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
+      - "cloudwatch.aws.amazon.com"
+    resources:
+      - amazoncloudwatchagents
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
+      - "flink.apache.org"
+    resources:
+      - flinkdeployments
+      - flinksessionjobs
+      - flinkstatesnapshots
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
       - "monitoring.coreos.com"
     resources:
       - alertmanagers
