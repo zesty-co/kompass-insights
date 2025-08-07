@@ -14,4 +14,4 @@ dependencies:
   alias: admission
   condition: admission.enabled
   repository: https://zesty-co.github.io/kompass-admission-controller
-  version: 0.1.14
+  version: 0.1.15
