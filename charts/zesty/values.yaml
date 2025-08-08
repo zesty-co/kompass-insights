@@ -99,6 +99,7 @@ s3override:
 
 metadata:
   enabled: false
+  provider: ~
   accountID: ~
   region: ~
   clusterName: ~

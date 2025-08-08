@@ -48,6 +48,7 @@ data:
   LOG_LEVEL: "{{ .Values.log.level }}"
   LOG_REMOTE: "{{ .Values.log.remote }}"
   {{- if .Values.metadata.enabled }}
+  METADATA_PROVIDER: "{{ .Values.metadata.provider }}"
   METADATA_ACCOUNTID: "{{ .Values.metadata.accountID }}"
   METADATA_REGION: "{{ .Values.metadata.region }}"
   METADATA_CLUSTERNAME: "{{ .Values.metadata.clusterName }}"
