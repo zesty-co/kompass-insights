@@ -137,6 +137,11 @@ rules:
       - autopilotconfigs
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
   - apiGroups:
+      - "kompass.zesty.co"
+    resources:
+      - workloaddescriptors/status
+    verbs: [ "get", "update", "patch" ]
+  - apiGroups:
       - "zesty.co"
     resources:
       - managedworkloads
