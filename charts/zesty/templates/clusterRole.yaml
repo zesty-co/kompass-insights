@@ -30,13 +30,13 @@ rules:
       - kafkamirrormaker2s
       - kafkarebalances
       - kafkabridges
-    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - "core.strimzi.io"
     resources:
       - strimzipodsets
       - strimzipodsets/status
-    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - "clickhouse.altinity.com"
     resources:
@@ -44,7 +44,7 @@ rules:
       - clickhouseinstallationtemplates
       - clickhouseoperatorconfigurations
       - clickhousekeeperinstallations
-    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - "cloudwatch.aws.amazon.com"
     resources:
