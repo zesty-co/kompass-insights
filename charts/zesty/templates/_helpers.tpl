@@ -114,41 +114,6 @@ Create a name for the Service.
 {{- end -}}
 
 {{/*
-Create a name for the AutoUpdate Role.
-*/}}
-{{- define "zesty-k8s.autoupdate-role" -}}
-  {{ printf "%s-autoupdate-role" (include "zesty-k8s.fullname" .) }}
-{{- end -}}
-
-{{/*
-Create a name for the AutoUpdate RoleBinding.
-*/}}
-{{- define "zesty-k8s.autoupdate-rolebinding" -}}
-  {{ printf "%s-autoupdate-roleBinding" (include "zesty-k8s.fullname" .) }}
-{{- end -}}
-
-{{/*
-Create a name for the AutoUpdate SA.
-*/}}
-{{- define "zesty-k8s.autoupdate-saname" -}}
-  {{ printf "%s-autoupdate-sa" (include "zesty-k8s.fullname" .) }}
-{{- end -}}
-
-{{/*
-Create a name for the AutoUpdate ClusterRole.
-*/}}
-{{- define "zesty-k8s.autoupdate-clusterrole" -}}
-  {{ printf "%s-autoupdate-clusterRole" (include "zesty-k8s.fullname" .) }}
-{{- end -}}
-
-{{/*
-Create a name for the AutoUpdate ClusterRoleBinding.
-*/}}
-{{- define "zesty-k8s.autoupdate-clusterrolebinding" -}}
-  {{ printf "%s-autoupdate-clusterRoleBinding" (include "zesty-k8s.fullname" .) }}
-{{- end -}}
-
-{{/*
 All of the relevant verbs.
 */}}
 {{- define "zesty-k8s.verbs" -}}
