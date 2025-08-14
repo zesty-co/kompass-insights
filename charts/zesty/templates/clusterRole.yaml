@@ -72,10 +72,15 @@ rules:
       - "actions.github.com"
     resources:
       - autoscalinglisteners
+      - autoscalingrunnersets
       - workflowruns
       - runnerdeployments
       - runners
+      - runnersets
       - workflows
+      - ephemeralrunners
+      - ephemeralrunnersets
+      - horizontalrunnerautoscalers
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - "qscaler.qubex.ai"
