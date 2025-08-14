@@ -17,7 +17,20 @@ rules:
       - analysistemplates
       - experiments
       - analysisruns
+      - eventbuses
+      - eventsources
+      - sensors
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
+      - "kiali.io"
+    resources:
+      - kialis
+    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
+      - "opentelemetry.io"
+    resources:
+      - opentelemetrycollectors
+    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - "kafka.strimzi.io"
     resources:
@@ -51,6 +64,11 @@ rules:
       - amazoncloudwatchagents
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
+      - "pkg.crossplane.io"
+    resources:
+      - providerrevisions
+    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
       - "flink.apache.org"
     resources:
       - flinkdeployments
@@ -65,6 +83,7 @@ rules:
       - probes
       - prometheuses
       - prometheusrules
+      - prometheusagents
       - servicemonitors
       - thanosrulers
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
@@ -105,6 +124,7 @@ rules:
       - ""
     resources:
       - pods/log
+      - podtemplates
     verbs:
       - get
   - apiGroups:
