@@ -76,6 +76,7 @@ rules:
       - runnerdeployments
       - runners
       - workflows
+      - ephemeralrunners
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - "qscaler.qubex.ai"
