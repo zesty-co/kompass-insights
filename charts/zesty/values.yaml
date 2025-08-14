@@ -38,7 +38,7 @@ persistence:
       - ReadWriteOnce
     resources:
       requests:
-        storage: 1Gi
+        storage: 10Gi
 
 serviceAccount:
   annotations:
@@ -145,20 +145,6 @@ recommendations:
 
 metricsServer:
   enabled: false # enable it to install metrics-server
-
-autoUpdate:
-  enabled: false # disable by default - enable to allow auto update mechanism
-  image:
-    repository: 672188301118.dkr.ecr.eu-west-1.amazonaws.com/kompass/auto-updater
-    pullPolicy: IfNotPresent
-    tag: "v0.1.4"
-  helm:
-    repoName: "zesty"
-    repoURL: "https://zesty-co.github.io/kompass-insights"
-    releaseName: "zesty-k8s"
-    chartName: "zesty/kompass-insights"
-    secretSubstring: "kompass-insights-secret"
-  schedule: "0 0 31 2 *"  # February 31st doesn't exist (Never)
 
 admission:
   enabled: false

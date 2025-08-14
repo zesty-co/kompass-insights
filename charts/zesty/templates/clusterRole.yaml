@@ -194,4 +194,5 @@ rules:
       - admissionregistration.k8s.io
     resources:
       - mutatingwebhookconfigurations
+      - validatingwebhookconfigurations
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
