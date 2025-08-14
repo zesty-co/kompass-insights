@@ -25,12 +25,12 @@ rules:
       - "kiali.io"
     resources:
       - kialis
-    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - "opentelemetry.io"
     resources:
       - opentelemetrycollectors
-    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - "kafka.strimzi.io"
     resources:
@@ -67,7 +67,7 @@ rules:
       - "pkg.crossplane.io"
     resources:
       - providerrevisions
-    {{ - include "zesty-k8s.verbs" . | nindent 4 }}
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
       - "flink.apache.org"
     resources:
