@@ -61,7 +61,7 @@ Create a name for the SA.
 Create a name for the PVC.
 */}}
 {{- define "zesty-k8s.pvcname" -}}
-  {{ printf "%s-pvc" (include "zesty-k8s.fullname" .) }}
+  {{ printf "%s-db-pvc" (include "zesty-k8s.fullname" .) }}
 {{- end -}}
 
 {{/*
