@@ -10,12 +10,10 @@ spec:
   selector:
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
   ports:
-    {{- if .Values.admission.enabled }}
     - name: grpc
       port: {{ .Values.admission.grpc.server.port }}
       targetPort: grpc
       protocol: TCP
-    {{- end }}
     - name: healthz
       port: {{ .Values.health.port }}
       targetPort: healthz
