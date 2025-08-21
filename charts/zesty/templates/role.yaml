@@ -12,7 +12,7 @@ rules:
     resources:
       - secrets
     resourceNames:
-      - "{{ .Values.admission.insights.secret }}"
+      - "{{ .Values.insights.secret }}"
     verbs:
       - get
       - patch

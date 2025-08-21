@@ -160,7 +160,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{- define "zesty-k8s.exposedMetrics.port" -}}
-{{- default "9003" .Values.metricsPort }}
+{{- default "9003" .Values.insights.metrics.port }}
 {{- end }}
 
 {{- define "zesty-k8s.recommendations.fullname" -}}

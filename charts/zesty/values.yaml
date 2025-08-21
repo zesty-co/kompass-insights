@@ -104,15 +104,27 @@ metadata:
   region: ~
   clusterName: ~
 
-health:
-  port: 9000
-
 config:
   manager:
     enable: false
 
 podMinuteMetrics:
   enabled: true
+
+insights:
+  secret: "kompass-insights-secret"
+  service: "kompass-insights-svc"
+
+  grpc:
+    port: 50051
+    server:
+      port: 50052
+
+  metrics:
+    port: 9003
+
+  health:
+    port: 9000
 
 recommendations:
   enabled: true
@@ -150,16 +162,6 @@ admission:
   enabled: false
   service:
     name: "kompass-admission-controller-svc"
-  insights:
-    secret: "kompass-insights-secret"
-    service: "kompass-insights-svc"
-  grpc:
-    server:
-      port: 50052
-    endpoint: "kompass-insights-svc"
-    port: 50051
-
-metricsPort: 9003
 
 cxLogging:
   enabled: false

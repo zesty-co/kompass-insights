@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "{{ .Values.admission.insights.service }}"
+  name: "{{ .Values.insights.service }}"
   namespace: "{{ .Release.Namespace }}"
   labels:
     app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
@@ -10,18 +10,16 @@ spec:
   selector:
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
   ports:
-    {{- if .Values.admission.enabled }}
     - name: grpc
-      port: {{ .Values.admission.grpc.server.port }}
+      port: {{ .Values.insights.grpc.server.port }}
       targetPort: grpc
       protocol: TCP
-    {{- end }}
     - name: healthz
-      port: {{ .Values.health.port }}
+      port: {{ .Values.insights.health.port }}
       targetPort: healthz
       protocol: TCP
     - name: metrics
-      port: {{ .Values.metricsPort }}
+      port: {{ .Values.insights.metrics.port }}
       targetPort: metrics
       protocol: TCP
   type: ClusterIP
