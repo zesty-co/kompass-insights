@@ -45,26 +45,26 @@ spec:
           name: "{{ include "zesty-k8s.name" . }}"
           ports:
             - name: healthz
-              containerPort: {{ .Values.health.port }}
+              containerPort: {{ .Values.insights.health.port }}
               protocol: TCP
             - name: metrics
-              containerPort: {{ .Values.metricsPort }}
+              containerPort: {{ .Values.insights.metrics.port }}
               protocol: TCP
             {{- if .Values.admission.enabled }}
             - name: grpc
-              containerPort: {{ .Values.admission.grpc.server.port }}
+              containerPort: {{ .Values.insights.grpc.server.port }}
               protocol: TCP
             {{- end }}
           readinessProbe:
             httpGet:
               path: /ready
-              port: {{ .Values.health.port }}
+              port: {{ .Values.insights.health.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.health.port }}
+              port: {{ .Values.insights.health.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
           {{- with .Values.resources }}
