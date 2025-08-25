@@ -2,8 +2,8 @@
 .idea/
 
 # Helm generated files
-charts/zesty/charts/
-charts/zesty/Chart.lock
+charts/**/charts/
+charts/**/Chart.lock
 
 # Other
 .DS_Store

@@ -3,17 +3,22 @@
 # Variables
 SHELL := /bin/bash
 
-all: lint ensure-template-var-prefix template ## Run all operations that validate the correctness of the chart
+all: update-dependencies lint ensure-template-var-prefix template ## Run all operations that validate the correctness of the chart
+
+.PHONY: update-dependencies
+update-dependencies: ## Update dependencies
+	@echo "Updating dependencies..."
+	@helm dependency update ./charts/zesty || exit 1;
 
 .PHONY: lint
 lint: ## Lint Helm chart
 	@echo "Linting Helm chart..."
-	@helm lint ./charts/* || exit 1;
+	@helm lint ./charts/zesty || exit 1;
 
 .PHONY: template
 template: ## Template Helm chart and validate output
 	@echo "Templating Helm chart..."
-	@helm template test-release ./charts/* --debug > /dev/null || exit 1;
+	@helm template test-release ./charts/zesty --debug > /dev/null || exit 1;
 
 TEMPLATE_PREFIX := zesty-k8s
 .PHONY: ensure-template-var-prefix
