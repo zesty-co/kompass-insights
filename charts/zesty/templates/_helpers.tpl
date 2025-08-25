@@ -9,12 +9,8 @@ Expand the name of the chart.
   {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "prefix.name" -}}
+{{- define "zesty-k8s.prefix.name" -}}
   {{- default "zesty-k8s" .Values.prefix | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
-{{- define "name" -}}
-  {{- printf "%s-%s" (include "prefix.name" .) .Chart.Name | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
@@ -125,14 +121,6 @@ verbs:
   {{- end }}
   - watch
 {{- end -}}
-
-{{- define "kube-state-metrics.serviceName" -}}
-  {{- if .Values.kubeStateMetrics.enabled }}
-    {{- .Values.kubeStateMetrics.fullnameOverride | trunc 63 | trimSuffix "-" }}
-  {{- else }}
-    {{- .Values.kubeStateMetrics.serviceName | trunc 63 | trimSuffix "-" }}
-  {{- end }}
-{{- end }}
 
 {{- define "zesty-k8s.labels" -}}
 helm.sh/chart: {{ include "zesty-k8s.chart" . }}
