@@ -9,14 +9,6 @@ Expand the name of the chart.
   {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "prefix.name" -}}
-  {{- default "zesty-k8s" .Values.prefix | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
-{{- define "name" -}}
-  {{- printf "%s-%s" (include "prefix.name" .) .Chart.Name | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
 {{/*
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
@@ -53,7 +45,7 @@ Create a version as used by the chart and image tag.
 {{/*
 Create a name for the SA.
 */}}
-{{- define "zesty-k8s.saname" -}}
+{{- define "zesty-k8s.serviceAccountName" -}}
   {{ printf "%s-sa" (include "zesty-k8s.fullname" .) }}
 {{- end -}}
 
