@@ -118,14 +118,6 @@ verbs:
   - watch
 {{- end -}}
 
-{{- define "kube-state-metrics.serviceName" -}}
-  {{- if .Values.kubeStateMetrics.enabled }}
-    {{- .Values.kubeStateMetrics.fullnameOverride | trunc 63 | trimSuffix "-" }}
-  {{- else }}
-    {{- .Values.kubeStateMetrics.serviceName | trunc 63 | trimSuffix "-" }}
-  {{- end }}
-{{- end }}
-
 {{- define "zesty-k8s.labels" -}}
 helm.sh/chart: {{ include "zesty-k8s.chart" . }}
 {{ include "zesty-k8s.selectorLabels" . }}
