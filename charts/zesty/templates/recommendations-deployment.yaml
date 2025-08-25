@@ -19,10 +19,20 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/path: "/metrics"
         prometheus.io/port: "{{ .Values.recommendations.http.port }}"
+        {{- with .Values.recommendations.podAnnotations }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
         app.kubernetes.io/name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
+        {{- with .Values.recommendations.podLabels }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       automountServiceAccountToken: true
       {{- if .Values.nodeSelector }}
       nodeSelector:
@@ -63,6 +73,9 @@ spec:
               value: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
             - name: AGENT_HOST
               value: {{ .Values.insights.service | quote }}
+            {{- with .Values.recommendations.extraEnv }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
       securityContext:
       {{- toYaml .Values.recommendations.securityContext | nindent 8 }}
 {{- end }}

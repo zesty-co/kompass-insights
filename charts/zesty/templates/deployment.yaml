@@ -18,10 +18,20 @@ spec:
     metadata:
       annotations:
         timestamp: {{ now | quote }}
+        {{- with .Values.insights.podAnnotations }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
         app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
+        {{- with .Values.insights.podLabels }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       automountServiceAccountToken: true
       {{- if .Values.nodeSelector }}
       nodeSelector:
@@ -98,6 +108,9 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+            {{- with .Values.insights.extraEnv }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
             {{- if .Values.cxLogging.enabled }}
             - name: CX_API_KEY
               value: {{ .Values.cxLogging.apiKey }}
@@ -121,7 +134,7 @@ spec:
       priorityClassName: system-cluster-critical
       securityContext:
       {{- toYaml .Values.securityContext | nindent 8 }}
-      serviceAccountName: "{{ include "zesty-k8s.saname" . }}"
+      serviceAccountName: "{{ include "zesty-k8s.serviceAccountName" . }}"
       shareProcessNamespace: true
       volumes:
         - name: {{ .Values.persistence.volumeName }}
