@@ -11,5 +11,5 @@ roleRef:
   name: "{{ include "zesty-k8s.clusterrole" . }}"
 subjects:
   - kind: ServiceAccount
-    name: "{{ include "zesty-k8s.saname" . }}"
+    name: "{{ include "zesty-k8s.serviceAccountName" . }}"
     namespace: "{{ .Release.Namespace }}"
