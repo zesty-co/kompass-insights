@@ -108,6 +108,14 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: CONTAINER_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: {{ include "zesty-k8s.name" . }}
             {{- with .Values.insights.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
