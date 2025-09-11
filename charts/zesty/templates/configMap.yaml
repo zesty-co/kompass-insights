@@ -24,6 +24,11 @@ data:
   {{- if .Values.prometheus.bearerToken }}
   DB_BEARER_TOKEN: "{{ .Values.prometheus.bearerToken }}"
   {{- end }}
+  {{- if .Values.pvcExpansion.enabled }}
+  PVC_EXPANSION_ENABLED: "{{ .Values.pvcExpansion.enabled }}"
+  PVC_EXPANSION_THRESHOLD: "{{ .Values.pvcExpansion.threshold }}"
+  PVC_EXPANSION_SIZE: "{{ .Values.pvcExpansion.expansionSize }}"
+  {{- end }}
   {{- if .Values.awsAthena.enabled }}
   ATHENA_ENABLED: "{{ .Values.awsAthena.enabled }}"
   ATHENA_CUR_V2: "{{ .Values.awsAthena.curV2 }}"

@@ -178,6 +178,11 @@ admission:
   service:
     name: "kompass-admission-controller-svc"
 
+pvcExpansion:
+  enabled: true
+  threshold: 80  # Expand when PVC usage reaches 80%
+  expansionSize: "20Gi"  # Amount to expand by
+
 cxLogging:
   enabled: false
   clusterName: ""
