@@ -143,6 +143,22 @@ app.kubernetes.io/instance: {{ .Release.Name }}
     {{- end }}
 {{- end }}
 
+{{- define "zesty-k8s.victoriaMetrics.name" -}}
+    {{- if and .Values.global .Values.global.victoriaMetricsNameOverride }}
+        {{- .Values.global.victoriaMetricsNameOverride -}}
+    {{- else -}}
+        kompass-victoria-metrics
+    {{- end }}
+{{- end }}
+
+{{- define "zesty-k8s.victoriaMetrics.namespace" -}}
+    {{- if and .Values.global .Values.global.victoriaMetricsNamespaceOverride }}
+        {{- .Values.global.victoriaMetricsNamespaceOverride -}}
+    {{- else -}}
+        {{- .Release.Namespace -}}
+    {{- end }}
+{{- end }}
+
 {{- define "zesty-k8s.exposedMetrics.port" -}}
 {{- default "9003" .Values.insights.metrics.port }}
 {{- end }}
