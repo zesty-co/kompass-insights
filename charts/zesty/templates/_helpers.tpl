@@ -143,11 +143,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
     {{- end }}
 {{- end }}
 
-{{- define "zesty-k8s.victoriaMetrics.name" -}}
-    {{- if and .Values.global .Values.global.victoriaMetricsNameOverride }}
-        {{- .Values.global.victoriaMetricsNameOverride -}}
+{{- define "zesty-k8s.victoriaMetrics.pvc" -}}
+    {{- if and .Values.global .Values.global.victoriaMetricsPvcNameOverride }}
+        {{- .Values.global.victoriaMetricsPvcNameOverride -}}
     {{- else -}}
-        kompass-victoria-metrics
+        kompass-victoria-metrics-pvc
     {{- end }}
 {{- end }}
 

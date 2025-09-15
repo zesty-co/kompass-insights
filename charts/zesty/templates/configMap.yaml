@@ -72,7 +72,7 @@ data:
   {{- end }}
   SECRET_NAME: "{{ .Values.insights.secret }}"
   UPDATER: "{{ include "zesty-k8s.fullname" . }}-updater"
-  VICTORIAMETRICS_NAME: {{ include "zesty-k8s.victoriaMetrics.name" . | quote }}
+  VICTORIAMETRICS_PVC: {{ include "zesty-k8s.victoriaMetrics.pvc" . | quote }}
   VICTORIAMETRICS_NAMESPACE: {{ include "zesty-k8s.victoriaMetrics.namespace" . | quote }}
   VICTORIAMETRICS_URL: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
   METRICSPORT: {{ include "zesty-k8s.exposedMetrics.port" . | quote }}
