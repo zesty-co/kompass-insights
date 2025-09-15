@@ -166,3 +166,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- define "zesty-k8s.recommendations.fullname" -}}
  {{ printf "%s-recommendations" (include "zesty-k8s.fullname" .) | trunc 63 | trimSuffix "-" }}
 {{- end }}
+
+{{- define "parentChartVersion" -}}
+    {{- if and .Values.global .Values.global.parentChartVersion }}
+        {{- .Values.global.parentChartVersion -}}
+    {{- end }}
+{{- end }}
