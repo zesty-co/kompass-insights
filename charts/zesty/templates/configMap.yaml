@@ -59,11 +59,9 @@ data:
   METADATA_REGION: "{{ .Values.metadata.region }}"
   METADATA_CLUSTERNAME: "{{ .Values.metadata.clusterName }}"
   {{- end }}
-  {{- if .Values.admission.enabled }}
   GRPC_PORT: "{{ .Values.insights.grpc.server.port }}"
   MANAGER_HOST: "{{ .Values.admission.service.name }}"
   MANAGER_PORT: "{{ .Values.insights.grpc.port }}"
-  {{- end }}
   {{- if .Values.awsCluster.enabled }}
   {{- if ne .Values.awsCluster.accessKeyID "" }}
   AWS_ACCESS_KEY_ID: "{{ .Values.awsCluster.accessKeyID }}"
