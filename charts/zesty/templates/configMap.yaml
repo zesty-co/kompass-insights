@@ -76,4 +76,4 @@ data:
   VICTORIAMETRICS_NAMESPACE: {{ include "zesty-k8s.victoriaMetrics.namespace" . | quote }}
   VICTORIAMETRICS_URL: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
   METRICSPORT: {{ include "zesty-k8s.exposedMetrics.port" . | quote }}
-  PARENT_CHART_VERSION: {{ include "parentChartVersion" . | quote }}
+  KOMPASS_CHART_VERSION: {{ include "kompass_chart_version" . | quote }}
