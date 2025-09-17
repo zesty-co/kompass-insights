@@ -73,7 +73,6 @@ data:
   SECRET_NAME: "{{ .Values.insights.secret }}"
   UPDATER: "{{ include "zesty-k8s.fullname" . }}-updater"
   VICTORIAMETRICS_NAME: {{ include "zesty-k8s.victoriaMetrics.name" . | quote }}
-  VICTORIAMETRICS_NAMESPACE: {{ include "zesty-k8s.victoriaMetrics.namespace" . | quote }}
   VICTORIAMETRICS_URL: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
   METRICSPORT: {{ include "zesty-k8s.exposedMetrics.port" . | quote }}
   KOMPASS_CHART_VERSION: {{ include "kompass_chart_version" . | quote }}
