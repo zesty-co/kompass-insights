@@ -59,11 +59,9 @@ data:
   METADATA_REGION: "{{ .Values.metadata.region }}"
   METADATA_CLUSTERNAME: "{{ .Values.metadata.clusterName }}"
   {{- end }}
-  {{- if .Values.admission.enabled }}
   GRPC_PORT: "{{ .Values.insights.grpc.server.port }}"
   MANAGER_HOST: "{{ .Values.admission.service.name }}"
   MANAGER_PORT: "{{ .Values.insights.grpc.port }}"
-  {{- end }}
   {{- if .Values.awsCluster.enabled }}
   {{- if ne .Values.awsCluster.accessKeyID "" }}
   AWS_ACCESS_KEY_ID: "{{ .Values.awsCluster.accessKeyID }}"
@@ -75,3 +73,4 @@ data:
   VICTORIAMETRICS_NAME: {{ include "zesty-k8s.victoriaMetrics.name" . | quote }}
   VICTORIAMETRICS_URL: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
   METRICSPORT: {{ include "zesty-k8s.exposedMetrics.port" . | quote }}
+  KOMPASS_CHART_VERSION: {{ include "zesty-k8s.kompass_chart_version" . | quote }}
