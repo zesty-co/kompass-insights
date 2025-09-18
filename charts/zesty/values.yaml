@@ -180,8 +180,11 @@ admission:
 
 pvcExpansion:
   enabled: true
-  threshold: 80  # Expand when PVC usage reaches 80%
-  expansionSize: "20Gi"  # Amount to expand by
+  # -- (string) A percentage threshold to limit pvb utilization
+  threshold: 80
+  # -- (string) The size by which to expand a PVC that exceeded its disk utilization
+  # threshold. The size can be either percentage or resource quantity ("20%"/"5Gi")
+  expansionSize: "20%"  # Amount to expand by,
 
 cxLogging:
   enabled: false
