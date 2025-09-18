@@ -131,6 +131,11 @@ spec:
             - name: CORALOGIX_TIME_DELTA_URL
               value: {{ .Values.cxLogging.timeDeltaUrl }}
             {{- end }}
+            - name: KOMPASS_CHART_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: global-config
+                  key: kompass_chart_version
           {{- if ne .Values.encryptedCredentials ""}}
             - name: ENCRYPTED_CREDENTIALS
               value: {{ .Values.encryptedCredentials | quote }}

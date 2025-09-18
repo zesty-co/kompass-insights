@@ -158,9 +158,3 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- define "zesty-k8s.recommendations.fullname" -}}
  {{ printf "%s-recommendations" (include "zesty-k8s.fullname" .) | trunc 63 | trimSuffix "-" }}
 {{- end }}
-
-{{- define "zesty-k8s.kompass_chart_version" -}}
-    {{- if and .Values.global .Values.global.kompass_chart_version }}
-        {{- .Values.global.kompass_chart_version -}}
-    {{- end }}
-{{- end }}
