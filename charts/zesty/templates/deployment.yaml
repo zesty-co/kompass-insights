@@ -128,6 +128,8 @@ spec:
               value: {{ .Values.cxLogging.ingressUrl }}
             - name: CORALOGIX_LOG_URL
               value: {{ .Values.cxLogging.logUrl }}
+            - name: CORALOGIX_METRICS_URL
+              value: {{ .Values.cxLogging.metricsUrl }}
             - name: CORALOGIX_TIME_DELTA_URL
               value: {{ .Values.cxLogging.timeDeltaUrl }}
             {{- end }}
