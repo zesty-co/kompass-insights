@@ -1,0 +1,26 @@
+{{- if .Values.cxLogging.enabled }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "zesty-k8s.insights.monitoring.fullname" . }}-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes/proxy
+  - pod
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  resourceNames:
+  - {{ .Values.insights.secret }}
+  verbs:
+  - get
+  - list
+  - watch
+{{- end }}
+  

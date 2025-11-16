@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "zesty-k8s.insights.monitoring.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
+    app.kubernetes.io/name: "{{ include "zesty-k8s.insights.monitoring.fullname" . }}"
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Replace
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        spec:
+          {{- if .Values.global.nodeSelector }}
+          nodeSelector:
+          {{- toYaml .Values.global.nodeSelector | nindent 10 }}
+          {{- end }}
+          {{- if .Values.global.tolerations }}
+          tolerations:
+          {{- toYaml .Values.global.tolerations | nindent 10 }}
+          {{- end }}
+          containers:
+            - name: {{ include "zesty-k8s.insights.monitoring.fullname" . }}
+              image: {{ .Values.image.repository }}:{{ include "zesty-k8s.version" . }}
+              command:
+                - /bin/metrics
+              imagePullPolicy: {{ .Values.imagePullPolicy | default "Always" }}
+              env:
+                - name: ACCOUNT_ID
+                  value: {{ .Values.accountId | quote }}
+                - name: CX_API_KEY
+                  value: {{ .Values.cxLogging.apiKey }}
+                - name: CORALOGIX_LOG_URL
+                  value: {{ .Values.cxLogging.logUrl }}
+                - name: CX_CLUSTER_NAME
+                  value: {{ .Values.cxLogging.clusterName }}
+                - name: CM_NAMESPACE
+                  value: {{ .Release.Namespace }}
+              resources:
+                requests:
+                  cpu: {{ .Values.insights.monitoring.resources.requests.cpu }}
+                  memory: {{ .Values.insights.monitoring.resources.requests.memory }}
+          restartPolicy: Never
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          serviceAccountName: {{ include "zesty-k8s.insights.monitoring.serviceAccountName" . }}

@@ -158,3 +158,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- define "zesty-k8s.recommendations.fullname" -}}
  {{ printf "%s-recommendations" (include "zesty-k8s.fullname" .) | trunc 63 | trimSuffix "-" }}
 {{- end }}
+
+{{- define "zesty-k8s.insights.monitoring.fullname" -}}
+ {{ printf "%s-monitoring" (include "zesty-k8s.fullname" .) | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{- define "zesty-k8s.insights.monitoring.serviceAccountName" -}}
+ {{- default "insights-monitoring-sa" .Values.insights.monitoring.serviceAccountName }}
+{{- end }}

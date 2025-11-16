@@ -45,7 +45,7 @@ spec:
       containers:
         - image: "{{ .Values.recommendations.image.repository }}:{{ .Values.recommendations.image.tag }}"
           imagePullPolicy: {{ .Values.recommendations.image.pullPolicy }}
-          name: "recommendations"
+          name: "{{ include "zesty-k8s.recommendations.fullname" . }}"
           ports:
             - containerPort: {{ .Values.recommendations.http.port }}
               name: http

@@ -134,6 +134,13 @@ insights:
   health:
     port: 9000
 
+  monitoring:
+    serviceAccountName: ~
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+
 recommendations:
   enabled: true
   image: 
