@@ -2,11 +2,12 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "zesty-k8s.insights.monitoring.fullname" . }}-role
+  name: {{ include "zesty-k8s.insights.metrics.job.fullname" . }}-role
 rules:
 - apiGroups:
   - ""
   resources:
+  - nodes
   - nodes/proxy
   - pod
   verbs:
@@ -17,7 +18,7 @@ rules:
   resources:
   - secrets
   resourceNames:
-  - {{ .Values.insights.secret }}
+  - {{ .Values.insights.secret  }}
   verbs:
   - get
   - list

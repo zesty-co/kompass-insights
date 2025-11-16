@@ -1,11 +1,11 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "zesty-k8s.insights.monitoring.fullname" . }}
+  name: {{ include "zesty-k8s.insights.metrics.job.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
-    app.kubernetes.io/name: "{{ include "zesty-k8s.insights.monitoring.fullname" . }}"
+    app.kubernetes.io/name: "{{ include "zesty-k8s.insights.metrics.job.fullname" . }}"
 spec:
   schedule: "*/5 * * * *"
   concurrencyPolicy: Replace
@@ -13,7 +13,7 @@ spec:
   successfulJobsHistoryLimit: 1
   jobTemplate:
     spec:
-      backoffLimit: 1
+      backoffLimit: 0
       template:
         spec:
           {{- if .Values.global.nodeSelector }}
@@ -25,32 +25,34 @@ spec:
           {{- toYaml .Values.global.tolerations | nindent 10 }}
           {{- end }}
           containers:
-            - name: {{ include "zesty-k8s.insights.monitoring.fullname" . }}
+            - name: {{ include "zesty-k8s.insights.metrics.job.fullname" . }}
               image: {{ .Values.image.repository }}:{{ include "zesty-k8s.version" . }}
               command:
                 - /bin/metrics
               imagePullPolicy: {{ .Values.imagePullPolicy | default "Always" }}
               env:
-                - name: ACCOUNT_ID
-                  value: {{ .Values.accountId | quote }}
-                - name: CX_API_KEY
-                  value: {{ .Values.cxLogging.apiKey }}
+                - name: NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.namespace
+                - name: NODE_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: spec.nodeName
                 - name: CORALOGIX_LOG_URL
                   value: {{ .Values.cxLogging.logUrl }}
-                - name: CX_CLUSTER_NAME
-                  value: {{ .Values.cxLogging.clusterName }}
-                - name: CM_NAMESPACE
-                  value: {{ .Release.Namespace }}
+                - name: CX_API_KEY
+                  value: {{ .Values.cxLogging.apiKey }}
               envFrom:
                 - configMapRef:
                     name: "{{ include "zesty-k8s.configmap" . }}"
               resources:
                 requests:
-                  cpu: {{ .Values.insights.monitoring.resources.requests.cpu }}
-                  memory: {{ .Values.insights.monitoring.resources.requests.memory }}
+                  cpu: {{ .Values.insights.metrics.job.resources.requests.cpu }}
+                  memory: {{ .Values.insights.metrics.job.resources.requests.memory }}
           restartPolicy: Never
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
             {{- toYaml . | nindent 8 }}
           {{- end }}
-          serviceAccountName: {{ include "zesty-k8s.insights.monitoring.serviceAccountName" . }}
+          serviceAccountName: {{ include "zesty-k8s.insights.metrics.job.serviceAccountName" . }}
