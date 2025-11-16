@@ -41,6 +41,9 @@ spec:
                   value: {{ .Values.cxLogging.clusterName }}
                 - name: CM_NAMESPACE
                   value: {{ .Release.Namespace }}
+              envFrom:
+                - configMapRef:
+                    name: "{{ include "zesty-k8s.configmap" . }}"
               resources:
                 requests:
                   cpu: {{ .Values.insights.monitoring.resources.requests.cpu }}
