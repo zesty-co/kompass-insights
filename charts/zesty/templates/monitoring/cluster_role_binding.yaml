@@ -3,12 +3,12 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app.kubernetes.io/name: pilot
-  name: {{ include "zesty-k8s.insights.metrics.job.fullname" . }}-rolebinding
+  name: {{ include "zesty-k8s.insights.self-monitoring.fullname" . }}-clusterRoleBinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "zesty-k8s.insights.metrics.job.fullname" . }}-role
+  name: {{ include "zesty-k8s.insights.self-monitoring.fullname" . }}-clusterRole
 subjects:
 - kind: ServiceAccount
-  name: {{ include "zesty-k8s.insights.metrics.job.serviceAccountName" . }}
+  name: {{ include "zesty-k8s.insights.self-monitoring.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}

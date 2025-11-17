@@ -130,15 +130,15 @@ insights:
 
   metrics:
     port: 9003
-    job:
-      serviceAccountName: ~
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
 
   health:
     port: 9000
+
+  selfMonitoring:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
 
 recommendations:
   enabled: true

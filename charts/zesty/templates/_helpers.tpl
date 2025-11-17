@@ -159,10 +159,10 @@ app.kubernetes.io/instance: {{ .Release.Name }}
  {{ printf "%s-recommendations" (include "zesty-k8s.fullname" .) | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "zesty-k8s.insights.metrics.job.fullname" -}}
- {{ printf "%s-metrics" (include "zesty-k8s.fullname" .) | trunc 63 | trimSuffix "-" }}
+{{- define "zesty-k8s.insights.self-monitoring.fullname" -}}
+ {{ printf "%s-self-monitoring" (include "zesty-k8s.fullname" .) | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "zesty-k8s.insights.metrics.job.serviceAccountName" -}}
- {{- default "insights-metrics-sa" .Values.insights.metrics.job.serviceAccountName }}
+{{- define "zesty-k8s.insights.self-monitoring.serviceAccountName" -}}
+ {{- printf "%s-sa" (include "zesty-k8s.insights.self-monitoring.fullname" .)}}
 {{- end }}

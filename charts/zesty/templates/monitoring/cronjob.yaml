@@ -1,11 +1,11 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "zesty-k8s.insights.metrics.job.fullname" . }}
+  name: {{ include "zesty-k8s.insights.self-monitoring.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
-    app.kubernetes.io/name: "{{ include "zesty-k8s.insights.metrics.job.fullname" . }}"
+    app.kubernetes.io/name: "{{ include "zesty-k8s.insights.self-monitoring.fullname" . }}"
 spec:
   schedule: "*/5 * * * *"
   concurrencyPolicy: Replace
@@ -25,7 +25,7 @@ spec:
           {{- toYaml .Values.global.tolerations | nindent 10 }}
           {{- end }}
           containers:
-            - name: {{ include "zesty-k8s.insights.metrics.job.fullname" . }}
+            - name: {{ include "zesty-k8s.insights.self-monitoring.fullname" . }}
               image: {{ .Values.image.repository }}:{{ include "zesty-k8s.version" . }}
               command:
                 - /bin/metrics
@@ -52,11 +52,11 @@ spec:
                     name: "{{ include "zesty-k8s.configmap" . }}"
               resources:
                 requests:
-                  cpu: {{ .Values.insights.metrics.job.resources.requests.cpu }}
-                  memory: {{ .Values.insights.metrics.job.resources.requests.memory }}
+                  cpu: {{ .Values.insights.selfMonitoring.resources.requests.cpu }}
+                  memory: {{ .Values.insights.selfMonitoring.resources.requests.memory }}
           restartPolicy: Never
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
             {{- toYaml . | nindent 8 }}
           {{- end }}
-          serviceAccountName: {{ include "zesty-k8s.insights.metrics.job.serviceAccountName" . }}
+          serviceAccountName: {{ include "zesty-k8s.insights.self-monitoring.serviceAccountName" . }}
