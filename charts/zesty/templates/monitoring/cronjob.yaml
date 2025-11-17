@@ -39,6 +39,10 @@ spec:
                   valueFrom:
                     fieldRef:
                       fieldPath: spec.nodeName
+                {{- if ne .Values.encryptedCredentials ""}}
+                - name: ENCRYPTED_CREDENTIALS
+                  value: {{ .Values.encryptedCredentials | quote }}
+                {{- end }}
                 - name: CORALOGIX_LOG_URL
                   value: {{ .Values.cxLogging.logUrl }}
                 - name: CX_API_KEY
