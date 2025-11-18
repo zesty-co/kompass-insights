@@ -2,7 +2,10 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "zesty-k8s.insights.self-monitoring.fullname" . }}-clusterRole
+  name: {{ include "zesty-k8s.self-monitoring.fullname" . }}-clusterRole
+  labels:
+    app.kubernetes.io/instance: "{{ include "zesty-k8s.self-monitoring.fullname" . }}
+    app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
 rules:
 - apiGroups:
   - ""

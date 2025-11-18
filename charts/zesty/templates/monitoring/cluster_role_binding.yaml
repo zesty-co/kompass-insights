@@ -2,13 +2,14 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    app.kubernetes.io/name: pilot
-  name: {{ include "zesty-k8s.insights.self-monitoring.fullname" . }}-clusterRoleBinding
+    app.kubernetes.io/instance: "{{ include "zesty-k8s.self-monitoring.fullname" . }}
+    app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
+  name: {{ include "zesty-k8s.self-monitoring.fullname" . }}-clusterRoleBinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ include "zesty-k8s.insights.self-monitoring.fullname" . }}-clusterRole
+  name: {{ include "zesty-k8s.self-monitoring.fullname" . }}-clusterRole
 subjects:
 - kind: ServiceAccount
-  name: {{ include "zesty-k8s.insights.self-monitoring.serviceAccountName" . }}
+  name: {{ include "zesty-k8s.self-monitoring.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
