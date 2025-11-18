@@ -1,12 +1,13 @@
+{{- if .Values.cxLogging.enabled }}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ include "zesty-k8s.self-monitoring.fullname" . }}
   labels:
-    app.kubernetes.io/instance: "{{ include "zesty-k8s.self-monitoring.fullname" . }}
+    app.kubernetes.io/instance: "{{ include "zesty-k8s.self-monitoring.fullname" . }}"
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
 spec:
-  schedule: {{ .Values.selfMonitoring.schedule }}
+  schedule: "{{ .Values.selfMonitoring.schedule }}"
   concurrencyPolicy: Replace
   failedJobsHistoryLimit: 1
   successfulJobsHistoryLimit: 1
@@ -59,3 +60,4 @@ spec:
             {{- toYaml . | nindent 8 }}
           {{- end }}
           serviceAccountName: {{ include "zesty-k8s.self-monitoring.serviceAccountName" . }}
+{{- end }}

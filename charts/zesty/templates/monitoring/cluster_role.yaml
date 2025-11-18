@@ -4,7 +4,7 @@ kind: ClusterRole
 metadata:
   name: {{ include "zesty-k8s.self-monitoring.fullname" . }}-clusterRole
   labels:
-    app.kubernetes.io/instance: "{{ include "zesty-k8s.self-monitoring.fullname" . }}
+    app.kubernetes.io/instance: "{{ include "zesty-k8s.self-monitoring.fullname" . }}"
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
 rules:
 - apiGroups:
