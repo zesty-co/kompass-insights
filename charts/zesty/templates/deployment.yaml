@@ -136,9 +136,9 @@ spec:
                 configMapKeyRef:
                   name: global-config
                   key: kompass_chart_version
-          {{- if ne .Values.encryptedCredentials ""}}
             - name: INSIGHTS_CHART_VERSION
               value: {{ .Chart.Version }}
+          {{- if ne .Values.encryptedCredentials ""}}
             - name: ENCRYPTED_CREDENTIALS
               value: {{ .Values.encryptedCredentials | quote }}
           {{- end }}
