@@ -50,10 +50,10 @@ spec:
               envFrom:
                 - configMapRef:
                     name: "{{ include "zesty-k8s.configmap" . }}"
+              {{- with .Values.selfMonitoring.resources }}
               resources:
-                requests:
-                  cpu: {{ .Values.selfMonitoring.resources.requests.cpu }}
-                  memory: {{ .Values.selfMonitoring.resources.requests.memory }}
+              {{- toYaml . | nindent 16 }}
+              {{- end }}
           restartPolicy: Never
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
