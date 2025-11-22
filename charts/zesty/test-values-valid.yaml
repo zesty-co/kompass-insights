@@ -1,0 +1,19 @@
+# Test values file with valid configuration
+orgID: "test-org-123"
+encryptedCredentials: "test-encrypted-credentials"
+
+assumeRole:
+  enabled: true
+  roleArn: "arn:aws:iam::123456789012:role/ZestyIntegrationRole"
+  zestyExternalID: "test-external-id"
+
+insights:
+  grpc:
+    port: 50051
+    server:
+      port: 50052
+
+cxLogging:
+  enabled: true
+  clusterName: "test-cluster"
+  apiKey: "test-api-key"

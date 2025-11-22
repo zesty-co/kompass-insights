@@ -1,0 +1,914 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "Kompass Insights Helm Chart Values Schema",
+    "description": "JSON Schema for Kompass Insights Helm chart values.yaml to prevent configuration errors",
+    "properties": {
+        "global": {
+            "type": "object",
+            "description": "Global values passed from parent chart",
+            "properties": {
+                "nodeSelector": {
+                    "type": "object",
+                    "description": "Global node selector",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "tolerations": {
+                    "type": "array",
+                    "description": "Global tolerations",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "key": {
+                                "type": "string"
+                            },
+                            "operator": {
+                                "type": "string",
+                                "enum": [
+                                    "Equal",
+                                    "Exists"
+                                ]
+                            },
+                            "value": {
+                                "type": "string"
+                            },
+                            "effect": {
+                                "type": "string",
+                                "enum": [
+                                    "NoSchedule",
+                                    "PreferNoSchedule",
+                                    "NoExecute"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "victoriaMetricsNameOverride": {
+                    "type": "string",
+                    "description": "VictoriaMetrics service name override"
+                },
+                "victoriaMetricsRemoteUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "VictoriaMetrics remote URL"
+                }
+            },
+            "additionalProperties": false
+        },
+        "orgID": {
+            "type": "string",
+            "description": "REQUIRED: Your Zesty organization ID",
+            "minLength": 1
+        },
+        "encryptedCredentials": {
+            "type": "string",
+            "description": "REQUIRED: Your Zesty encrypted credentials",
+            "minLength": 1
+        },
+        "secret": {
+            "type": "object",
+            "description": "Secret configuration for credentials",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the secret containing credentials"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "Key within the secret"
+                }
+            },
+            "additionalProperties": false
+        },
+        "awsCluster": {
+            "type": "object",
+            "description": "AWS cluster configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable AWS cluster specific functionality"
+                },
+                "accessKeyID": {
+                    "type": "string",
+                    "description": "AWS Access Key ID (if not using secret)"
+                },
+                "secretAccessKey": {
+                    "type": "string",
+                    "description": "AWS Secret Access Key (if not using secret)"
+                },
+                "secret": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "key": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "log": {
+            "type": "object",
+            "description": "Logging configuration",
+            "properties": {
+                "level": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 5,
+                    "description": "Log level (0-5)"
+                },
+                "remote": {
+                    "type": "boolean",
+                    "description": "Enable remote logging"
+                }
+            },
+            "additionalProperties": false
+        },
+        "imagePullSecrets": {
+            "type": "array",
+            "description": "Image pull secrets",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "image": {
+            "type": "object",
+            "description": "Container image configuration",
+            "properties": {
+                "repository": {
+                    "type": "string",
+                    "description": "Image repository"
+                },
+                "migrationRepository": {
+                    "type": "string",
+                    "description": "Migration image repository"
+                },
+                "pullPolicy": {
+                    "type": "string",
+                    "enum": [
+                        "Always",
+                        "IfNotPresent",
+                        "Never"
+                    ],
+                    "description": "Image pull policy"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "Image tag"
+                }
+            },
+            "additionalProperties": false
+        },
+        "nameOverride": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Override the name of the chart"
+        },
+        "fullnameOverride": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "Override the full name of the chart"
+        },
+        "persistence": {
+            "type": "object",
+            "description": "Persistence configuration",
+            "properties": {
+                "volumeName": {
+                    "type": "string",
+                    "description": "Name of the persistent volume"
+                },
+                "mountPath": {
+                    "type": "string",
+                    "description": "Mount path for the volume"
+                },
+                "spec": {
+                    "type": "object",
+                    "properties": {
+                        "accessModes": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "ReadWriteOnce",
+                                    "ReadOnlyMany",
+                                    "ReadWriteMany"
+                                ]
+                            }
+                        },
+                        "resources": {
+                            "type": "object",
+                            "properties": {
+                                "requests": {
+                                    "type": "object",
+                                    "properties": {
+                                        "storage": {
+                                            "type": "string",
+                                            "pattern": "^[0-9]+(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)$"
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "storageClassName": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "serviceAccount": {
+            "type": "object",
+            "description": "Service account configuration",
+            "properties": {
+                "annotations": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "externalID": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "External ID for AWS role assumption"
+        },
+        "container": {
+            "type": "object",
+            "description": "Container security context",
+            "properties": {
+                "securityContext": {
+                    "type": "object",
+                    "properties": {
+                        "allowPrivilegeEscalation": {
+                            "type": "boolean"
+                        },
+                        "capabilities": {
+                            "type": "object",
+                            "properties": {
+                                "drop": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "readOnlyRootFilesystem": {
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "securityContext": {
+            "type": "object",
+            "description": "Pod security context",
+            "properties": {
+                "fsGroup": {
+                    "type": "integer"
+                },
+                "runAsGroup": {
+                    "type": "integer"
+                },
+                "runAsNonRoot": {
+                    "type": "boolean"
+                },
+                "runAsUser": {
+                    "type": "integer"
+                },
+                "seccompProfile": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "RuntimeDefault",
+                                "Localhost",
+                                "Unconfined"
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "resources": {
+            "type": "object",
+            "description": "Resource requests and limits",
+            "properties": {
+                "limits": {
+                    "type": "object",
+                    "properties": {
+                        "memory": {
+                            "type": "string",
+                            "pattern": "^[0-9]+(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)$"
+                        },
+                        "cpu": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "requests": {
+                    "type": "object",
+                    "properties": {
+                        "memory": {
+                            "type": "string",
+                            "pattern": "^[0-9]+(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)$"
+                        },
+                        "cpu": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "prometheus": {
+            "type": "object",
+            "description": "Prometheus configuration",
+            "properties": {
+                "url": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "format": "uri"
+                },
+                "username": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "password": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "bearerToken": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "awsAthena": {
+            "type": "object",
+            "description": "AWS Athena configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "curV2": {
+                    "type": "boolean"
+                },
+                "athenaProjectID": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "athenaBucketName": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "athenaRegion": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "athenaDatabase": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "athenaTable": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "athenaWorkgroup": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "athenaCatalog": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "assumeRole": {
+            "type": "object",
+            "description": "AWS IAM role assumption configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "masterRoleArn": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "masterExternalID": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "zestyExternalID": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "roleArn": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "additionalProperties": false,
+            "if": {
+                "properties": {
+                    "enabled": {
+                        "const": true
+                    }
+                }
+            },
+            "then": {
+                "anyOf": [
+                    {
+                        "required": [
+                            "roleArn",
+                            "zestyExternalID"
+                        ],
+                        "properties": {
+                            "roleArn": {
+                                "type": "string",
+                                "pattern": "^arn:aws:iam::[0-9]{12}:role/.+",
+                                "minLength": 1
+                            },
+                            "zestyExternalID": {
+                                "type": "string",
+                                "minLength": 1
+                            }
+                        }
+                    },
+                    {
+                        "required": [
+                            "masterRoleArn",
+                            "masterExternalID"
+                        ],
+                        "properties": {
+                            "masterRoleArn": {
+                                "type": "string",
+                                "pattern": "^arn:aws:iam::[0-9]{12}:role/.+",
+                                "minLength": 1
+                            },
+                            "masterExternalID": {
+                                "type": "string",
+                                "minLength": 1
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "s3override": {
+            "type": "object",
+            "description": "S3 override configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "bucket": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "region": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "metadata": {
+            "type": "object",
+            "description": "Metadata configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "provider": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "accountID": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "region": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "clusterName": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "config": {
+            "type": "object",
+            "description": "General configuration",
+            "properties": {
+                "manager": {
+                    "type": "object",
+                    "properties": {
+                        "enable": {
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "podMinuteMetrics": {
+            "type": "object",
+            "description": "Pod minute metrics configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "insights": {
+            "type": "object",
+            "description": "Insights agent configuration",
+            "properties": {
+                "extraEnv": {
+                    "type": "array",
+                    "description": "Extra environment variables",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "value"
+                        ],
+                        "additionalProperties": false
+                    }
+                },
+                "podAnnotations": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "podLabels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "Name of the secret containing insights credentials"
+                },
+                "service": {
+                    "type": "string",
+                    "description": "Name of the insights service"
+                },
+                "grpc": {
+                    "type": "object",
+                    "description": "gRPC configuration",
+                    "properties": {
+                        "port": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 65535,
+                            "description": "gRPC client port"
+                        },
+                        "server": {
+                            "type": "object",
+                            "properties": {
+                                "port": {
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 65535,
+                                    "description": "gRPC server port"
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "metrics": {
+                    "type": "object",
+                    "description": "Metrics configuration",
+                    "properties": {
+                        "port": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 65535,
+                            "description": "Metrics port"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "health": {
+                    "type": "object",
+                    "description": "Health check configuration",
+                    "properties": {
+                        "port": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 65535,
+                            "description": "Health check port"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "recommendations": {
+            "type": "object",
+            "description": "Recommendations service configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable recommendations service"
+                },
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "repository": {
+                            "type": "string"
+                        },
+                        "pullPolicy": {
+                            "type": "string",
+                            "enum": [
+                                "Always",
+                                "IfNotPresent",
+                                "Never"
+                            ]
+                        },
+                        "tag": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "extraEnv": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "value"
+                        ],
+                        "additionalProperties": false
+                    }
+                },
+                "podAnnotations": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "podLabels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "container": {
+                    "$ref": "#/properties/container"
+                },
+                "securityContext": {
+                    "$ref": "#/properties/securityContext"
+                },
+                "http": {
+                    "type": "object",
+                    "properties": {
+                        "port": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 65535
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "resources": {
+                    "$ref": "#/properties/resources"
+                }
+            },
+            "additionalProperties": false
+        },
+        "metricsServer": {
+            "type": "object",
+            "description": "Metrics server configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable metrics server installation"
+                }
+            },
+            "additionalProperties": false
+        },
+        "admission": {
+            "type": "object",
+            "description": "Admission controller configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable admission controller"
+                },
+                "service": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the admission controller service"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "pvcExpansion": {
+            "type": "object",
+            "description": "PVC expansion configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable PVC expansion"
+                },
+                "threshold": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "Percentage threshold to limit PVC utilization"
+                },
+                "expansionSize": {
+                    "type": "string",
+                    "pattern": "^([0-9]+%|[0-9]+(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E))$",
+                    "description": "Size by which to expand a PVC (percentage or resource quantity)"
+                }
+            },
+            "additionalProperties": false
+        },
+        "cxLogging": {
+            "type": "object",
+            "description": "CX logging configuration",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable CX logging"
+                },
+                "clusterName": {
+                    "type": "string",
+                    "description": "Cluster name for logging"
+                },
+                "apiKey": {
+                    "type": "string",
+                    "description": "API key for CX logging"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Coralogix domain"
+                },
+                "logUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Log URL endpoint"
+                },
+                "timeDeltaUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Time delta URL endpoint"
+                },
+                "ingressLogsUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Ingress logs URL"
+                },
+                "ingressUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Ingress URL"
+                }
+            },
+            "additionalProperties": false,
+            "if": {
+                "properties": {
+                    "enabled": {
+                        "const": true
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "clusterName",
+                    "apiKey"
+                ],
+                "properties": {
+                    "clusterName": {
+                        "minLength": 1
+                    },
+                    "apiKey": {
+                        "minLength": 1
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "orgID",
+        "encryptedCredentials"
+    ],
+    "additionalProperties": false
+}
