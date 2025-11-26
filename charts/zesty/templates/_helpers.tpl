@@ -166,3 +166,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- define "zesty-k8s.self-monitoring.serviceAccountName" -}}
  {{- printf "%s-sa" (include "zesty-k8s.self-monitoring.fullname" .)}}
 {{- end }}
+
+{{- define "zesty-k8s.globalConfig" -}}
+  {{- if and .Values.global .Values.global.globalConfigName }}
+      {{- .Values.global.globalConfigName -}}
+  {{- else -}}
+      global-config
+  {{- end }}
+{{- end }}
