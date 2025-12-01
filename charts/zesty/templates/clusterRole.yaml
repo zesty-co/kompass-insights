@@ -83,7 +83,7 @@ rules:
       - horizontalrunnerautoscalers
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
-      - "sparkoperator.k8s.ios"
+      - "sparkoperator.k8s.io"
     resources:
       - sparkapplications
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
