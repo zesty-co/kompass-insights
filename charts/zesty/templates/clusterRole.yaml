@@ -83,6 +83,11 @@ rules:
       - horizontalrunnerautoscalers
     {{- include "zesty-k8s.verbs" . | nindent 4 }}
   - apiGroups:
+      - "sparkoperator.k8s.ios"
+    resources:
+      - sparkapplications
+    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+  - apiGroups:
       - "qscaler.qubex.ai"
     resources:
       - qcacherevisioncreations
