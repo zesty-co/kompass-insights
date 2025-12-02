@@ -6,10 +6,6 @@ version: 2.1.73
 appVersion: "stable"
 
 dependencies:
-- name: metrics-server
-  condition: metricsServer.enabled
-  repository: https://kubernetes-sigs.github.io/metrics-server/
-  version: 3.12.1
 - name: kompass-admission-controller
   alias: admission
   condition: admission.enabled
