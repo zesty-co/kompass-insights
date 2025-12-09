@@ -139,15 +139,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
     {{- if and .Values.global .Values.global.victoriaMetricsRemoteUrl }}
         {{- .Values.global.victoriaMetricsRemoteUrl -}}
     {{- else -}}
-        http://kompass-victoria-metrics:8428
-    {{- end }}
-{{- end }}
-
-{{- define "zesty-k8s.victoriaMetrics.name" -}}
-    {{- if and .Values.global .Values.global.victoriaMetricsNameOverride }}
-        {{- .Values.global.victoriaMetricsNameOverride -}}
-    {{- else -}}
-        kompass-victoria-metrics
+        http://kompass-victoria-metrics-auth:8427
     {{- end }}
 {{- end }}
 
