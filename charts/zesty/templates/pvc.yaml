@@ -1,10 +1,20 @@
+{{- $pvcName := include "zesty-k8s.pvcname" . -}}
+{{- $existingPVC := lookup "v1" "PersistentVolumeClaim" .Release.Namespace $pvcName -}}
+{{- $existingStorage := "" -}}
+{{- if $existingPVC -}}
+  {{- $existingStorage = $existingPVC.spec.resources.requests.storage -}}
+{{- end -}}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: "{{ include "zesty-k8s.pvcname" . }}"
-  namespace: "{{ .Release.Namespace }}"
+  name: "{{ $pvcName }}"
   labels:
     app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
 spec:
-  {{- toYaml .Values.persistence.spec | nindent 2 }}
+  accessModes:
+    {{- toYaml .Values.persistence.spec.accessModes | nindent 4 }}
+  storageClassName: {{ .Values.persistence.spec.storageClassName }}
+  resources:
+    requests:
+      storage: {{ $existingStorage | default .Values.persistence.spec.resources.requests.storage }}
