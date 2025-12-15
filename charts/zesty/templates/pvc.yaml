@@ -4,6 +4,8 @@
 {{- if $existingPVC -}}
   {{- $existingStorage = $existingPVC.spec.resources.requests.storage -}}
 {{- end -}}
+{{- $pvcSpec := .Values.persistence.spec -}}
+{{- $_ := set $pvcSpec.resources.requests "storage" ($existingStorage | default $pvcSpec.resources.requests.storage) -}}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -12,9 +14,4 @@ metadata:
     app.kubernetes.io/instance: "{{ include "zesty-k8s.fullname" . }}"
     app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
 spec:
-  accessModes:
-    {{- toYaml .Values.persistence.spec.accessModes | nindent 4 }}
-  storageClassName: {{ .Values.persistence.spec.storageClassName }}
-  resources:
-    requests:
-      storage: {{ $existingStorage | default .Values.persistence.spec.resources.requests.storage }}
+  {{- toYaml $pvcSpec | nindent 2 }}
