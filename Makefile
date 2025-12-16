@@ -14,6 +14,7 @@ update-dependencies: ## Update dependencies
 lint: ## Lint Helm chart
 	@echo "Linting Helm chart..."
 	@helm lint ./charts/zesty || exit 1;
+	@helm template test-release ./charts/zesty --values charts/zesty/values.yaml | kubeconform -strict -summary --ignore-missing-schemas
 
 .PHONY: template
 template: ## Template Helm chart and validate output

@@ -44,6 +44,10 @@ jobs:
 
           echo "✅ Chart version bump detected."
 
+      - name: setup kubeconform
+        run: |
+          go install github.com/yannh/kubeconform@v0.7.0
+      
       - name: run all checks
         run: |
           make all
