@@ -36,11 +36,11 @@ spec:
       automountServiceAccountToken: true
       {{- if .Values.global.nodeSelector }}
       nodeSelector:
-      {{- toYaml .Values.global.nodeSelector | nindent 10 }}
+      {{- toYaml .Values.global.nodeSelector | nindent 8 }}
       {{- end }}
       {{- if .Values.global.tolerations }}
       tolerations:
-      {{- toYaml .Values.global.tolerations | nindent 10 }}
+      {{- toYaml .Values.global.tolerations | nindent 8 }}
       {{- end }}
       containers:
         - image: "{{ .Values.recommendations.image.repository }}:{{ .Values.recommendations.image.tag }}"

@@ -18,11 +18,11 @@ spec:
         spec:
           {{- if .Values.global.nodeSelector }}
           nodeSelector:
-          {{- toYaml .Values.global.nodeSelector | nindent 10 }}
+          {{- toYaml .Values.global.nodeSelector | nindent 12 }}
           {{- end }}
           {{- if .Values.global.tolerations }}
           tolerations:
-          {{- toYaml .Values.global.tolerations | nindent 10 }}
+          {{- toYaml .Values.global.tolerations | nindent 12 }}
           {{- end }}
           containers:
             - name: {{ include "zesty-k8s.self-monitoring.fullname" . }}
