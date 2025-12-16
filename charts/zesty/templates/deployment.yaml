@@ -35,11 +35,11 @@ spec:
       automountServiceAccountToken: true
       {{- if .Values.global.nodeSelector }}
       nodeSelector:
-      {{- toYaml .Values.global.nodeSelector | nindent 10 }}
+      {{- toYaml .Values.global.nodeSelector | nindent 8 }}
       {{- end }}
       {{- if .Values.global.tolerations }}
       tolerations:
-      {{- toYaml .Values.global.tolerations | nindent 10 }}
+      {{- toYaml .Values.global.tolerations | nindent 8 }}
       {{- end }}
       initContainers:
         - image: "{{ .Values.image.migrationRepository }}:{{ include "zesty-k8s.version" . }}"
