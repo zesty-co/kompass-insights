@@ -1,0 +1,8 @@
+global:
+  nodeSelector:
+      foo: "bar"
+  tolerations:
+    - key: "foo"
+      operator: "Equal"
+      value: "bar"
+      effect: "NoSchedule"
