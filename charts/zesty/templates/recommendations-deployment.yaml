@@ -77,7 +77,14 @@ spec:
               value: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
             - name: AGENT_HOST
               value: {{ .Values.insights.service | quote }}
-            {{- if .Values.cxLogging.enabled }}
+            {{- if and .Values.global.cxLogging .Values.global.cxLogging.enabled }}
+            - name: CORALOGIX_API_KEY
+              value: {{ .Values.global.cxLogging.apiKey }}
+            - name: CORALOGIX_LOG_URL
+              value: {{ .Values.global.cxLogging.logUrl }}
+            - name: CORALOGIX_TIME_DELTA_URL
+              value: {{ .Values.global.cxLogging.timeDeltaUrl }}
+            {{- else if and .Values.cxLogging .Values.cxLogging.enabled }}
             - name: CORALOGIX_API_KEY
               value: {{ .Values.cxLogging.apiKey }}
             - name: CORALOGIX_LOG_URL

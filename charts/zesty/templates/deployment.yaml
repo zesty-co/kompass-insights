@@ -115,17 +115,32 @@ spec:
             {{- with .Values.insights.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
-            {{- if .Values.cxLogging.enabled }}
+            {{- if and .Values.global.cxLogging .Values.global.cxLogging.enabled }}
+            - name: CX_CLUSTER_NAME
+              value: {{ .Values.global.cxLogging.clusterName }}
             - name: CX_API_KEY
-              value: {{ .Values.cxLogging.apiKey }}
+              value: {{ .Values.global.cxLogging.apiKey }}
+            - name: CORALOGIX_DOMAIN
+              value: {{ .Values.global.cxLogging.domain }}
+            - name: CORALOGIX_INGRESS_URL
+              value: {{ .Values.global.cxLogging.ingressUrl }}
+            - name: CORALOGIX_INGRESS_LOGS_URL
+              value: {{ .Values.global.cxLogging.ingressLogsUrl }}
+            - name: CORALOGIX_LOG_URL
+              value: {{ .Values.global.cxLogging.logUrl }}
+            - name: CORALOGIX_TIME_DELTA_URL
+              value: {{ .Values.global.cxLogging.timeDeltaUrl }}
+            {{- else if and .Values.cxLogging .Values.cxLogging.enabled }}
             - name: CX_CLUSTER_NAME
               value: {{ .Values.cxLogging.clusterName }}
+            - name: CX_API_KEY
+              value: {{ .Values.cxLogging.apiKey }}
             - name: CORALOGIX_DOMAIN
               value: {{ .Values.cxLogging.domain }}
-            - name: CORALOGIX_INGRESS_LOGS_URL
-              value: {{ .Values.cxLogging.ingressLogsUrl }}
             - name: CORALOGIX_INGRESS_URL
               value: {{ .Values.cxLogging.ingressUrl }}
+            - name: CORALOGIX_INGRESS_LOGS_URL
+              value: {{ .Values.cxLogging.ingressLogsUrl }}
             - name: CORALOGIX_LOG_URL
               value: {{ .Values.cxLogging.logUrl }}
             - name: CORALOGIX_TIME_DELTA_URL
