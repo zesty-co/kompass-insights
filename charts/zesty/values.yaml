@@ -1,208 +1,903 @@
+# @schema.root
+# additionalProperties: true
+# @schema.root
+# @schema
+# type: object
+# required: false
+# additionalProperties: true
+# @schema
 global:
+  # @schema
+  # type: object
+  # required: false
+  # additionalProperties: true
+  # @schema
   nodeSelector: {}
+  # @schema
+  # type: array
+  # required: false
+  # @schema
   tolerations: []
 
+# @schema
+# type: string
+# required: true
+# @schema
 orgID: ""
-# if you put the value here, the secret won't be used.
+# @schema
+# type: string
+# required: true
+# @schema
+# If you put the value here, the secret won't be used
 encryptedCredentials: ""
+# @schema
+# type: object
+# required: true
+# @schema
 secret:
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   name: zesty-k8s-agent-creds
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   key: "zesty-k8s/encrypted-creds"
 
+# @schema
+# type: object
+# required: true
+# @schema
 awsCluster:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   enabled: true
-  # if you put the values here, the secret won't be used.
+  # @schema
+  # type: string
+  # required: true
+  # @schema
+  # If you put the values here, the secret won't be used
   accessKeyID: ""
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   secretAccessKey: ""
+  # @schema
+  # type: object
+  # required: true
+  # @schema
   secret:
+    # @schema
+    # type: string
+    # required: true
+    # @schema
     name: aws-cluster-secret
+    # @schema
+    # type: string
+    # required: true
+    # @schema
     key: "zesty/access-credentials"
 
+# @schema
+# type: object
+# required: true
+# @schema
 log:
+  # @schema
+  # type: integer
+  # required: true
+  # @schema
   level: 0
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   remote: true
 
+# @schema
+# type: array
+# required: true
+# @schema
 imagePullSecrets: []
 
+# @schema
+# type: object
+# required: true
+# @schema
 image:
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent"
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   migrationRepository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent/migration"
+  # @schema
+  # required: true
+  # enum: [Always, IfNotPresent, Never]
+  # @schema
   pullPolicy: Always
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   tag: stable
 
-nameOverride: ~
-fullnameOverride: ~
+# @schema
+# type: string
+# required: false
+# @schema
+nameOverride: ""
+# @schema
+# type: string
+# required: false
+# @schema
+fullnameOverride: ""
 
+# @schema
+# type: object
+# required: true
+# @schema
 persistence:
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   volumeName: "zesty-pv-storage"
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   mountPath: "/bin/db"
+  # @schema
+  # type: object
+  # required: true
+  # additionalProperties: true
+  # @schema
   spec:
+    # @schema
+    # type: array
+    # required: true
+    # @schema
     accessModes:
       - ReadWriteOnce
+    # @schema
+    # type: object
+    # required: true
+    # @schema
     resources:
+      # @schema
+      # type: object
+      # required: true
+      # @schema
       requests:
+        # @schema
+        # type: string
+        # required: true
+        # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
+        # @schema
         storage: 10Gi
 
+# @schema
+# type: object
+# required: true
+# @schema
 serviceAccount:
+  # @schema
+  # type: object
+  # required: false
+  # additionalProperties: true
+  # @schema
   annotations: {}
 
-externalID: ~
+# @schema
+# type: string
+# required: false
+# @schema
+externalID: ""
 
+# @schema
+# type: object
+# required: false
+# @schema
 container:
+  # @schema
+  # type: object
+  # required: false
+  # @schema
   securityContext:
+    # @schema
+    # type: boolean
+    # required: true
+    # @schema
     allowPrivilegeEscalation: false
+    # @schema
+    # type: object
+    # required: false
+    # @schema
     capabilities:
+      # @schema
+      # type: array
+      # required: false
+      # @schema
       drop:
         - ALL
+    # @schema
+    # type: boolean
+    # required: true
+    # @schema
     readOnlyRootFilesystem: true
 
+# @schema
+# type: object
+# required: false
+# @schema
 securityContext:
+  # @schema
+  # type: integer
+  # required: true
+  # @schema
   fsGroup: 65532
+  # @schema
+  # type: integer
+  # required: true
+  # @schema
   runAsGroup: 65532
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   runAsNonRoot: true
+  # @schema
+  # type: integer
+  # required: true
+  # @schema
   runAsUser: 65532
+  # @schema
+  # type: object
+  # required: false
+  # @schema
   seccompProfile:
+    # @schema
+    # type: string
+    # required: true
+    # @schema
     type: RuntimeDefault
 
+# @schema
+# type: object
+# required: false
+# @schema
 resources:
+  # @schema
+  # type: object
+  # required: false
+  # @schema
   limits:
+    # @schema
+    # type: string
+    # required: false
+    # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
+    # @schema
     memory: 2Gi
+  # @schema
+  # type: object
+  # required: false
+  # @schema
   requests:
+    # @schema
+    # type: string
+    # required: false
+    # pattern: ^[0-9]+(\.[0-9]+)?m?$
+    # @schema
     cpu: 250m
+    # @schema
+    # type: string
+    # required: false
+    # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
+    # @schema
     memory: 2Gi
 
+# @schema
+# type: object
+# required: true
+# @schema
 prometheus:
-  url: ~
-  username: ~
-  password: ~
-  bearerToken: ~
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  url: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  username: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  password: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  bearerToken: ""
 
+# @schema
+# type: object
+# required: true
+# @schema
 awsAthena:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   enabled: false
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   curV2: false
-  athenaProjectID: ~
-  athenaBucketName: ~
-  athenaRegion: ~
-  athenaDatabase: ~
-  athenaTable: ~
-  athenaWorkgroup: ~
-  athenaCatalog: ~
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  athenaProjectID: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  athenaBucketName: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  athenaRegion: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  athenaDatabase: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  athenaTable: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  athenaWorkgroup: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  athenaCatalog: ""
 
+# @schema
+# type: object
+# required: true
+# @schema
 assumeRole:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   enabled: false
-  masterRoleArn: ~
-  masterExternalID: ~
-  zestyExternalID: ~
-  roleArn: ~
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  masterRoleArn: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  masterExternalID: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  zestyExternalID: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  roleArn: ""
 
+# @schema
+# type: object
+# required: true
+# @schema
 s3override:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   enabled: false
-  bucket: ~
-  region: ~
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  bucket: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  region: ""
 
+# @schema
+# type: object
+# required: true
+# @schema
 metadata:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   enabled: false
-  provider: ~
-  accountID: ~
-  region: ~
-  clusterName: ~
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  provider: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  accountID: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  region: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
+  clusterName: ""
 
+# @schema
+# type: object
+# required: true
+# @schema
 config:
+  # @schema
+  # type: object
+  # required: true
+  # @schema
   manager:
+    # @schema
+    # type: boolean
+    # required: true
+    # @schema
     enable: false
 
+# @schema
+# type: object
+# required: true
+# @schema
 podMinuteMetrics:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   enabled: true
 
+# @schema
+# type: object
+# required: true
+# @schema
 insights:
+  # @schema
+  # type: array
+  # required: false
+  # @schema
   extraEnv: []
 
+  # @schema
+  # type: object
+  # required: false
+  # additionalProperties: true
+  # @schema
   podAnnotations: {}
+  # @schema
+  # type: object
+  # required: false
+  # additionalProperties: true
+  # @schema
   podLabels: {}
 
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   secret: "kompass-insights-secret"
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   service: "kompass-insights-svc"
 
+  # @schema
+  # type: object
+  # required: true
+  # @schema
   grpc:
+    # @schema
+    # type: integer
+    # required: true
+    # minimum: 1
+    # maximum: 65535
+    # @schema
     port: 50051
+    # @schema
+    # type: object
+    # required: true
+    # @schema
     server:
+      # @schema
+      # type: integer
+      # required: true
+      # minimum: 1
+      # maximum: 65535
+      # @schema
       port: 50052
 
+  # @schema
+  # type: object
+  # required: true
+  # @schema
   metrics:
+    # @schema
+    # type: integer
+    # required: true
+    # minimum: 1
+    # maximum: 65535
+    # @schema
     port: 9003
 
+  # @schema
+  # type: object
+  # required: true
+  # @schema
   health:
+    # @schema
+    # type: integer
+    # required: true
+    # minimum: 1
+    # maximum: 65535
+    # @schema
     port: 9000
 
+# @schema
+# type: object
+# required: true
+# @schema
 recommendations:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   enabled: true
+  # @schema
+  # type: object
+  # required: true
+  # @schema
   image: 
+    # @schema
+    # type: string
+    # required: true
+    # @schema
     repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/recommendation-maker"
+    # @schema
+    # required: true
+    # enum: [Always, IfNotPresent, Never]
+    # @schema
     pullPolicy: Always
+    # @schema
+    # type: string
+    # required: true
+    # @schema
     tag: stable
 
+  # @schema
+  # type: array
+  # required: false
+  # @schema
   extraEnv: []
 
+  # @schema
+  # type: object
+  # required: false
+  # additionalProperties: true
+  # @schema
   podAnnotations: {}
+  # @schema
+  # type: object
+  # required: false
+  # additionalProperties: true
+  # @schema
   podLabels: {}
 
+  # @schema
+  # type: object
+  # required: false
+  # @schema
   container:
+    # @schema
+    # type: object
+    # required: false
+    # @schema
     securityContext:
+      # @schema
+      # type: boolean
+      # required: true
+      # @schema
       allowPrivilegeEscalation: false
+      # @schema
+      # type: object
+      # required: false
+      # @schema
       capabilities:
+        # @schema
+        # type: array
+        # required: false
+        # @schema
         drop:
           - ALL
+      # @schema
+      # type: boolean
+      # required: true
+      # @schema
       readOnlyRootFilesystem: true
 
+  # @schema
+  # type: object
+  # required: false
+  # @schema
   securityContext:
+    # @schema
+    # type: integer
+    # required: true
+    # @schema
     fsGroup: 65532
+    # @schema
+    # type: integer
+    # required: true
+    # @schema
     runAsGroup: 65532
+    # @schema
+    # type: boolean
+    # required: true
+    # @schema
     runAsNonRoot: true
+    # @schema
+    # type: integer
+    # required: true
+    # @schema
     runAsUser: 65532
+    # @schema
+    # type: object
+    # required: false
+    # @schema
     seccompProfile:
+      # @schema
+      # type: string
+      # required: true
+      # @schema
       type: RuntimeDefault
 
+  # @schema
+  # type: object
+  # required: true
+  # @schema
   http:
+    # @schema
+    # type: integer
+    # required: true
+    # minimum: 1
+    # maximum: 65535
+    # @schema
     port: 8000
+  # @schema
+  # type: object
+  # required: false
+  # @schema
   resources:
+    # @schema
+    # type: object
+    # required: false
+    # @schema
     limits:
+      # @schema
+      # type: string
+      # required: false
+      # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
+      # @schema
       memory: 1Gi
+    # @schema
+    # type: object
+    # required: false
+    # @schema
     requests:
+      # @schema
+      # type: string
+      # required: false
+      # pattern: ^[0-9]+(\.[0-9]+)?m?$
+      # @schema
       cpu: 250m
+      # @schema
+      # type: string
+      # required: false
+      # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
+      # @schema
       memory: 512Mi
 
+# @schema
+# type: object
+# required: true
+# @schema
 metricsServer:
-  enabled: false # enable it to install metrics-server
-
-admission:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
+  # Enable it to install metrics-server
   enabled: false
+
+# @schema
+# type: object
+# required: true
+# @schema
+admission:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
+  enabled: false
+  # @schema
+  # type: object
+  # required: true
+  # @schema
   service:
+    # @schema
+    # type: string
+    # required: true
+    # @schema
     name: "kompass-admission-controller-svc"
 
+# @schema
+# type: object
+# required: true
+# @schema
 pvcExpansion:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   enabled: true
-  # -- (string) A percentage threshold to limit pvb utilization
+  # @schema
+  # type: integer
+  # required: true
+  # minimum: 0
+  # maximum: 100
+  # @schema
+  # Percentage threshold to limit PVC utilization
   threshold: 80
-  # -- (string) The size by which to expand a PVC that exceeded its disk utilization
-  # threshold. The size can be either percentage or resource quantity ("20%"/"5Gi")
-  expansionSize: "20%"  # Amount to expand by,
+  # @schema
+  # type: string
+  # required: true
+  # @schema
+  # Size by which to expand a PVC that exceeded its disk utilization threshold
+  # Can be either percentage or resource quantity ("20%"/"5Gi")
+  expansionSize: "20%"
 
+# @schema
+# type: object
+# required: false
+# additionalProperties: true
+# @schema
 cxLogging:
+  # @schema
+  # type: boolean
+  # required: true
+  # @schema
   enabled: false
+  # @schema
+  # type: string
+  # required: false
+  # @schema
   clusterName: ""
+  # @schema
+  # type: string
+  # required: false
+  # @schema
   apiKey: ""
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   domain: "eu2.coralogix.com"
+  # @schema
+  # type: string
+  # required: true
+  # format: uri
+  # @schema
   logUrl: "https://ingress.eu2.coralogix.com:443/api/v1/logs"
+  # @schema
+  # type: string
+  # required: true
+  # format: uri
+  # @schema
   timeDeltaUrl: "https://ingress.eu2.coralogix.com:443/sdk/v1/time"
+  # @schema
+  # type: string
+  # required: true
+  # format: uri
+  # @schema
   ingressLogsUrl: "https://ingress.eu2.coralogix.com/logs/v1/singles"
+  # @schema
+  # type: string
+  # required: true
+  # format: uri
+  # @schema
   ingressUrl: "https://ingress.eu2.coralogix.com/"
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   otelEndpoint: ""
 
+# @schema
+# type: object
+# required: true
+# @schema
 selfMonitoring:
+  # @schema
+  # type: string
+  # required: true
+  # @schema
   schedule: "*/5 * * * *"
+  # @schema
+  # type: object
+  # required: false
+  # @schema
   resources:
+    # @schema
+    # type: object
+    # required: false
+    # @schema
     requests:
+      # @schema
+      # type: string
+      # required: false
+      # pattern: ^[0-9]+(\.[0-9]+)?m?$
+      # @schema
       cpu: 100m
+      # @schema
+      # type: string
+      # required: false
+      # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
+      # @schema
       memory: 256Mi
+    # @schema
+    # type: object
+    # required: false
+    # @schema
     limits:
+      # @schema
+      # type: string
+      # required: false
+      # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
+      # @schema
       memory: 256Mi
