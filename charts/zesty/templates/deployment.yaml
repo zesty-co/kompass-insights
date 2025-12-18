@@ -123,13 +123,20 @@ spec:
             - name: CORALOGIX_DOMAIN
               value: {{ .Values.global.cxLogging.domain }}
             - name: CORALOGIX_INGRESS_URL
+            {{- /* For backward compatibility, if the ingressUrl is not provided, use the otelEndpoint to create one */}}
+            {{- if .Values.global.cxLogging.ingressUrl }}
               value: {{ .Values.global.cxLogging.ingressUrl }}
+            {{- else }}
+              value: https://{{ .Values.global.cxLogging.otelEndpoint }}/
+            {{- end }}
             - name: CORALOGIX_INGRESS_LOGS_URL
               value: {{ .Values.global.cxLogging.ingressLogsUrl }}
             - name: CORALOGIX_LOG_URL
               value: {{ .Values.global.cxLogging.logUrl }}
             - name: CORALOGIX_TIME_DELTA_URL
               value: {{ .Values.global.cxLogging.timeDeltaUrl }}
+            - name: CORALOGIX_OTEL_ENDPOINT
+              value: {{ .Values.global.cxLogging.otelEndpoint }}
             {{- else if and .Values.cxLogging .Values.cxLogging.enabled }}
             - name: CX_CLUSTER_NAME
               value: {{ .Values.cxLogging.clusterName }}
@@ -138,13 +145,20 @@ spec:
             - name: CORALOGIX_DOMAIN
               value: {{ .Values.cxLogging.domain }}
             - name: CORALOGIX_INGRESS_URL
+            {{- /* For backward compatibility, if the ingressUrl is not provided, use the otelEndpoint to create one */}}
+            {{- if .Values.cxLogging.ingressUrl }}
               value: {{ .Values.cxLogging.ingressUrl }}
+            {{- else }}
+              value: https://{{ .Values.cxLogging.otelEndpoint }}/
+            {{- end }}
             - name: CORALOGIX_INGRESS_LOGS_URL
               value: {{ .Values.cxLogging.ingressLogsUrl }}
             - name: CORALOGIX_LOG_URL
               value: {{ .Values.cxLogging.logUrl }}
             - name: CORALOGIX_TIME_DELTA_URL
               value: {{ .Values.cxLogging.timeDeltaUrl }}
+            - name: CORALOGIX_OTEL_ENDPOINT
+              value: {{ .Values.cxLogging.otelEndpoint }}
             {{- end }}
             - name: KOMPASS_CHART_VERSION
               valueFrom:
