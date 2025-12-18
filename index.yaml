@@ -3,6 +3,26 @@ entries:
   kompass-insights:
   - apiVersion: v2
     appVersion: stable
+    created: "2025-12-18T14:56:58.57799318Z"
+    dependencies:
+    - condition: metricsServer.enabled
+      name: metrics-server
+      repository: https://kubernetes-sigs.github.io/metrics-server/
+      version: 3.12.1
+    - alias: admission
+      condition: admission.enabled
+      name: kompass-admission-controller
+      repository: https://zesty-co.github.io/kompass-admission-controller
+      version: 0.1.19
+    description: Kompass Insights for K8s
+    digest: dbe7e75efad5e0436d33a79264a2405d21ad95668c567019bc40a0e53e539e99
+    name: kompass-insights
+    type: application
+    urls:
+    - https://github.com/zesty-co/kompass-insights/releases/download/kompass-insights-2.1.77/kompass-insights-2.1.77.tgz
+    version: 2.1.77
+  - apiVersion: v2
+    appVersion: stable
     created: "2025-12-16T13:15:02.023105704Z"
     dependencies:
     - condition: metricsServer.enabled
@@ -2469,4 +2489,4 @@ entries:
     urls:
     - https://github.com/zesty-co/kompass-insights/releases/download/zesty-k8s-helm-1.1.13/zesty-k8s-helm-1.1.13.tgz
     version: 1.1.13
-generated: "2025-12-16T13:15:02.023796538Z"
+generated: "2025-12-18T14:56:58.578282831Z"
