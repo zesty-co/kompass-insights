@@ -10,50 +10,83 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: setup helm
+      - name: Setup Helm
         uses: azure/setup-helm@v4
 
-      - name: validate Chart.yaml version changed in PR
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+
+      - name: Install helm-schema
+        run: go install github.com/dadav/helm-schema/cmd/helm-schema@latest
+
+      - name: Validate Chart.yaml version changed in PR
         if: github.event_name == 'pull_request'
         run: |
           set -e
-
+          
           CHART_PATH="charts/zesty"
-
+          
           git fetch origin main
           MAIN_VERSION=$(git show origin/main:$CHART_PATH/Chart.yaml | yq '.version')
           PR_VERSION=$(yq '.version' $CHART_PATH/Chart.yaml)
-
+          
           echo "Main version: $MAIN_VERSION"
           echo "PR version:   $PR_VERSION"
-
+          
           if [ "$MAIN_VERSION" = "$PR_VERSION" ]; then
             echo "❌ Chart version has not been updated."
             exit 1
           fi
-
+          
           if [ "$(printf '%s\n' "$PR_VERSION" "$MAIN_VERSION" | sort -V | head -n1)" = "$PR_VERSION" ]; then
             echo "❌ Chart version ($PR_VERSION) must be greater than main ($MAIN_VERSION)."
             exit 1
           fi
-
+          
           echo "✅ Chart version bump detected."
 
-      - name: setup kubeconform
+      - name: Run helm lint
+        run: helm lint ./charts/*
+
+      - name: Generate schema
+        run: |
+          cd charts/zesty
+          helm-schema
+
+      - name: Check for schema changes
+        run: |
+          git diff --exit-code || (echo "❌ Schema out of sync! Run 'helm schema' and commit changes." && exit 1)
+          echo "✅ Schema is up to date"
+
+      - name: Validate with schema
+        run: |
+          cd charts/zesty
+          helm template test . > /dev/null
+          echo "✅ Values validate against schema"
+
+      - name: Setup kubeconform
         run: |
           go install github.com/yannh/kubeconform/cmd/kubeconform@v0.7.0
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
-      
+
       - name: run all checks
         run: |
           make all
 
-      - name: check for changes
+      - name: Check for changes
         run: |
-            git diff --exit-code || (echo "There are changes in the repository. Please commit them." && exit 1)
-            echo "No changes detected."
+          git diff --exit-code || (echo "❌ There are changes in the repository. Please commit them." && exit 1)
+          echo "✅ No changes detected."
+
+      - name: Validate Kubernetes manifests
+        run: |
+          cd charts/zesty
+          helm template test . | kubeconform -strict -summary --ignore-missing-schemas
+          echo "✅ Kubernetes manifests are valid"

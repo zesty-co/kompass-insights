@@ -1,0 +1,2269 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": true,
+  "properties": {
+    "admission": {
+      "description": "A Helm chart for Kompass Admission Controller Subsystem",
+      "properties": {
+        "cxLogging": {
+          "additionalProperties": true,
+          "properties": {
+            "apiKey": {
+              "default": "",
+              "title": "apiKey",
+              "type": "string"
+            },
+            "clusterName": {
+              "default": "",
+              "title": "clusterName",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "ingressUrl": {
+              "default": "https://ingress.eu2.coralogix.com/",
+              "format": "uri",
+              "title": "ingressUrl",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "cxLogging",
+          "type": "object"
+        },
+        "deployment": {
+          "additionalProperties": false,
+          "properties": {
+            "image": {
+              "additionalProperties": false,
+              "properties": {
+                "pullPolicy": {
+                  "default": "Always",
+                  "description": "Image pull policy (e.g., Always, IfNotPresent, Never)",
+                  "enum": [
+                    "Always",
+                    "IfNotPresent",
+                    "Never"
+                  ],
+                  "required": [],
+                  "title": "pullPolicy"
+                },
+                "repository": {
+                  "default": "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/action-taker",
+                  "description": "Image repository",
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "stable",
+                  "description": "Image tag (version)",
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "image",
+              "type": "object"
+            },
+            "nodeSelector": {
+              "additionalProperties": true,
+              "description": "Node selector for scheduling",
+              "required": [],
+              "title": "nodeSelector",
+              "type": "object"
+            },
+            "replicaCount": {
+              "default": 2,
+              "description": "Number of replicas for the deployment",
+              "minimum": 0,
+              "title": "replicaCount",
+              "type": "integer"
+            },
+            "resources": {
+              "additionalProperties": false,
+              "properties": {
+                "limits": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "memory": {
+                      "default": "2Gi",
+                      "description": "Maximum memory limit for the container",
+                      "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
+                      "title": "memory",
+                      "type": "string"
+                    }
+                  },
+                  "required": [],
+                  "title": "limits",
+                  "type": "object"
+                },
+                "requests": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "cpu": {
+                      "default": "250m",
+                      "description": "CPU request for scheduling",
+                      "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
+                      "title": "cpu",
+                      "type": "string"
+                    },
+                    "memory": {
+                      "default": "2Gi",
+                      "description": "Memory request for scheduling",
+                      "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
+                      "title": "memory",
+                      "type": "string"
+                    }
+                  },
+                  "required": [],
+                  "title": "requests",
+                  "type": "object"
+                }
+              },
+              "required": [],
+              "title": "resources",
+              "type": "object"
+            },
+            "tolerations": {
+              "description": "Tolerations for scheduling onto nodes with taints",
+              "items": {
+                "required": []
+              },
+              "title": "tolerations",
+              "type": "array"
+            }
+          },
+          "required": [],
+          "title": "deployment",
+          "type": "object"
+        },
+        "fullnameOverride": {
+          "default": "",
+          "description": "Override the fully qualified name",
+          "title": "fullnameOverride",
+          "type": "string"
+        },
+        "global": {
+          "additionalProperties": true,
+          "properties": {
+            "cxLogging": {
+              "additionalProperties": true,
+              "properties": {
+                "apiKey": {
+                  "default": "",
+                  "title": "apiKey",
+                  "type": "string"
+                },
+                "clusterName": {
+                  "default": "",
+                  "title": "clusterName",
+                  "type": "string"
+                },
+                "enabled": {
+                  "default": false,
+                  "title": "enabled",
+                  "type": "boolean"
+                },
+                "ingressUrl": {
+                  "default": "https://ingress.eu2.coralogix.com/",
+                  "format": "uri",
+                  "title": "ingressUrl",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "cxLogging",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "global",
+          "type": "object"
+        },
+        "grpc": {
+          "additionalProperties": false,
+          "properties": {
+            "endpoint": {
+              "default": "",
+              "description": "gRPC service endpoint",
+              "title": "endpoint",
+              "type": "string"
+            },
+            "port": {
+              "default": 50051,
+              "description": "Default gRPC port",
+              "maximum": 65535,
+              "minimum": 1,
+              "title": "port",
+              "type": "integer"
+            },
+            "server": {
+              "additionalProperties": false,
+              "properties": {
+                "port": {
+                  "default": 50052,
+                  "description": "Port for the gRPC server",
+                  "maximum": 65535,
+                  "minimum": 1,
+                  "title": "port",
+                  "type": "integer"
+                }
+              },
+              "required": [],
+              "title": "server",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "grpc",
+          "type": "object"
+        },
+        "insights": {
+          "additionalProperties": false,
+          "properties": {
+            "secret": {
+              "default": "kompass-insights-secret",
+              "description": "Override the Kompass Insights generated secret name",
+              "title": "secret",
+              "type": "string"
+            },
+            "service": {
+              "default": "kompass-insights-svc",
+              "description": "Override the Kompass Insights generated service name",
+              "title": "service",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "insights",
+          "type": "object"
+        },
+        "log": {
+          "additionalProperties": false,
+          "properties": {
+            "level": {
+              "default": 0,
+              "description": "Log level to use",
+              "title": "level",
+              "type": "integer"
+            },
+            "remote": {
+              "default": true,
+              "description": "Enable or disable remote logging features",
+              "title": "remote",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "log",
+          "type": "object"
+        },
+        "nameOverride": {
+          "default": "",
+          "description": "Override the default name",
+          "title": "nameOverride",
+          "type": "string"
+        },
+        "pdb": {
+          "additionalProperties": true,
+          "properties": {
+            "maxUnavailable": {
+              "default": 1,
+              "description": "Maximum number of unavailable pods in the pod disruption budget",
+              "title": "maxUnavailable",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "pdb",
+          "type": "object"
+        },
+        "service": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "default": "kompass-admission-controller-svc",
+              "description": "Name of the controller service",
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "service",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "additionalProperties": false,
+          "properties": {
+            "annotations": {
+              "additionalProperties": true,
+              "description": "Annotations to add to the service account",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "webhook": {
+          "additionalProperties": false,
+          "properties": {
+            "failurePolicy": {
+              "default": "Ignore",
+              "description": "Webhook failure policy",
+              "enum": [
+                "Ignore",
+                "Fail"
+              ],
+              "required": [],
+              "title": "failurePolicy"
+            }
+          },
+          "required": [],
+          "title": "webhook",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "kompass-admission-controller",
+      "type": "object"
+    },
+    "assumeRole": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": false,
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "masterExternalID": {
+          "default": "",
+          "title": "masterExternalID",
+          "type": "string"
+        },
+        "masterRoleArn": {
+          "default": "",
+          "title": "masterRoleArn",
+          "type": "string"
+        },
+        "roleArn": {
+          "default": "",
+          "title": "roleArn",
+          "type": "string"
+        },
+        "zestyExternalID": {
+          "default": "",
+          "title": "zestyExternalID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "assumeRole",
+      "type": "object"
+    },
+    "awsAthena": {
+      "additionalProperties": false,
+      "properties": {
+        "athenaBucketName": {
+          "default": "",
+          "title": "athenaBucketName",
+          "type": "string"
+        },
+        "athenaCatalog": {
+          "default": "",
+          "title": "athenaCatalog",
+          "type": "string"
+        },
+        "athenaDatabase": {
+          "default": "",
+          "title": "athenaDatabase",
+          "type": "string"
+        },
+        "athenaProjectID": {
+          "default": "",
+          "title": "athenaProjectID",
+          "type": "string"
+        },
+        "athenaRegion": {
+          "default": "",
+          "title": "athenaRegion",
+          "type": "string"
+        },
+        "athenaTable": {
+          "default": "",
+          "title": "athenaTable",
+          "type": "string"
+        },
+        "athenaWorkgroup": {
+          "default": "",
+          "title": "athenaWorkgroup",
+          "type": "string"
+        },
+        "curV2": {
+          "default": false,
+          "title": "curV2",
+          "type": "boolean"
+        },
+        "enabled": {
+          "default": false,
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled",
+        "curV2"
+      ],
+      "title": "awsAthena",
+      "type": "object"
+    },
+    "awsCluster": {
+      "additionalProperties": false,
+      "properties": {
+        "accessKeyID": {
+          "default": "",
+          "description": "If you put the values here, the secret won't be used",
+          "title": "accessKeyID",
+          "type": "string"
+        },
+        "enabled": {
+          "default": true,
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "secret": {
+          "additionalProperties": false,
+          "properties": {
+            "key": {
+              "default": "zesty/access-credentials",
+              "title": "key",
+              "type": "string"
+            },
+            "name": {
+              "default": "aws-cluster-secret",
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "key"
+          ],
+          "title": "secret",
+          "type": "object"
+        },
+        "secretAccessKey": {
+          "default": "",
+          "title": "secretAccessKey",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "accessKeyID",
+        "secretAccessKey",
+        "secret"
+      ],
+      "title": "awsCluster",
+      "type": "object"
+    },
+    "config": {
+      "additionalProperties": false,
+      "properties": {
+        "manager": {
+          "additionalProperties": false,
+          "properties": {
+            "enable": {
+              "default": false,
+              "title": "enable",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enable"
+          ],
+          "title": "manager",
+          "type": "object"
+        }
+      },
+      "required": [
+        "manager"
+      ],
+      "title": "config",
+      "type": "object"
+    },
+    "container": {
+      "additionalProperties": false,
+      "properties": {
+        "securityContext": {
+          "additionalProperties": false,
+          "properties": {
+            "allowPrivilegeEscalation": {
+              "default": false,
+              "title": "allowPrivilegeEscalation",
+              "type": "boolean"
+            },
+            "capabilities": {
+              "additionalProperties": false,
+              "properties": {
+                "drop": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "title": "drop",
+                  "type": "array"
+                }
+              },
+              "required": [],
+              "title": "capabilities",
+              "type": "object"
+            },
+            "readOnlyRootFilesystem": {
+              "default": true,
+              "title": "readOnlyRootFilesystem",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "allowPrivilegeEscalation",
+            "readOnlyRootFilesystem"
+          ],
+          "title": "securityContext",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "container",
+      "type": "object"
+    },
+    "cxLogging": {
+      "additionalProperties": true,
+      "properties": {
+        "apiKey": {
+          "default": "",
+          "title": "apiKey",
+          "type": "string"
+        },
+        "clusterName": {
+          "default": "",
+          "title": "clusterName",
+          "type": "string"
+        },
+        "domain": {
+          "default": "eu2.coralogix.com",
+          "title": "domain",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "ingressLogsUrl": {
+          "default": "https://ingress.eu2.coralogix.com/logs/v1/singles",
+          "format": "uri",
+          "title": "ingressLogsUrl",
+          "type": "string"
+        },
+        "ingressUrl": {
+          "default": "https://ingress.eu2.coralogix.com/",
+          "format": "uri",
+          "title": "ingressUrl",
+          "type": "string"
+        },
+        "logUrl": {
+          "default": "https://ingress.eu2.coralogix.com:443/api/v1/logs",
+          "format": "uri",
+          "title": "logUrl",
+          "type": "string"
+        },
+        "otelEndpoint": {
+          "default": "",
+          "title": "otelEndpoint",
+          "type": "string"
+        },
+        "timeDeltaUrl": {
+          "default": "https://ingress.eu2.coralogix.com:443/sdk/v1/time",
+          "format": "uri",
+          "title": "timeDeltaUrl",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled",
+        "domain",
+        "logUrl",
+        "timeDeltaUrl",
+        "ingressLogsUrl",
+        "ingressUrl",
+        "otelEndpoint"
+      ],
+      "title": "cxLogging",
+      "type": "object"
+    },
+    "encryptedCredentials": {
+      "default": "",
+      "description": "If you put the value here, the secret won't be used",
+      "title": "encryptedCredentials",
+      "type": "string"
+    },
+    "externalID": {
+      "default": "",
+      "title": "externalID",
+      "type": "string"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "additionalProperties": true,
+      "properties": {
+        "nodeSelector": {
+          "additionalProperties": true,
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "tolerations": {
+          "items": {
+            "required": []
+          },
+          "title": "tolerations",
+          "type": "array"
+        }
+      },
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "additionalProperties": false,
+      "properties": {
+        "migrationRepository": {
+          "default": "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent/migration",
+          "title": "migrationRepository",
+          "type": "string"
+        },
+        "pullPolicy": {
+          "default": "Always",
+          "enum": [
+            "Always",
+            "IfNotPresent",
+            "Never"
+          ],
+          "required": [],
+          "title": "pullPolicy"
+        },
+        "repository": {
+          "default": "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent",
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "stable",
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "migrationRepository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "items": {
+        "required": []
+      },
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "insights": {
+      "additionalProperties": false,
+      "properties": {
+        "extraEnv": {
+          "items": {
+            "required": []
+          },
+          "title": "extraEnv",
+          "type": "array"
+        },
+        "grpc": {
+          "additionalProperties": false,
+          "properties": {
+            "port": {
+              "default": 50051,
+              "maximum": 65535,
+              "minimum": 1,
+              "title": "port",
+              "type": "integer"
+            },
+            "server": {
+              "additionalProperties": false,
+              "properties": {
+                "port": {
+                  "default": 50052,
+                  "maximum": 65535,
+                  "minimum": 1,
+                  "title": "port",
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "port"
+              ],
+              "title": "server",
+              "type": "object"
+            }
+          },
+          "required": [
+            "port",
+            "server"
+          ],
+          "title": "grpc",
+          "type": "object"
+        },
+        "health": {
+          "additionalProperties": false,
+          "properties": {
+            "port": {
+              "default": 9000,
+              "maximum": 65535,
+              "minimum": 1,
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "title": "health",
+          "type": "object"
+        },
+        "metrics": {
+          "additionalProperties": false,
+          "properties": {
+            "port": {
+              "default": 9003,
+              "maximum": 65535,
+              "minimum": 1,
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "title": "metrics",
+          "type": "object"
+        },
+        "podAnnotations": {
+          "additionalProperties": true,
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podLabels": {
+          "additionalProperties": true,
+          "required": [],
+          "title": "podLabels",
+          "type": "object"
+        },
+        "secret": {
+          "default": "kompass-insights-secret",
+          "title": "secret",
+          "type": "string"
+        },
+        "service": {
+          "default": "kompass-insights-svc",
+          "title": "service",
+          "type": "string"
+        }
+      },
+      "required": [
+        "secret",
+        "service",
+        "grpc",
+        "metrics",
+        "health"
+      ],
+      "title": "insights",
+      "type": "object"
+    },
+    "log": {
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "default": 0,
+          "title": "level",
+          "type": "integer"
+        },
+        "remote": {
+          "default": true,
+          "title": "remote",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "level",
+        "remote"
+      ],
+      "title": "log",
+      "type": "object"
+    },
+    "metadata": {
+      "additionalProperties": false,
+      "properties": {
+        "accountID": {
+          "default": "",
+          "title": "accountID",
+          "type": "string"
+        },
+        "clusterName": {
+          "default": "",
+          "title": "clusterName",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "provider": {
+          "default": "",
+          "title": "provider",
+          "type": "string"
+        },
+        "region": {
+          "default": "",
+          "title": "region",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "metadata",
+      "type": "object"
+    },
+    "metrics-server": {
+      "description": "Metrics Server is a scalable, efficient source of container resource metrics for Kubernetes built-in autoscaling pipelines.",
+      "properties": {
+        "addonResizer": {
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "default": false,
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "image": {
+              "additionalProperties": false,
+              "properties": {
+                "repository": {
+                  "default": "registry.k8s.io/autoscaling/addon-resizer",
+                  "title": "repository",
+                  "type": "string"
+                },
+                "tag": {
+                  "default": "1.8.20",
+                  "title": "tag",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "image",
+              "type": "object"
+            },
+            "nanny": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "0m",
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "extraCpu": {
+                  "default": "1m",
+                  "title": "extraCpu",
+                  "type": "string"
+                },
+                "extraMemory": {
+                  "default": "2Mi",
+                  "title": "extraMemory",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "0Mi",
+                  "title": "memory",
+                  "type": "string"
+                },
+                "minClusterSize": {
+                  "default": 100,
+                  "title": "minClusterSize",
+                  "type": "integer"
+                },
+                "pollPeriod": {
+                  "default": 300000,
+                  "title": "pollPeriod",
+                  "type": "integer"
+                },
+                "threshold": {
+                  "default": 5,
+                  "title": "threshold",
+                  "type": "integer"
+                }
+              },
+              "required": [],
+              "title": "nanny",
+              "type": "object"
+            },
+            "resources": {
+              "additionalProperties": false,
+              "properties": {
+                "limits": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "cpu": {
+                      "default": "40m",
+                      "title": "cpu",
+                      "type": "string"
+                    },
+                    "memory": {
+                      "default": "25Mi",
+                      "title": "memory",
+                      "type": "string"
+                    }
+                  },
+                  "required": [],
+                  "title": "limits",
+                  "type": "object"
+                },
+                "requests": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "cpu": {
+                      "default": "40m",
+                      "title": "cpu",
+                      "type": "string"
+                    },
+                    "memory": {
+                      "default": "25Mi",
+                      "title": "memory",
+                      "type": "string"
+                    }
+                  },
+                  "required": [],
+                  "title": "requests",
+                  "type": "object"
+                }
+              },
+              "required": [],
+              "title": "resources",
+              "type": "object"
+            },
+            "securityContext": {
+              "additionalProperties": false,
+              "properties": {
+                "allowPrivilegeEscalation": {
+                  "default": false,
+                  "title": "allowPrivilegeEscalation",
+                  "type": "boolean"
+                },
+                "capabilities": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "drop": {
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          }
+                        ],
+                        "required": []
+                      },
+                      "title": "drop",
+                      "type": "array"
+                    }
+                  },
+                  "required": [],
+                  "title": "capabilities",
+                  "type": "object"
+                },
+                "readOnlyRootFilesystem": {
+                  "default": true,
+                  "title": "readOnlyRootFilesystem",
+                  "type": "boolean"
+                },
+                "runAsNonRoot": {
+                  "default": true,
+                  "title": "runAsNonRoot",
+                  "type": "boolean"
+                },
+                "runAsUser": {
+                  "default": 1000,
+                  "title": "runAsUser",
+                  "type": "integer"
+                },
+                "seccompProfile": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": {
+                      "default": "RuntimeDefault",
+                      "title": "type",
+                      "type": "string"
+                    }
+                  },
+                  "required": [],
+                  "title": "seccompProfile",
+                  "type": "object"
+                }
+              },
+              "required": [],
+              "title": "securityContext",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "addonResizer",
+          "type": "object"
+        },
+        "affinity": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "affinity",
+          "type": "object"
+        },
+        "apiService": {
+          "additionalProperties": false,
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "description": "Annotations to add to the API service",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "caBundle": {
+              "default": "",
+              "description": "The PEM encoded CA bundle for TLS verification",
+              "title": "caBundle",
+              "type": "string"
+            },
+            "create": {
+              "default": true,
+              "description": "Specifies if the v1beta1.metrics.k8s.io API service should be created.\n\nYou typically want this enabled! If you disable API service creation you have to\nmanage it outside of this chart for e.g horizontal pod autoscaling to\nwork with this release.",
+              "title": "create",
+              "type": "boolean"
+            },
+            "insecureSkipTLSVerify": {
+              "default": true,
+              "description": "Specifies whether to skip TLS verification",
+              "title": "insecureSkipTLSVerify",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "apiService",
+          "type": "object"
+        },
+        "args": {
+          "items": {
+            "required": []
+          },
+          "title": "args",
+          "type": "array"
+        },
+        "commonLabels": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "commonLabels",
+          "type": "object"
+        },
+        "containerPort": {
+          "default": 10250,
+          "title": "containerPort",
+          "type": "integer"
+        },
+        "defaultArgs": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "required": []
+          },
+          "title": "defaultArgs",
+          "type": "array"
+        },
+        "deploymentAnnotations": {
+          "additionalProperties": false,
+          "description": "Annotations to add to the deployment",
+          "required": [],
+          "title": "deploymentAnnotations",
+          "type": "object"
+        },
+        "dnsConfig": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "dnsConfig",
+          "type": "object"
+        },
+        "extraVolumeMounts": {
+          "items": {
+            "required": []
+          },
+          "title": "extraVolumeMounts",
+          "type": "array"
+        },
+        "extraVolumes": {
+          "items": {
+            "required": []
+          },
+          "title": "extraVolumes",
+          "type": "array"
+        },
+        "fullnameOverride": {
+          "default": "",
+          "title": "fullnameOverride",
+          "type": "string"
+        },
+        "global": {
+          "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+          "required": [],
+          "title": "global",
+          "type": "object"
+        },
+        "hostNetwork": {
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "Specifies if metrics-server should be started in hostNetwork mode.\n\nYou would require this enabled if you use alternate overlay networking for pods and\nAPI server unable to communicate with metrics-server. As an example, this is required\nif you use Weave network on EKS",
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "hostNetwork",
+          "type": "object"
+        },
+        "image": {
+          "additionalProperties": false,
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "repository": {
+              "default": "registry.k8s.io/metrics-server/metrics-server",
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "",
+              "description": "Overrides the image tag whose default is v{{ .Chart.AppVersion }}",
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "image",
+          "type": "object"
+        },
+        "imagePullSecrets": {
+          "items": {
+            "required": []
+          },
+          "title": "imagePullSecrets",
+          "type": "array"
+        },
+        "livenessProbe": {
+          "additionalProperties": false,
+          "properties": {
+            "failureThreshold": {
+              "default": 3,
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "httpGet": {
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "default": "/livez",
+                  "title": "path",
+                  "type": "string"
+                },
+                "port": {
+                  "default": "https",
+                  "title": "port",
+                  "type": "string"
+                },
+                "scheme": {
+                  "default": "HTTPS",
+                  "title": "scheme",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "httpGet",
+              "type": "object"
+            },
+            "initialDelaySeconds": {
+              "default": 0,
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "title": "periodSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "livenessProbe",
+          "type": "object"
+        },
+        "metrics": {
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "default": false,
+              "title": "enabled",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "metrics",
+          "type": "object"
+        },
+        "nameOverride": {
+          "default": "",
+          "title": "nameOverride",
+          "type": "string"
+        },
+        "nodeSelector": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "nodeSelector",
+          "type": "object"
+        },
+        "podAnnotations": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podDisruptionBudget": {
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "https://kubernetes.io/docs/tasks/run-application/configure-pdb/",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "maxUnavailable": {
+              "default": "",
+              "title": "maxUnavailable",
+              "type": "null"
+            },
+            "minAvailable": {
+              "default": "",
+              "title": "minAvailable",
+              "type": "null"
+            }
+          },
+          "required": [],
+          "title": "podDisruptionBudget",
+          "type": "object"
+        },
+        "podLabels": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "podLabels",
+          "type": "object"
+        },
+        "podSecurityContext": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "podSecurityContext",
+          "type": "object"
+        },
+        "priorityClassName": {
+          "default": "system-cluster-critical",
+          "title": "priorityClassName",
+          "type": "string"
+        },
+        "rbac": {
+          "additionalProperties": false,
+          "properties": {
+            "create": {
+              "default": true,
+              "description": "Specifies whether RBAC resources should be created",
+              "title": "create",
+              "type": "boolean"
+            },
+            "pspEnabled": {
+              "default": false,
+              "title": "pspEnabled",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "rbac",
+          "type": "object"
+        },
+        "readinessProbe": {
+          "additionalProperties": false,
+          "properties": {
+            "failureThreshold": {
+              "default": 3,
+              "title": "failureThreshold",
+              "type": "integer"
+            },
+            "httpGet": {
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "default": "/readyz",
+                  "title": "path",
+                  "type": "string"
+                },
+                "port": {
+                  "default": "https",
+                  "title": "port",
+                  "type": "string"
+                },
+                "scheme": {
+                  "default": "HTTPS",
+                  "title": "scheme",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "httpGet",
+              "type": "object"
+            },
+            "initialDelaySeconds": {
+              "default": 20,
+              "title": "initialDelaySeconds",
+              "type": "integer"
+            },
+            "periodSeconds": {
+              "default": 10,
+              "title": "periodSeconds",
+              "type": "integer"
+            }
+          },
+          "required": [],
+          "title": "readinessProbe",
+          "type": "object"
+        },
+        "replicas": {
+          "default": 1,
+          "title": "replicas",
+          "type": "integer"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "description": "See https://github.com/kubernetes-sigs/metrics-server#scaling",
+          "properties": {
+            "requests": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "100m",
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "200Mi",
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "resources",
+          "type": "object"
+        },
+        "revisionHistoryLimit": {
+          "default": "",
+          "title": "revisionHistoryLimit",
+          "type": "null"
+        },
+        "schedulerName": {
+          "default": "",
+          "title": "schedulerName",
+          "type": "string"
+        },
+        "securityContext": {
+          "additionalProperties": false,
+          "properties": {
+            "allowPrivilegeEscalation": {
+              "default": false,
+              "title": "allowPrivilegeEscalation",
+              "type": "boolean"
+            },
+            "capabilities": {
+              "additionalProperties": false,
+              "properties": {
+                "drop": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "required": []
+                  },
+                  "title": "drop",
+                  "type": "array"
+                }
+              },
+              "required": [],
+              "title": "capabilities",
+              "type": "object"
+            },
+            "readOnlyRootFilesystem": {
+              "default": true,
+              "title": "readOnlyRootFilesystem",
+              "type": "boolean"
+            },
+            "runAsNonRoot": {
+              "default": true,
+              "title": "runAsNonRoot",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 1000,
+              "title": "runAsUser",
+              "type": "integer"
+            },
+            "seccompProfile": {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "default": "RuntimeDefault",
+                  "title": "type",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "seccompProfile",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "securityContext",
+          "type": "object"
+        },
+        "service": {
+          "additionalProperties": false,
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "labels": {
+              "additionalProperties": false,
+              "required": [],
+              "title": "labels",
+              "type": "object"
+            },
+            "port": {
+              "default": 443,
+              "title": "port",
+              "type": "integer"
+            },
+            "type": {
+              "default": "ClusterIP",
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "service",
+          "type": "object"
+        },
+        "serviceAccount": {
+          "additionalProperties": false,
+          "properties": {
+            "annotations": {
+              "additionalProperties": false,
+              "description": "Annotations to add to the service account",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "create": {
+              "default": true,
+              "description": "Specifies whether a service account should be created",
+              "title": "create",
+              "type": "boolean"
+            },
+            "name": {
+              "default": "",
+              "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
+              "title": "name",
+              "type": "string"
+            },
+            "secrets": {
+              "description": "The list of secrets mountable by this service account.\nSee https://kubernetes.io/docs/reference/labels-annotations-taints/#enforce-mountable-secrets",
+              "items": {
+                "required": []
+              },
+              "title": "secrets",
+              "type": "array"
+            }
+          },
+          "required": [],
+          "title": "serviceAccount",
+          "type": "object"
+        },
+        "serviceMonitor": {
+          "additionalProperties": false,
+          "properties": {
+            "additionalLabels": {
+              "additionalProperties": false,
+              "required": [],
+              "title": "additionalLabels",
+              "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "interval": {
+              "default": "1m",
+              "title": "interval",
+              "type": "string"
+            },
+            "metricRelabelings": {
+              "items": {
+                "required": []
+              },
+              "title": "metricRelabelings",
+              "type": "array"
+            },
+            "relabelings": {
+              "items": {
+                "required": []
+              },
+              "title": "relabelings",
+              "type": "array"
+            },
+            "scrapeTimeout": {
+              "default": "10s",
+              "title": "scrapeTimeout",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "serviceMonitor",
+          "type": "object"
+        },
+        "tmpVolume": {
+          "additionalProperties": false,
+          "properties": {
+            "emptyDir": {
+              "additionalProperties": false,
+              "required": [],
+              "title": "emptyDir",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "tmpVolume",
+          "type": "object"
+        },
+        "tolerations": {
+          "items": {
+            "required": []
+          },
+          "title": "tolerations",
+          "type": "array"
+        },
+        "topologySpreadConstraints": {
+          "items": {
+            "required": []
+          },
+          "title": "topologySpreadConstraints",
+          "type": "array"
+        },
+        "updateStrategy": {
+          "additionalProperties": false,
+          "required": [],
+          "title": "updateStrategy",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "metrics-server",
+      "type": "object"
+    },
+    "metricsServer": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable it to install metrics-server",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "metricsServer",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "orgID": {
+      "default": "",
+      "title": "orgID",
+      "type": "string"
+    },
+    "persistence": {
+      "additionalProperties": false,
+      "properties": {
+        "mountPath": {
+          "default": "/bin/db",
+          "title": "mountPath",
+          "type": "string"
+        },
+        "spec": {
+          "additionalProperties": true,
+          "properties": {
+            "accessModes": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "title": "accessModes",
+              "type": "array"
+            },
+            "resources": {
+              "additionalProperties": false,
+              "properties": {
+                "requests": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "storage": {
+                      "default": "10Gi",
+                      "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
+                      "title": "storage",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "storage"
+                  ],
+                  "title": "requests",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "requests"
+              ],
+              "title": "resources",
+              "type": "object"
+            }
+          },
+          "required": [
+            "accessModes",
+            "resources"
+          ],
+          "title": "spec",
+          "type": "object"
+        },
+        "volumeName": {
+          "default": "zesty-pv-storage",
+          "title": "volumeName",
+          "type": "string"
+        }
+      },
+      "required": [
+        "volumeName",
+        "mountPath",
+        "spec"
+      ],
+      "title": "persistence",
+      "type": "object"
+    },
+    "podMinuteMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": true,
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "podMinuteMetrics",
+      "type": "object"
+    },
+    "prometheus": {
+      "additionalProperties": false,
+      "properties": {
+        "bearerToken": {
+          "default": "",
+          "title": "bearerToken",
+          "type": "string"
+        },
+        "password": {
+          "default": "",
+          "title": "password",
+          "type": "string"
+        },
+        "url": {
+          "default": "",
+          "title": "url",
+          "type": "string"
+        },
+        "username": {
+          "default": "",
+          "title": "username",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "prometheus",
+      "type": "object"
+    },
+    "pvcExpansion": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": true,
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "expansionSize": {
+          "default": "20%",
+          "description": "Size by which to expand a PVC that exceeded its disk utilization threshold\nCan be either percentage or resource quantity (\"20%\"/\"5Gi\")",
+          "title": "expansionSize",
+          "type": "string"
+        },
+        "threshold": {
+          "default": 80,
+          "description": "Percentage threshold to limit PVC utilization",
+          "maximum": 100,
+          "minimum": 0,
+          "title": "threshold",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "threshold",
+        "expansionSize"
+      ],
+      "title": "pvcExpansion",
+      "type": "object"
+    },
+    "recommendations": {
+      "additionalProperties": false,
+      "properties": {
+        "container": {
+          "additionalProperties": false,
+          "properties": {
+            "securityContext": {
+              "additionalProperties": false,
+              "properties": {
+                "allowPrivilegeEscalation": {
+                  "default": false,
+                  "title": "allowPrivilegeEscalation",
+                  "type": "boolean"
+                },
+                "capabilities": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "drop": {
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          }
+                        ],
+                        "required": []
+                      },
+                      "title": "drop",
+                      "type": "array"
+                    }
+                  },
+                  "required": [],
+                  "title": "capabilities",
+                  "type": "object"
+                },
+                "readOnlyRootFilesystem": {
+                  "default": true,
+                  "title": "readOnlyRootFilesystem",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "allowPrivilegeEscalation",
+                "readOnlyRootFilesystem"
+              ],
+              "title": "securityContext",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "container",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "extraEnv": {
+          "items": {
+            "required": []
+          },
+          "title": "extraEnv",
+          "type": "array"
+        },
+        "http": {
+          "additionalProperties": false,
+          "properties": {
+            "port": {
+              "default": 8000,
+              "maximum": 65535,
+              "minimum": 1,
+              "title": "port",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "port"
+          ],
+          "title": "http",
+          "type": "object"
+        },
+        "image": {
+          "additionalProperties": false,
+          "properties": {
+            "pullPolicy": {
+              "default": "Always",
+              "enum": [
+                "Always",
+                "IfNotPresent",
+                "Never"
+              ],
+              "required": [],
+              "title": "pullPolicy"
+            },
+            "repository": {
+              "default": "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/recommendation-maker",
+              "title": "repository",
+              "type": "string"
+            },
+            "tag": {
+              "default": "stable",
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repository",
+            "pullPolicy",
+            "tag"
+          ],
+          "title": "image",
+          "type": "object"
+        },
+        "podAnnotations": {
+          "additionalProperties": true,
+          "required": [],
+          "title": "podAnnotations",
+          "type": "object"
+        },
+        "podLabels": {
+          "additionalProperties": true,
+          "required": [],
+          "title": "podLabels",
+          "type": "object"
+        },
+        "resources": {
+          "additionalProperties": false,
+          "properties": {
+            "limits": {
+              "additionalProperties": false,
+              "properties": {
+                "memory": {
+                  "default": "1Gi",
+                  "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "250m",
+                  "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "512Mi",
+                  "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "resources",
+          "type": "object"
+        },
+        "securityContext": {
+          "additionalProperties": false,
+          "properties": {
+            "fsGroup": {
+              "default": 65532,
+              "title": "fsGroup",
+              "type": "integer"
+            },
+            "runAsGroup": {
+              "default": 65532,
+              "title": "runAsGroup",
+              "type": "integer"
+            },
+            "runAsNonRoot": {
+              "default": true,
+              "title": "runAsNonRoot",
+              "type": "boolean"
+            },
+            "runAsUser": {
+              "default": 65532,
+              "title": "runAsUser",
+              "type": "integer"
+            },
+            "seccompProfile": {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "default": "RuntimeDefault",
+                  "title": "type",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "title": "seccompProfile",
+              "type": "object"
+            }
+          },
+          "required": [
+            "fsGroup",
+            "runAsGroup",
+            "runAsNonRoot",
+            "runAsUser"
+          ],
+          "title": "securityContext",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "image",
+        "http"
+      ],
+      "title": "recommendations",
+      "type": "object"
+    },
+    "resources": {
+      "additionalProperties": false,
+      "properties": {
+        "limits": {
+          "additionalProperties": false,
+          "properties": {
+            "memory": {
+              "default": "2Gi",
+              "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "limits",
+          "type": "object"
+        },
+        "requests": {
+          "additionalProperties": false,
+          "properties": {
+            "cpu": {
+              "default": "250m",
+              "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "2Gi",
+              "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "requests",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "s3override": {
+      "additionalProperties": false,
+      "properties": {
+        "bucket": {
+          "default": "",
+          "title": "bucket",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "region": {
+          "default": "",
+          "title": "region",
+          "type": "string"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "s3override",
+      "type": "object"
+    },
+    "secret": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "default": "zesty-k8s/encrypted-creds",
+          "title": "key",
+          "type": "string"
+        },
+        "name": {
+          "default": "zesty-k8s-agent-creds",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "key"
+      ],
+      "title": "secret",
+      "type": "object"
+    },
+    "securityContext": {
+      "additionalProperties": false,
+      "properties": {
+        "fsGroup": {
+          "default": 65532,
+          "title": "fsGroup",
+          "type": "integer"
+        },
+        "runAsGroup": {
+          "default": 65532,
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 65532,
+          "title": "runAsUser",
+          "type": "integer"
+        },
+        "seccompProfile": {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "default": "RuntimeDefault",
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "seccompProfile",
+          "type": "object"
+        }
+      },
+      "required": [
+        "fsGroup",
+        "runAsGroup",
+        "runAsNonRoot",
+        "runAsUser"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "selfMonitoring": {
+      "additionalProperties": false,
+      "properties": {
+        "resources": {
+          "additionalProperties": false,
+          "properties": {
+            "limits": {
+              "additionalProperties": false,
+              "properties": {
+                "memory": {
+                  "default": "256Mi",
+                  "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "limits",
+              "type": "object"
+            },
+            "requests": {
+              "additionalProperties": false,
+              "properties": {
+                "cpu": {
+                  "default": "100m",
+                  "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
+                  "title": "cpu",
+                  "type": "string"
+                },
+                "memory": {
+                  "default": "256Mi",
+                  "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
+                  "title": "memory",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "requests",
+              "type": "object"
+            }
+          },
+          "required": [],
+          "title": "resources",
+          "type": "object"
+        },
+        "schedule": {
+          "default": "*/5 * * * *",
+          "title": "schedule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schedule"
+      ],
+      "title": "selfMonitoring",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "additionalProperties": true,
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "serviceAccount",
+      "type": "object"
+    }
+  },
+  "required": [
+    "orgID",
+    "encryptedCredentials",
+    "secret",
+    "awsCluster",
+    "log",
+    "imagePullSecrets",
+    "image",
+    "persistence",
+    "serviceAccount",
+    "prometheus",
+    "awsAthena",
+    "assumeRole",
+    "s3override",
+    "metadata",
+    "config",
+    "podMinuteMetrics",
+    "insights",
+    "recommendations",
+    "metricsServer",
+    "admission",
+    "pvcExpansion",
+    "selfMonitoring"
+  ],
+  "type": "object"
+}
