@@ -68,15 +68,6 @@ data:
   AWS_SECRET_ACCESS_KEY: "{{ .Values.awsCluster.secretAccessKey }}"
   {{- end }}
   {{- end }}
-  {{- if and .Values.cxLogging .Values.cxLogging.enabled }}
-  {{- if ne .Values.cxLogging.otelEndpoint "" }}
-  CORALOGIX_OTEL_ENDPOINT: "{{ .Values.cxLogging.otelEndpoint }}"
-  {{- end }}
-  {{- else if and .Values.global.cxLogging .Values.global.cxLogging.enabled }}
-  {{- if ne .Values.global.cxLogging.otelEndpoint "" }}
-  CORALOGIX_OTEL_ENDPOINT: "{{ .Values.global.cxLogging.otelEndpoint }}"
-  {{- end }}
-  {{- end }}
   SECRET_NAME: "{{ .Values.insights.secret }}"
   UPDATER: "{{ include "zesty-k8s.fullname" . }}-updater"
   VICTORIAMETRICS_URL: {{ include "zesty-k8s.victoriaMetrics.endpoint" . | quote }}
