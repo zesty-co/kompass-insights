@@ -78,15 +78,47 @@ spec:
             - name: AGENT_HOST
               value: {{ .Values.insights.service | quote }}
             {{- if and .Values.global.cxLogging .Values.global.cxLogging.enabled }}
+            - name: CX_CLUSTER_NAME
+              value: {{ .Values.global.cxLogging.clusterName }}
             - name: CORALOGIX_API_KEY
               value: {{ .Values.global.cxLogging.apiKey }}
+            - name: CORALOGIX_INGRESS_URL
+            {{- /*
+            For backward compatibility, if the cxLogging.otelEndpoint is provided, use it to generate the ingressUrl.
+            To remove in the future.
+            */}}
+            {{- if .Values.global.cxLogging.otelEndpoint }}
+              value: https://{{ .Values.global.cxLogging.otelEndpoint }}/
+            {{- else }}
+              value: {{ .Values.global.cxLogging.ingressUrl }}
+            {{- end }}
+            {{- /*
+            Coralogix SDK env variables.
+            To remove, once migrated to OTEL.
+            */}}
             - name: CORALOGIX_LOG_URL
               value: {{ .Values.global.cxLogging.logUrl }}
             - name: CORALOGIX_TIME_DELTA_URL
               value: {{ .Values.global.cxLogging.timeDeltaUrl }}
             {{- else if and .Values.cxLogging .Values.cxLogging.enabled }}
+            - name: CX_CLUSTER_NAME
+              value: {{ .Values.cxLogging.clusterName }}
             - name: CORALOGIX_API_KEY
               value: {{ .Values.cxLogging.apiKey }}
+            - name: CORALOGIX_INGRESS_URL
+            {{- /*
+            For backward compatibility, if the cxLogging.otelEndpoint is provided, use it to generate the ingressUrl.
+            To remove in the future.
+            */}}
+            {{- if .Values.cxLogging.otelEndpoint }}
+              value: https://{{ .Values.cxLogging.otelEndpoint }}/
+            {{- else }}
+              value: {{ .Values.cxLogging.ingressUrl }}
+            {{- end }}
+            {{- /*
+            Coralogix SDK env variables.
+            To remove, once migrated to OTEL.
+            */}}
             - name: CORALOGIX_LOG_URL
               value: {{ .Values.cxLogging.logUrl }}
             - name: CORALOGIX_TIME_DELTA_URL

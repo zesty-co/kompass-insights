@@ -123,11 +123,14 @@ spec:
             - name: CORALOGIX_DOMAIN
               value: {{ .Values.global.cxLogging.domain }}
             - name: CORALOGIX_INGRESS_URL
-            {{- /* For backward compatibility, if the ingressUrl is not provided, use the otelEndpoint to create one */}}
-            {{- if .Values.global.cxLogging.ingressUrl }}
-              value: {{ .Values.global.cxLogging.ingressUrl }}
-            {{- else }}
+            {{- /*
+            For backward compatibility, if the cxLogging.otelEndpoint is provided, use it to generate the ingressUrl.
+            To remove in the future.
+            */}}
+            {{- if .Values.global.cxLogging.otelEndpoint }}
               value: https://{{ .Values.global.cxLogging.otelEndpoint }}/
+            {{- else }}
+              value: {{ .Values.global.cxLogging.ingressUrl }}
             {{- end }}
             - name: CORALOGIX_INGRESS_LOGS_URL
               value: {{ .Values.global.cxLogging.ingressLogsUrl }}
@@ -145,11 +148,14 @@ spec:
             - name: CORALOGIX_DOMAIN
               value: {{ .Values.cxLogging.domain }}
             - name: CORALOGIX_INGRESS_URL
-            {{- /* For backward compatibility, if the ingressUrl is not provided, use the otelEndpoint to create one */}}
-            {{- if .Values.cxLogging.ingressUrl }}
-              value: {{ .Values.cxLogging.ingressUrl }}
-            {{- else }}
+            {{- /*
+            For backward compatibility, if the cxLogging.otelEndpoint is provided, use it to generate the ingressUrl.
+            To remove in the future.
+            */}}
+            {{- if .Values.cxLogging.otelEndpoint }}
               value: https://{{ .Values.cxLogging.otelEndpoint }}/
+            {{- else }}
+              value: {{ .Values.cxLogging.ingressUrl }}
             {{- end }}
             - name: CORALOGIX_INGRESS_LOGS_URL
               value: {{ .Values.cxLogging.ingressLogsUrl }}
