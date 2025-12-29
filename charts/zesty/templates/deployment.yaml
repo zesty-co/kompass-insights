@@ -115,22 +115,7 @@ spec:
             {{- with .Values.insights.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
-            {{- if .Values.cxLogging.enabled }}
-            - name: CX_API_KEY
-              value: {{ .Values.cxLogging.apiKey }}
-            - name: CX_CLUSTER_NAME
-              value: {{ .Values.cxLogging.clusterName }}
-            - name: CORALOGIX_DOMAIN
-              value: {{ .Values.cxLogging.domain }}
-            - name: CORALOGIX_INGRESS_LOGS_URL
-              value: {{ .Values.cxLogging.ingressLogsUrl }}
-            - name: CORALOGIX_INGRESS_URL
-              value: {{ .Values.cxLogging.ingressUrl }}
-            - name: CORALOGIX_LOG_URL
-              value: {{ .Values.cxLogging.logUrl }}
-            - name: CORALOGIX_TIME_DELTA_URL
-              value: {{ .Values.cxLogging.timeDeltaUrl }}
-            {{- end }}
+            {{- include "zesty-k8s.controller.coralogix.envs" . | nindent 12 }}
             - name: KOMPASS_CHART_VERSION
               valueFrom:
                 configMapKeyRef:
