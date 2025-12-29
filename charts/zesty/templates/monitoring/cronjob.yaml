@@ -43,37 +43,7 @@ spec:
                 - name: ENCRYPTED_CREDENTIALS
                   value: {{ .Values.encryptedCredentials | quote }}
                 {{- end }}
-                {{- if and .Values.global.cxLogging .Values.global.cxLogging.enabled }}
-                - name: CX_CLUSTER_NAME
-                  value: {{ .Values.global.cxLogging.clusterName }}
-                - name: CX_API_KEY
-                  value: {{ .Values.global.cxLogging.apiKey }}
-                - name: CORALOGIX_INGRESS_URL
-                {{- /*
-                For backward compatibility, if the cxLogging.otelEndpoint is provided, use it to generate the ingressUrl.
-                To remove in the future.
-                */}}
-                {{- if .Values.global.cxLogging.otelEndpoint }}
-                  value: https://{{ .Values.global.cxLogging.otelEndpoint }}/
-                {{- else }}
-                  value: {{ .Values.global.cxLogging.ingressUrl }}
-                {{- end }}
-                {{- else if and .Values.cxLogging .Values.cxLogging.enabled }}
-                - name: CX_CLUSTER_NAME
-                  value: {{ .Values.cxLogging.clusterName }}
-                - name: CX_API_KEY
-                  value: {{ .Values.cxLogging.apiKey }}
-                - name: CORALOGIX_INGRESS_URL
-                {{- /*
-                For backward compatibility, if the cxLogging.otelEndpoint is provided, use it to generate the ingressUrl.
-                To remove in the future.
-                */}}
-                {{- if .Values.cxLogging.otelEndpoint }}
-                  value: https://{{ .Values.cxLogging.otelEndpoint }}/
-                {{- else }}
-                  value: {{ .Values.cxLogging.ingressUrl }}
-                {{- end }}
-                {{- end }}
+                {{- include "zesty-k8s.monitoring.coralogix.envs" . | nindent 16 }}
               envFrom:
                 - configMapRef:
                     name: "{{ include "zesty-k8s.configmap" . }}"
@@ -84,7 +54,7 @@ spec:
           restartPolicy: Never
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:
-            {{- toYaml . | nindent 8 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           serviceAccountName: {{ include "zesty-k8s.self-monitoring.serviceAccountName" . }}
 {{- end }}

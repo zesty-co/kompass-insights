@@ -166,3 +166,97 @@ app.kubernetes.io/instance: {{ .Release.Name }}
       global-config
   {{- end }}
 {{- end }}
+
+{{- define "zesty-k8s.coralogix.envs" -}}
+{{- if and .Values.global.cxLogging .Values.global.cxLogging.enabled -}}
+- name: CX_CLUSTER_NAME
+  value: {{ .Values.global.cxLogging.clusterName }}
+{{- if .coralogixApiKey }}
+- name: CORALOGIX_API_KEY
+{{- else }}
+- name: CX_API_KEY
+{{- end }}
+  value: {{ .Values.global.cxLogging.apiKey }}
+{{- if .domain }}
+- name: CORALOGIX_DOMAIN
+  value: {{ .Values.global.cxLogging.domain }}
+{{- end }}
+- name: CORALOGIX_INGRESS_URL
+{{- /*
+For backward compatibility, if the cxLogging.otelEndpoint is provided, use it to generate the ingressUrl.
+To remove in the future.
+*/}}
+{{- if .Values.global.cxLogging.otelEndpoint }}
+  value: https://{{ .Values.global.cxLogging.otelEndpoint }}/
+{{- else }}
+  value: {{ .Values.global.cxLogging.ingressUrl }}
+{{- end }}
+{{- if .ingressLogsUrl }}
+- name: CORALOGIX_INGRESS_LOGS_URL
+  value: {{ .Values.global.cxLogging.ingressLogsUrl }}
+{{- end }}
+{{- if .logUrl }}
+- name: CORALOGIX_LOG_URL
+  value: {{ .Values.global.cxLogging.logUrl }}
+{{- end }}
+{{- if .timeDeltaUrl }}
+- name: CORALOGIX_TIME_DELTA_URL
+  value: {{ .Values.global.cxLogging.timeDeltaUrl }}
+{{- end }}
+{{- if .otelEndpoint }}
+- name: CORALOGIX_OTEL_ENDPOINT
+  value: {{ .Values.global.cxLogging.otelEndpoint }}
+{{- end }}
+{{- else if and .Values.cxLogging .Values.cxLogging.enabled }}
+- name: CX_CLUSTER_NAME
+  value: {{ .Values.cxLogging.clusterName }}
+{{- if .coralogixApiKey }}
+- name: CORALOGIX_API_KEY
+{{- else }}
+- name: CX_API_KEY
+{{- end }}
+  value: {{ .Values.cxLogging.apiKey }}
+{{- if .domain }}
+- name: CORALOGIX_DOMAIN
+  value: {{ .Values.cxLogging.domain }}
+{{- end }}
+- name: CORALOGIX_INGRESS_URL
+{{- /*
+For backward compatibility, if the cxLogging.otelEndpoint is provided, use it to generate the ingressUrl.
+To remove in the future.
+*/}}
+{{- if .Values.cxLogging.otelEndpoint }}
+  value: https://{{ .Values.cxLogging.otelEndpoint }}/
+{{- else }}
+  value: {{ .Values.cxLogging.ingressUrl }}
+{{- end }}
+{{- if .ingressLogsUrl }}
+- name: CORALOGIX_INGRESS_LOGS_URL
+  value: {{ .Values.cxLogging.ingressLogsUrl }}
+{{- end }}
+{{- if .logUrl }}
+- name: CORALOGIX_LOG_URL
+  value: {{ .Values.cxLogging.logUrl }}
+{{- end }}
+{{- if .timeDeltaUrl }}
+- name: CORALOGIX_TIME_DELTA_URL
+  value: {{ .Values.cxLogging.timeDeltaUrl }}
+{{- end }}
+{{- if .otelEndpoint }}
+- name: CORALOGIX_OTEL_ENDPOINT
+  value: {{ .Values.cxLogging.otelEndpoint }}
+{{- end}}
+{{- end -}}
+{{- end -}}
+
+{{- define "zesty-k8s.controller.coralogix.envs" -}}
+{{- include "zesty-k8s.coralogix.envs" (dict "Values" .Values "coralogixApiKey" false "domain" true "ingressLogsUrl" true "logUrl" true "timeDeltaUrl" true "otelEndpoint" true) }}
+{{- end }}
+
+{{- define "zesty-k8s.recommendations.coralogix.envs" -}}
+{{- include "zesty-k8s.coralogix.envs" (dict "Values" .Values "coralogixApiKey" true "domain" false "logUrl" true "timeDeltaUrl" true "otelEndpoint" false) }}
+{{- end }}
+
+{{- define "zesty-k8s.monitoring.coralogix.envs" -}}
+{{- include "zesty-k8s.coralogix.envs" (dict "Values" .Values "coralogixApiKey" false "domain" false "logUrl" false "timeDeltaUrl" false "otelEndpoint" false) }}
+{{- end }}
