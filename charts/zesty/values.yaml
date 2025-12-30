@@ -287,37 +287,30 @@ resources:
   # type: object
   # required: false
   # additionalProperties: true
+  # patternProperties:
+  #   "^cpu$":
+  #     type: string
+  #     pattern: ^[0-9]+(\.[0-9]+)?m?$
+  #   "^memory$":
+  #     type: string
+  #     pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
   # @schema
   limits:
-    # @schema
-    # type: string
-    # required: false
-    # pattern: ^[0-9]+(\.[0-9]+)?m?$
-    # @schema
-    cpu:
-    # @schema
-    # type: string
-    # required: false
-    # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
-    # @schema
     memory: 2Gi
   # @schema
   # type: object
   # required: false
   # additionalProperties: true
+  # patternProperties:
+  #   "^cpu$":
+  #     type: string
+  #     pattern: ^[0-9]+(\.[0-9]+)?m?$
+  #   "^memory$":
+  #     type: string
+  #     pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
   # @schema
   requests:
-    # @schema
-    # type: string
-    # required: false
-    # pattern: ^[0-9]+(\.[0-9]+)?m?$
-    # @schema
     cpu: 250m
-    # @schema
-    # type: string
-    # required: false
-    # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
-    # @schema
     memory: 2Gi
 
 # @schema
@@ -744,37 +737,30 @@ recommendations:
     # type: object
     # required: false
     # additionalProperties: true
+    # patternProperties:
+    #   "^cpu$":
+    #     type: string
+    #     pattern: ^[0-9]+(\.[0-9]+)?m?$
+    #   "^memory$":
+    #     type: string
+    #     pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
     # @schema
     limits:
-      # @schema
-      # type: string
-      # required: false
-      # pattern: ^[0-9]+(\.[0-9]+)?m?$
-      # @schema
-      cpu:
-      # @schema
-      # type: string
-      # required: false
-      # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
-      # @schema
       memory: 1Gi
     # @schema
     # type: object
     # required: false
     # additionalProperties: true
+    # patternProperties:
+    #   "^cpu$":
+    #     type: string
+    #     pattern: ^[0-9]+(\.[0-9]+)?m?$
+    #   "^memory$":
+    #     type: string
+    #     pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
     # @schema
     requests:
-      # @schema
-      # type: string
-      # required: false
-      # pattern: ^[0-9]+(\.[0-9]+)?m?$
-      # @schema
       cpu: 250m
-      # @schema
-      # type: string
-      # required: false
-      # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
-      # @schema
       memory: 512Mi
 
 # @schema
@@ -912,35 +898,28 @@ selfMonitoring:
     # type: object
     # required: false
     # additionalProperties: true
+    # patternProperties:
+    #   "^cpu$":
+    #     type: string
+    #     pattern: ^[0-9]+(\.[0-9]+)?m?$
+    #   "^memory$":
+    #     type: string
+    #     pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
     # @schema
     requests:
-      # @schema
-      # type: string
-      # required: false
-      # pattern: ^[0-9]+(\.[0-9]+)?m?$
-      # @schema
       cpu: 100m
-      # @schema
-      # type: string
-      # required: false
-      # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
-      # @schema
       memory: 256Mi
     # @schema
     # type: object
     # required: false
     # additionalProperties: true
+    # patternProperties:
+    #   "^cpu$":
+    #     type: string
+    #     pattern: ^[0-9]+(\.[0-9]+)?m?$
+    #   "^memory$":
+    #     type: string
+    #     pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
     # @schema
     limits:
-      # @schema
-      # type: string
-      # required: false
-      # pattern: ^[0-9]+(\.[0-9]+)?m?$
-      # @schema
-      cpu:
-      # @schema
-      # type: string
-      # required: false
-      # pattern: ^[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$
-      # @schema
       memory: 256Mi

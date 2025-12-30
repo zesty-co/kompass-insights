@@ -92,19 +92,13 @@
               "properties": {
                 "limits": {
                   "additionalProperties": true,
-                  "properties": {
-                    "cpu": {
-                      "default": "",
-                      "description": "CPU limit for the container",
+                  "patternProperties": {
+                    "^cpu$": {
                       "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
-                      "title": "cpu",
                       "type": "string"
                     },
-                    "memory": {
-                      "default": "2Gi",
-                      "description": "Maximum memory limit for the container",
+                    "^memory$": {
                       "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
-                      "title": "memory",
                       "type": "string"
                     }
                   },
@@ -114,19 +108,13 @@
                 },
                 "requests": {
                   "additionalProperties": true,
-                  "properties": {
-                    "cpu": {
-                      "default": "250m",
-                      "description": "CPU request for scheduling",
+                  "patternProperties": {
+                    "^cpu$": {
                       "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
-                      "title": "cpu",
                       "type": "string"
                     },
-                    "memory": {
-                      "default": "2Gi",
-                      "description": "Memory request for scheduling",
+                    "^memory$": {
                       "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
-                      "title": "memory",
                       "type": "string"
                     }
                   },
@@ -1982,41 +1970,38 @@
           "properties": {
             "limits": {
               "additionalProperties": true,
-              "properties": {
-                "cpu": {
-                  "default": "",
+              "patternProperties": {
+                "^cpu$": {
                   "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
-                  "title": "cpu",
                   "type": "string"
                 },
-                "memory": {
-                  "default": "1Gi",
+                "^memory$": {
                   "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
-                  "title": "memory",
                   "type": "string"
                 }
               },
-              "required": [],
+              "required": [
+                "memory"
+              ],
               "title": "limits",
               "type": "object"
             },
             "requests": {
               "additionalProperties": true,
-              "properties": {
-                "cpu": {
-                  "default": "250m",
+              "patternProperties": {
+                "^cpu$": {
                   "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
-                  "title": "cpu",
                   "type": "string"
                 },
-                "memory": {
-                  "default": "512Mi",
+                "^memory$": {
                   "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
-                  "title": "memory",
                   "type": "string"
                 }
               },
-              "required": [],
+              "required": [
+                "cpu",
+                "memory"
+              ],
               "title": "requests",
               "type": "object"
             }
@@ -2087,41 +2072,38 @@
       "properties": {
         "limits": {
           "additionalProperties": true,
-          "properties": {
-            "cpu": {
-              "default": "",
+          "patternProperties": {
+            "^cpu$": {
               "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
-              "title": "cpu",
               "type": "string"
             },
-            "memory": {
-              "default": "2Gi",
+            "^memory$": {
               "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
-              "title": "memory",
               "type": "string"
             }
           },
-          "required": [],
+          "required": [
+            "memory"
+          ],
           "title": "limits",
           "type": "object"
         },
         "requests": {
           "additionalProperties": true,
-          "properties": {
-            "cpu": {
-              "default": "250m",
+          "patternProperties": {
+            "^cpu$": {
               "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
-              "title": "cpu",
               "type": "string"
             },
-            "memory": {
-              "default": "2Gi",
+            "^memory$": {
               "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
-              "title": "memory",
               "type": "string"
             }
           },
-          "required": [],
+          "required": [
+            "cpu",
+            "memory"
+          ],
           "title": "requests",
           "type": "object"
         }
@@ -2232,41 +2214,38 @@
           "properties": {
             "limits": {
               "additionalProperties": true,
-              "properties": {
-                "cpu": {
-                  "default": "",
+              "patternProperties": {
+                "^cpu$": {
                   "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
-                  "title": "cpu",
                   "type": "string"
                 },
-                "memory": {
-                  "default": "256Mi",
+                "^memory$": {
                   "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
-                  "title": "memory",
                   "type": "string"
                 }
               },
-              "required": [],
+              "required": [
+                "memory"
+              ],
               "title": "limits",
               "type": "object"
             },
             "requests": {
               "additionalProperties": true,
-              "properties": {
-                "cpu": {
-                  "default": "100m",
+              "patternProperties": {
+                "^cpu$": {
                   "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
-                  "title": "cpu",
                   "type": "string"
                 },
-                "memory": {
-                  "default": "256Mi",
+                "^memory$": {
                   "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
-                  "title": "memory",
                   "type": "string"
                 }
               },
-              "required": [],
+              "required": [
+                "cpu",
+                "memory"
+              ],
               "title": "requests",
               "type": "object"
             }
