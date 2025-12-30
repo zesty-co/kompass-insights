@@ -234,6 +234,77 @@ cxLogging:  # Parent is optional
 
 Use this for objects that should accept arbitrary key-value pairs beyond defined properties.
 
+### Using `patternProperties` for Type Validation
+
+When using `additionalProperties: true`, you can combine it with `patternProperties` to enforce type constraints on all properties. This is especially useful for Kubernetes labels and annotations, which must have string values.
+
+**Basic Pattern Properties:**
+
+```yaml
+# @schema
+# type: object
+# required: false
+# additionalProperties: true
+# patternProperties:
+#   ".*":
+#     type: string
+# @schema
+annotations: {}
+```
+
+**What this does:**
+- `additionalProperties: true` - Allows any property names
+- `patternProperties: { ".*": { type: string } }` - Enforces that **all** properties (matching pattern `.*`) must be strings
+- Prevents users from accidentally setting non-string values like `annotations: { port: 8080 }` (invalid)
+- Allows valid annotations like `annotations: { "app.kubernetes.io/name": "myapp" }`
+
+**Use Cases:**
+
+1. **Kubernetes Annotations** - Must be string key-value pairs:
+   ```yaml
+   # @schema
+   # type: object
+   # required: false
+   # additionalProperties: true
+   # patternProperties:
+   #   ".*":
+   #     type: string
+   # @schema
+   annotations: {}
+   ```
+
+2. **Kubernetes Labels** - Must be string key-value pairs:
+   ```yaml
+   # @schema
+   # type: object
+   # required: false
+   # additionalProperties: true
+   # patternProperties:
+   #   ".*":
+   #     type: string
+   # @schema
+   labels: {}
+   ```
+
+3. **Node Selectors** - Must be string key-value pairs:
+   ```yaml
+   # @schema
+   # type: object
+   # required: false
+   # additionalProperties: true
+   # patternProperties:
+   #   ".*":
+   #     type: string
+   # @schema
+   nodeSelector: {}
+   ```
+
+**Important Notes:**
+- The pattern `".*"` matches all property names
+- You can use more specific patterns to validate different property name formats
+- `patternProperties` works alongside `additionalProperties` - both can be used together
+- This prevents common mistakes where users might set numeric or boolean values instead of strings
+
 #### 1. Global Configuration Objects
 
 For fields shared across multiple charts or components:
@@ -275,6 +346,9 @@ For fields that accept arbitrary Kubernetes labels, annotations, selectors, or o
 # type: object
 # required: false
 # additionalProperties: true
+# patternProperties:
+#   ".*":
+#     type: string
 # @schema
 nodeSelector: {}
 
@@ -282,6 +356,9 @@ nodeSelector: {}
 # type: object
 # required: false
 # additionalProperties: true
+# patternProperties:
+#   ".*":
+#     type: string
 # @schema
 annotations: {}
 
@@ -332,8 +409,15 @@ resources:
   # @schema
   # type: object
   # required: false
+  # additionalProperties: true
   # @schema
   limits:
+    # @schema
+    # type: string
+    # required: false
+    # pattern: ^[0-9]+(\.[0-9]+)?m?$
+    # @schema
+    cpu:
     # @schema
     # type: string
     # required: false
@@ -343,6 +427,7 @@ resources:
   # @schema
   # type: object
   # required: false
+  # additionalProperties: true
   # @schema
   requests:
     # @schema
@@ -724,11 +809,14 @@ deployment:
 # type: object
 # required: false
 # additionalProperties: true
+# patternProperties:
+#   ".*":
+#     type: string
 # @schema
 nodeSelector: {}
 ```
 
-**Use Case:** Accepts any key-value pairs user wants to add. Optional field that can be omitted entirely if not needed.
+**Use Case:** Accepts any key-value pairs user wants to add. Optional field that can be omitted entirely if not needed. Using `patternProperties` ensures all values are strings, as required by Kubernetes.
 
 ### Validated String with Pattern
 

@@ -71,6 +71,11 @@
             "nodeSelector": {
               "additionalProperties": true,
               "description": "Node selector for scheduling",
+              "patternProperties": {
+                ".*": {
+                  "type": "string"
+                }
+              },
               "required": [],
               "title": "nodeSelector",
               "type": "object"
@@ -86,8 +91,15 @@
               "additionalProperties": false,
               "properties": {
                 "limits": {
-                  "additionalProperties": false,
+                  "additionalProperties": true,
                   "properties": {
+                    "cpu": {
+                      "default": "",
+                      "description": "CPU limit for the container",
+                      "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
+                      "title": "cpu",
+                      "type": "string"
+                    },
                     "memory": {
                       "default": "2Gi",
                       "description": "Maximum memory limit for the container",
@@ -101,7 +113,7 @@
                   "type": "object"
                 },
                 "requests": {
-                  "additionalProperties": false,
+                  "additionalProperties": true,
                   "properties": {
                     "cpu": {
                       "default": "250m",
@@ -301,6 +313,11 @@
             "annotations": {
               "additionalProperties": true,
               "description": "Annotations to add to the service account",
+              "patternProperties": {
+                ".*": {
+                  "type": "string"
+                }
+              },
               "required": [],
               "title": "annotations",
               "type": "object"
@@ -634,6 +651,11 @@
       "properties": {
         "nodeSelector": {
           "additionalProperties": true,
+          "patternProperties": {
+            ".*": {
+              "type": "string"
+            }
+          },
           "required": [],
           "title": "nodeSelector",
           "type": "object"
@@ -776,12 +798,22 @@
         },
         "podAnnotations": {
           "additionalProperties": true,
+          "patternProperties": {
+            ".*": {
+              "type": "string"
+            }
+          },
           "required": [],
           "title": "podAnnotations",
           "type": "object"
         },
         "podLabels": {
           "additionalProperties": true,
+          "patternProperties": {
+            ".*": {
+              "type": "string"
+            }
+          },
           "required": [],
           "title": "podLabels",
           "type": "object"
@@ -1789,6 +1821,7 @@
         "expansionSize": {
           "default": "20%",
           "description": "Size by which to expand a PVC that exceeded its disk utilization threshold\nCan be either percentage or resource quantity (\"20%\"/\"5Gi\")",
+          "pattern": "^([0-9]+(\\.[0-9]+)?%|[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?)$",
           "title": "expansionSize",
           "type": "string"
         },
@@ -1924,12 +1957,22 @@
         },
         "podAnnotations": {
           "additionalProperties": true,
+          "patternProperties": {
+            ".*": {
+              "type": "string"
+            }
+          },
           "required": [],
           "title": "podAnnotations",
           "type": "object"
         },
         "podLabels": {
           "additionalProperties": true,
+          "patternProperties": {
+            ".*": {
+              "type": "string"
+            }
+          },
           "required": [],
           "title": "podLabels",
           "type": "object"
@@ -1938,8 +1981,14 @@
           "additionalProperties": false,
           "properties": {
             "limits": {
-              "additionalProperties": false,
+              "additionalProperties": true,
               "properties": {
+                "cpu": {
+                  "default": "",
+                  "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
+                  "title": "cpu",
+                  "type": "string"
+                },
                 "memory": {
                   "default": "1Gi",
                   "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
@@ -1952,7 +2001,7 @@
               "type": "object"
             },
             "requests": {
-              "additionalProperties": false,
+              "additionalProperties": true,
               "properties": {
                 "cpu": {
                   "default": "250m",
@@ -2037,8 +2086,14 @@
       "additionalProperties": false,
       "properties": {
         "limits": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
+            "cpu": {
+              "default": "",
+              "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
+              "title": "cpu",
+              "type": "string"
+            },
             "memory": {
               "default": "2Gi",
               "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
@@ -2051,7 +2106,7 @@
           "type": "object"
         },
         "requests": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "properties": {
             "cpu": {
               "default": "250m",
@@ -2176,8 +2231,14 @@
           "additionalProperties": false,
           "properties": {
             "limits": {
-              "additionalProperties": false,
+              "additionalProperties": true,
               "properties": {
+                "cpu": {
+                  "default": "",
+                  "pattern": "^[0-9]+(\\.[0-9]+)?m?$",
+                  "title": "cpu",
+                  "type": "string"
+                },
                 "memory": {
                   "default": "256Mi",
                   "pattern": "^[0-9]+(\\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?$",
@@ -2190,7 +2251,7 @@
               "type": "object"
             },
             "requests": {
-              "additionalProperties": false,
+              "additionalProperties": true,
               "properties": {
                 "cpu": {
                   "default": "100m",
@@ -2231,6 +2292,11 @@
       "properties": {
         "annotations": {
           "additionalProperties": true,
+          "patternProperties": {
+            ".*": {
+              "type": "string"
+            }
+          },
           "required": [],
           "title": "annotations",
           "type": "object"

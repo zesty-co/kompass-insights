@@ -11,6 +11,9 @@ global:
   # type: object
   # required: false
   # additionalProperties: true
+  # patternProperties:
+  #   ".*":
+  #     type: string
   # @schema
   nodeSelector: {}
   # @schema
@@ -195,6 +198,9 @@ serviceAccount:
   # type: object
   # required: false
   # additionalProperties: true
+  # patternProperties:
+  #   ".*":
+  #     type: string
   # @schema
   annotations: {}
 
@@ -280,8 +286,15 @@ resources:
   # @schema
   # type: object
   # required: false
+  # additionalProperties: true
   # @schema
   limits:
+    # @schema
+    # type: string
+    # required: false
+    # pattern: ^[0-9]+(\.[0-9]+)?m?$
+    # @schema
+    cpu:
     # @schema
     # type: string
     # required: false
@@ -291,6 +304,7 @@ resources:
   # @schema
   # type: object
   # required: false
+  # additionalProperties: true
   # @schema
   requests:
     # @schema
@@ -508,12 +522,18 @@ insights:
   # type: object
   # required: false
   # additionalProperties: true
+  # patternProperties:
+  #   ".*":
+  #     type: string
   # @schema
   podAnnotations: {}
   # @schema
   # type: object
   # required: false
   # additionalProperties: true
+  # patternProperties:
+  #   ".*":
+  #     type: string
   # @schema
   podLabels: {}
 
@@ -620,12 +640,18 @@ recommendations:
   # type: object
   # required: false
   # additionalProperties: true
+  # patternProperties:
+  #   ".*":
+  #     type: string
   # @schema
   podAnnotations: {}
   # @schema
   # type: object
   # required: false
   # additionalProperties: true
+  # patternProperties:
+  #   ".*":
+  #     type: string
   # @schema
   podLabels: {}
 
@@ -717,8 +743,15 @@ recommendations:
     # @schema
     # type: object
     # required: false
+    # additionalProperties: true
     # @schema
     limits:
+      # @schema
+      # type: string
+      # required: false
+      # pattern: ^[0-9]+(\.[0-9]+)?m?$
+      # @schema
+      cpu:
       # @schema
       # type: string
       # required: false
@@ -728,6 +761,7 @@ recommendations:
     # @schema
     # type: object
     # required: false
+    # additionalProperties: true
     # @schema
     requests:
       # @schema
@@ -797,6 +831,7 @@ pvcExpansion:
   # @schema
   # type: string
   # required: true
+  # pattern: ^([0-9]+(\.[0-9]+)?%|[0-9]+(\.[0-9]+)?(Ki|Mi|Gi|Ti|Pi|Ei|k|M|G|T|P|E)?)$
   # @schema
   # Size by which to expand a PVC that exceeded its disk utilization threshold
   # Can be either percentage or resource quantity ("20%"/"5Gi")
@@ -876,6 +911,7 @@ selfMonitoring:
     # @schema
     # type: object
     # required: false
+    # additionalProperties: true
     # @schema
     requests:
       # @schema
@@ -893,8 +929,15 @@ selfMonitoring:
     # @schema
     # type: object
     # required: false
+    # additionalProperties: true
     # @schema
     limits:
+      # @schema
+      # type: string
+      # required: false
+      # pattern: ^[0-9]+(\.[0-9]+)?m?$
+      # @schema
+      cpu:
       # @schema
       # type: string
       # required: false
