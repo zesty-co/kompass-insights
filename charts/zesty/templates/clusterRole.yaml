@@ -178,6 +178,8 @@ rules:
       - "kompass.zesty.co"
     resources:
       - workloaddescriptors/status
+      - autopilotconfigs/status
+      - jobpilotconfigs/status
     verbs: [ "get", "update", "patch" ]
   - apiGroups:
       - "zesty.co"
