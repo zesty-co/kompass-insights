@@ -44,3 +44,8 @@ rules:
       - persistentvolumeclaims
     verbs: ["get", "list", "watch", "patch", "update"]
 {{- end }}
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
