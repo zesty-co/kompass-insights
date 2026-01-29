@@ -28,7 +28,7 @@ image:
   repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent"
   migrationRepository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/agent/migration"
   pullPolicy: Always
-  tag: v1.159.5
+  tag: ~
 
 nameOverride: ~
 fullnameOverride: ~
@@ -139,7 +139,7 @@ recommendations:
   image: 
     repository: "672188301118.dkr.ecr.eu-west-1.amazonaws.com/zesty-k8s/recommendation-maker"
     pullPolicy: Always
-    tag: stable
+    tag: v1.9.0
 
   extraEnv: []
 
