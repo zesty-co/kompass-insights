@@ -28,9 +28,17 @@ spec:
           {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- with .Values.imagePullSecrets }}
+      {{- $globalPullSecrets := list }}
+      {{- if .Values.global.imagePullSecret.name }}
+      {{- $globalPullSecrets = append $globalPullSecrets (dict "name" .Values.global.imagePullSecret.name) }}
+      {{- end }}
+      {{- range .Values.global.imagePullSecrets }}
+      {{- $globalPullSecrets = append $globalPullSecrets . }}
+      {{- end }}
+      {{- $pullSecrets := .Values.imagePullSecrets | default $globalPullSecrets }}
+      {{- if $pullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml $pullSecrets | nindent 8 }}
       {{- end }}
       automountServiceAccountToken: true
       {{- if .Values.global.nodeSelector }}
