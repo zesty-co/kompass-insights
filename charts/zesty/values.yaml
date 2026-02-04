@@ -1,6 +1,10 @@
 global:
   nodeSelector: {}
   tolerations: []
+  imagePullSecrets: []
+  imagePullSecret:
+    name: ""
+    dockerconfigjson: ""
 
 orgID: ""
 # if you put the value here, the secret won't be used.
