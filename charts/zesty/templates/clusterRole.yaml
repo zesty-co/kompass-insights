@@ -17,7 +17,12 @@ rules:
       - analysistemplates
       - experiments
       - analysisruns
-    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+      - watch
   - apiGroups:
       - "kafka.strimzi.io"
     resources:
@@ -126,13 +131,23 @@ rules:
       - replicasets
       - daemonsets
       - statefulsets
-    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+      - watch
   - apiGroups:
       - batch
     resources:
       - cronjobs
       - jobs
-    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+      - watch
   - apiGroups:
       - policy
     resources:
@@ -154,7 +169,12 @@ rules:
     resources:
       - scaledjobs
       - scaledobjects
-    {{- include "zesty-k8s.verbs" . | nindent 4 }}
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+      - watch
   - apiGroups:
       - autoscaling
     resources:
