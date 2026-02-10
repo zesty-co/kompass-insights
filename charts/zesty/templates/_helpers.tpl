@@ -112,9 +112,8 @@ All of the relevant verbs.
 verbs:
   - get
   - list
-  {{- if .Values.admission.enabled }}
   - patch
-  {{- end }}
+  - update
   - watch
 {{- end -}}
 
