@@ -10,6 +10,7 @@ rules:
       - "rightsizing.kompass.zesty.co"
     resources:
       - policies
+      - actions
     verbs:
       - list
       - watch
