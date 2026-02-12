@@ -15,6 +15,16 @@ rules:
       - list
       - watch
   - apiGroups:
+      - "kompass.zesty.co"
+    resources:
+      - virtualworkloads
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
       - "argoproj.io"
     resources:
       - workflows
