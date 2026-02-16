@@ -1,7 +1,17 @@
 global:
   nodeSelector: {}
   tolerations: []
-  imagePullSecrets: []
+  affinity: {}
+  automountServiceAccountToken: ~
+  imagePullSecrets: ~
+  podAnnotations: {}
+  podLabels: {}
+  # Pod-level settings. These take precedence over legacy pod keys under `securityContext`.
+  podSecurityContext: {}
+  runtimeClassName: ~
+  # Container-level settings. Legacy pod-level keys mixed here are tolerated and moved to pod securityContext.
+  securityContext: {}
+  topologySpreadConstraints: ~
   imagePullSecret:
     name: ""
     dockerconfigjson: ""
@@ -121,8 +131,17 @@ podMinuteMetrics:
 insights:
   extraEnv: []
 
+  affinity: {}
+  automountServiceAccountToken: ~
+  imagePullSecrets: ~
   podAnnotations: {}
   podLabels: {}
+  # Pod-level settings. These take precedence over legacy pod keys under `securityContext`.
+  podSecurityContext: {}
+  runtimeClassName: ~
+  # Container-level settings. Legacy pod-level keys mixed here are tolerated and moved to pod securityContext.
+  securityContext: {}
+  topologySpreadConstraints: ~
 
   secret: "kompass-insights-secret"
   service: "kompass-insights-svc"
@@ -147,24 +166,28 @@ recommendations:
 
   extraEnv: []
 
+  affinity: {}
+  automountServiceAccountToken: ~
+  imagePullSecrets: ~
   podAnnotations: {}
   podLabels: {}
-
-  container:
-    securityContext:
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-          - ALL
-      readOnlyRootFilesystem: true
-
-  securityContext:
+  # Pod-level settings. These take precedence over legacy pod keys under `securityContext`.
+  podSecurityContext:
     fsGroup: 65532
     runAsGroup: 65532
     runAsNonRoot: true
     runAsUser: 65532
     seccompProfile:
       type: RuntimeDefault
+  runtimeClassName: ~
+  # Container-level settings. Legacy pod-level keys mixed here are tolerated and moved to pod securityContext.
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+  topologySpreadConstraints: ~
 
   http:
     port: 8000
@@ -204,6 +227,17 @@ cxLogging:
 
 selfMonitoring:
   schedule: "*/5 * * * *"
+  affinity: {}
+  automountServiceAccountToken: ~
+  imagePullSecrets: ~
+  podAnnotations: {}
+  podLabels: {}
+  # Pod-level settings. These take precedence over legacy pod keys under `securityContext`.
+  podSecurityContext: {}
+  runtimeClassName: ~
+  # Container-level settings. Legacy pod-level keys mixed here are tolerated and moved to pod securityContext.
+  securityContext: {}
+  topologySpreadConstraints: ~
   resources:
     requests:
       cpu: 100m
