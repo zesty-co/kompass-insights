@@ -166,6 +166,148 @@ app.kubernetes.io/instance: {{ .Release.Name }}
   {{- end }}
 {{- end }}
 
+{{- define "zesty-k8s.workload.mergeMaps" -}}
+{{- $global := default dict .global -}}
+{{- $component := default dict .component -}}
+{{- $fallback := default dict .fallback -}}
+{{- $key := .key -}}
+{{- $componentValue := (get $component $key) | default dict -}}
+{{- $globalValue := (get $global $key) | default dict -}}
+{{- $resolved := deepCopy $fallback | mergeOverwrite $componentValue | mergeOverwrite $globalValue -}}
+{{- if gt (len $resolved) 0 -}}
+{{- toYaml $resolved -}}
+{{- end -}}
+{{- end }}
+
+{{- define "zesty-k8s.workload.resolveListWithGlobalPrecedence" -}}
+{{- $global := default dict .global -}}
+{{- $component := default dict .component -}}
+{{- $fallback := .fallback | default (list) -}}
+{{- $key := .key -}}
+{{- $resolved := $fallback -}}
+{{- if and (hasKey $global $key) (ne (get $global $key) nil) -}}
+  {{- $resolved = (get $global $key) -}}
+{{- else if and (hasKey $component $key) (ne (get $component $key) nil) -}}
+  {{- $resolved = (get $component $key) -}}
+{{- end -}}
+{{- if ne $resolved nil -}}
+{{- if not (kindIs "slice" $resolved) -}}
+{{- fail (printf "Invalid type for workload list key '%s': expected list, got %s" $key (kindOf $resolved)) -}}
+{{- end -}}
+{{- toYaml $resolved -}}
+{{- end -}}
+{{- end }}
+
+{{- define "zesty-k8s.workload.resolveBool" -}}
+{{- $global := default dict .global -}}
+{{- $component := default dict .component -}}
+{{- $key := .key -}}
+{{- if and (hasKey $global $key) (ne (get $global $key) nil) -}}
+{{- get $global $key -}}
+{{- else if and (hasKey $component $key) (ne (get $component $key) nil) -}}
+{{- get $component $key -}}
+{{- else if ne .fallback nil -}}
+{{- .fallback -}}
+{{- end -}}
+{{- end }}
+
+{{- define "zesty-k8s.workload.resolveString" -}}
+{{- $global := default dict .global -}}
+{{- $component := default dict .component -}}
+{{- $key := .key -}}
+{{- $globalValue := get $global $key -}}
+{{- $componentValue := get $component $key -}}
+{{- if and (hasKey $global $key) (ne $globalValue nil) (ne (toString $globalValue) "") -}}
+{{- $globalValue -}}
+{{- else if and (hasKey $component $key) (ne $componentValue nil) (ne (toString $componentValue) "") -}}
+{{- $componentValue -}}
+{{- else if and (ne .fallback nil) (ne (toString .fallback) "") -}}
+{{- .fallback -}}
+{{- end -}}
+{{- end }}
+
+{{- define "zesty-k8s.workload.validateContainerSecurityContext" -}}
+{{- $context := .context | default dict -}}
+{{- $path := .path | default "securityContext" -}}
+{{- if not (kindIs "map" $context) -}}
+{{- fail (printf "Invalid %s: expected map, got %s" $path (kindOf $context)) -}}
+{{- end -}}
+{{- end }}
+
+{{- define "zesty-k8s.workload.extractPodSecurityContext" -}}
+{{- $context := .context | default dict -}}
+{{- $path := .path | default "securityContext" -}}
+{{- if not (kindIs "map" $context) -}}
+{{- fail (printf "Invalid %s: expected map, got %s" $path (kindOf $context)) -}}
+{{- end -}}
+{{- $pod := dict -}}
+{{- if hasKey $context "fsGroup" -}}
+{{- $_ := set $pod "fsGroup" (get $context "fsGroup") -}}
+{{- end -}}
+{{- if hasKey $context "fsGroupChangePolicy" -}}
+{{- $_ := set $pod "fsGroupChangePolicy" (get $context "fsGroupChangePolicy") -}}
+{{- end -}}
+{{- if hasKey $context "supplementalGroups" -}}
+{{- $_ := set $pod "supplementalGroups" (get $context "supplementalGroups") -}}
+{{- end -}}
+{{- if hasKey $context "sysctls" -}}
+{{- $_ := set $pod "sysctls" (get $context "sysctls") -}}
+{{- end -}}
+{{- if gt (len $pod) 0 -}}
+{{- toYaml $pod -}}
+{{- end -}}
+{{- end }}
+
+{{- define "zesty-k8s.workload.extractContainerSecurityContext" -}}
+{{- $context := .context | default dict -}}
+{{- $path := .path | default "securityContext" -}}
+{{- if not (kindIs "map" $context) -}}
+{{- fail (printf "Invalid %s: expected map, got %s" $path (kindOf $context)) -}}
+{{- end -}}
+{{- $container := deepCopy $context -}}
+{{- if hasKey $container "fsGroup" -}}
+{{- $_ := unset $container "fsGroup" -}}
+{{- end -}}
+{{- if hasKey $container "fsGroupChangePolicy" -}}
+{{- $_ := unset $container "fsGroupChangePolicy" -}}
+{{- end -}}
+{{- if hasKey $container "supplementalGroups" -}}
+{{- $_ := unset $container "supplementalGroups" -}}
+{{- end -}}
+{{- if hasKey $container "sysctls" -}}
+{{- $_ := unset $container "sysctls" -}}
+{{- end -}}
+{{- if gt (len $container) 0 -}}
+{{- toYaml $container -}}
+{{- end -}}
+{{- end }}
+
+{{- define "zesty-k8s.workload.legacyImagePullSecrets" -}}
+{{- $globalPullSecrets := list -}}
+{{- if .Values.global.imagePullSecret.name -}}
+{{- $globalPullSecrets = append $globalPullSecrets (dict "name" .Values.global.imagePullSecret.name) -}}
+{{- end -}}
+{{- range .Values.global.imagePullSecrets -}}
+{{- $globalPullSecrets = append $globalPullSecrets . -}}
+{{- end -}}
+{{- $pullSecrets := .Values.imagePullSecrets | default $globalPullSecrets -}}
+{{- if gt (len ($pullSecrets | default (list))) 0 -}}
+{{- toYaml $pullSecrets -}}
+{{- end -}}
+{{- end }}
+
+{{- define "zesty-k8s.workload.resolveImagePullSecrets" -}}
+{{- $global := default dict .global -}}
+{{- $component := default dict .component -}}
+{{- $fallback := include "zesty-k8s.workload.legacyImagePullSecrets" .root | fromYamlArray | default (list) -}}
+{{- include "zesty-k8s.workload.resolveListWithGlobalPrecedence" (dict
+  "global" $global
+  "component" $component
+  "fallback" $fallback
+  "key" "imagePullSecrets"
+) -}}
+{{- end }}
+
 {{- define "zesty-k8s.coralogix.envs" -}}
 {{- if and .Values.global.cxLogging .Values.global.cxLogging.enabled -}}
 - name: CX_CLUSTER_NAME

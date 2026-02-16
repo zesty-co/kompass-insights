@@ -1,4 +1,70 @@
 {{- if or (and .Values.global.cxLogging .Values.global.cxLogging.enabled) (and .Values.cxLogging .Values.cxLogging.enabled) }}
+{{- $globalWorkload := .Values.global | default dict -}}
+{{- $selfMonitoringWorkload := .Values.selfMonitoring | default dict -}}
+{{- $selfMonitoringPodAnnotations := include "zesty-k8s.workload.mergeMaps" (dict
+  "global" $globalWorkload
+  "component" $selfMonitoringWorkload
+  "key" "podAnnotations"
+) | fromYaml -}}
+{{- $selfMonitoringPodLabels := include "zesty-k8s.workload.mergeMaps" (dict
+  "global" $globalWorkload
+  "component" $selfMonitoringWorkload
+  "key" "podLabels"
+) | fromYaml -}}
+{{- $selfMonitoringResolvedPodSecurityContext := mergeOverwrite
+  (mergeOverwrite
+    (deepCopy (dict))
+    ((get $selfMonitoringWorkload "podSecurityContext") | default dict)
+  )
+  ((get $globalWorkload "podSecurityContext") | default dict)
+-}}
+{{- $selfMonitoringResolvedSecurityContext := mergeOverwrite
+  (mergeOverwrite
+    (deepCopy (dict))
+    ((get $selfMonitoringWorkload "securityContext") | default dict)
+  )
+  ((get $globalWorkload "securityContext") | default dict)
+-}}
+{{- include "zesty-k8s.workload.validateContainerSecurityContext" (dict
+  "context" $selfMonitoringResolvedSecurityContext
+  "path" "selfMonitoring.securityContext"
+) -}}
+{{- $selfMonitoringLegacyPodSecurityContext := include "zesty-k8s.workload.extractPodSecurityContext" (dict
+  "context" $selfMonitoringResolvedSecurityContext
+  "path" "selfMonitoring.securityContext"
+) | fromYaml -}}
+{{- $selfMonitoringContainerSecurityContext := include "zesty-k8s.workload.extractContainerSecurityContext" (dict
+  "context" $selfMonitoringResolvedSecurityContext
+  "path" "selfMonitoring.securityContext"
+) | fromYaml -}}
+{{- $selfMonitoringPodSecurityContext := mergeOverwrite (deepCopy ($selfMonitoringLegacyPodSecurityContext | default dict)) ($selfMonitoringResolvedPodSecurityContext | default dict) -}}
+{{- $selfMonitoringAffinity := include "zesty-k8s.workload.mergeMaps" (dict
+  "global" $globalWorkload
+  "component" $selfMonitoringWorkload
+  "key" "affinity"
+) | fromYaml -}}
+{{- $selfMonitoringImagePullSecrets := include "zesty-k8s.workload.resolveImagePullSecrets" (dict
+  "root" .
+  "global" $globalWorkload
+  "component" $selfMonitoringWorkload
+) | fromYamlArray -}}
+{{- $selfMonitoringTopologySpreadConstraints := include "zesty-k8s.workload.resolveListWithGlobalPrecedence" (dict
+  "global" $globalWorkload
+  "component" $selfMonitoringWorkload
+  "key" "topologySpreadConstraints"
+) | fromYamlArray -}}
+{{- $selfMonitoringAutomountSAToken := include "zesty-k8s.workload.resolveBool" (dict
+  "global" $globalWorkload
+  "component" $selfMonitoringWorkload
+  "key" "automountServiceAccountToken"
+  "fallback" true
+) | trim -}}
+{{- $selfMonitoringRuntimeClassName := include "zesty-k8s.workload.resolveString" (dict
+  "global" $globalWorkload
+  "component" $selfMonitoringWorkload
+  "key" "runtimeClassName"
+  "fallback" ""
+) | trim -}}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -15,7 +81,22 @@ spec:
     spec:
       backoffLimit: 0
       template:
+        metadata:
+          {{- with $selfMonitoringPodAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          labels:
+            app.kubernetes.io/instance: "{{ include "zesty-k8s.self-monitoring.fullname" . }}"
+            app.kubernetes.io/name: "{{ include "zesty-k8s.fullname" . }}"
+            {{- with $selfMonitoringPodLabels }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
         spec:
+          automountServiceAccountToken: {{ $selfMonitoringAutomountSAToken }}
+          {{- if $selfMonitoringRuntimeClassName }}
+          runtimeClassName: {{ $selfMonitoringRuntimeClassName | quote }}
+          {{- end }}
           {{- if .Values.global.nodeSelector }}
           nodeSelector:
           {{- toYaml .Values.global.nodeSelector | nindent 12 }}
@@ -24,12 +105,24 @@ spec:
           tolerations:
           {{- toYaml .Values.global.tolerations | nindent 12 }}
           {{- end }}
+          {{- with $selfMonitoringAffinity }}
+          affinity:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $selfMonitoringTopologySpreadConstraints }}
+          topologySpreadConstraints:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $selfMonitoringPodSecurityContext }}
+          securityContext:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
           containers:
             - name: {{ include "zesty-k8s.self-monitoring.fullname" . }}
               image: {{ .Values.image.repository }}:{{ include "zesty-k8s.version" . }}
               command:
                 - /bin/metrics
-              imagePullPolicy: {{ .Values.imagePullPolicy | default "Always" }}
+              imagePullPolicy: {{ .Values.image.pullPolicy | default "Always" }}
               env:
                 - name: NAMESPACE
                   valueFrom:
@@ -51,18 +144,14 @@ spec:
               resources:
               {{- toYaml . | nindent 16 }}
               {{- end }}
+              {{- with $selfMonitoringContainerSecurityContext }}
+              securityContext:
+              {{- toYaml . | nindent 16 }}
+              {{- end }}
           restartPolicy: Never
-          {{- $globalPullSecrets := list }}
-          {{- if .Values.global.imagePullSecret.name }}
-          {{- $globalPullSecrets = append $globalPullSecrets (dict "name" .Values.global.imagePullSecret.name) }}
-          {{- end }}
-          {{- range .Values.global.imagePullSecrets }}
-          {{- $globalPullSecrets = append $globalPullSecrets . }}
-          {{- end }}
-          {{- $pullSecrets := .Values.imagePullSecrets | default $globalPullSecrets }}
-          {{- if $pullSecrets }}
+          {{- if $selfMonitoringImagePullSecrets }}
           imagePullSecrets:
-            {{- toYaml $pullSecrets | nindent 12 }}
+            {{- toYaml $selfMonitoringImagePullSecrets | nindent 12 }}
           {{- end }}
           serviceAccountName: {{ include "zesty-k8s.self-monitoring.serviceAccountName" . }}
 {{- end }}
