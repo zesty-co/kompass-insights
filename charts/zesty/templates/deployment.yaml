@@ -209,7 +209,7 @@ spec:
             {{- with .Values.insights.extraEnv }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
-            {{- include "zesty-k8s.controller.coralogix.envs" . | nindent 12 -}}
+            {{- include "zesty-k8s.controller.coralogix.envs" . | nindent 12 }}
             - name: KOMPASS_RELEASE
               value: {{ .Release.Name }}
             - name: KOMPASS_CHART_VERSION
